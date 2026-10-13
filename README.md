@@ -49,14 +49,3 @@ tick 2 | ...
 
 Headless (для CI): `export WOKWI_CLI_TOKEN=...; make sim` — чекає рядок `tick 3`.
 
-## Форма A (залізо)
-
-`make flash` (st-flash), `make monitor PORT=/dev/ttyACM0` (picocom). Для F411/F446 потрібен
-CubeF4-пакет HAL і `-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard` — див. коментар у `firmware/Makefile`.
-
-## Звіт у PDF
-
-```bash
-pandoc docs/report.md -o docs/report.pdf --pdf-engine=xelatex -V mainfont="DejaVu Serif"
-```
-або відкрити `report.md` у VS Code → Markdown Preview → друк у PDF.
