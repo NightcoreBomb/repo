@@ -1,0 +1,12 @@
+build/
+*.o
+*.d
+*.elf
+*.hex
+*.bin
+*.map
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+# CubeMX тимчасові
+.mxproject

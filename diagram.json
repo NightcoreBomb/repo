@@ -1,0 +1,301 @@
+{
+  "version": 1,
+  "author": "Viktoriia Savaryna",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-st-nucleo-c031c6",
+      "id": "nucleo",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "imu",
+      "top": -160,
+      "left": 330,
+      "attrs": {}
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled",
+      "top": -150,
+      "left": 520,
+      "attrs": {
+        "i2cAddress": "0x3c"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot",
+      "top": 330,
+      "left": -120,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn",
+      "top": 330,
+      "left": 40,
+      "attrs": {
+        "color": "green",
+        "label": "MODE"
+      }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_pan",
+      "top": 20,
+      "left": 460,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_tilt",
+      "top": 140,
+      "left": 460,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-microsd-card",
+      "id": "sd",
+      "top": 300,
+      "left": 330,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-logic-analyzer",
+      "id": "logic",
+      "top": 300,
+      "left": 560,
+      "attrs": {
+        "bufferSize": "1000000",
+        "channelNames": "SCL,SDA,SCK,MOSI,CS,PWM,BTN,TX"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "$serialMonitor:TX",
+      "nucleo:PA3",
+      "",
+      []
+    ],
+    [
+      "$serialMonitor:RX",
+      "nucleo:PA2",
+      "",
+      []
+    ],
+    [
+      "imu:SCL",
+      "nucleo:PB8",
+      "yellow",
+      []
+    ],
+    [
+      "imu:SDA",
+      "nucleo:PB9",
+      "blue",
+      []
+    ],
+    [
+      "oled:SCL",
+      "nucleo:PB8",
+      "yellow",
+      []
+    ],
+    [
+      "oled:SDA",
+      "nucleo:PB9",
+      "blue",
+      []
+    ],
+    [
+      "imu:VCC",
+      "nucleo:3V3.1",
+      "red",
+      []
+    ],
+    [
+      "imu:GND",
+      "nucleo:GND.1",
+      "black",
+      []
+    ],
+    [
+      "oled:VCC",
+      "nucleo:3V3.2",
+      "red",
+      []
+    ],
+    [
+      "oled:GND",
+      "nucleo:GND.2",
+      "black",
+      []
+    ],
+    [
+      "pot:SIG",
+      "nucleo:PA0",
+      "orange",
+      []
+    ],
+    [
+      "pot:VCC",
+      "nucleo:3V3.1",
+      "red",
+      []
+    ],
+    [
+      "pot:GND",
+      "nucleo:GND.3",
+      "black",
+      []
+    ],
+    [
+      "btn:1.l",
+      "nucleo:PA8",
+      "green",
+      []
+    ],
+    [
+      "btn:2.l",
+      "nucleo:GND.4",
+      "black",
+      []
+    ],
+    [
+      "servo_pan:PWM",
+      "nucleo:PB4",
+      "orange",
+      []
+    ],
+    [
+      "servo_tilt:PWM",
+      "nucleo:PB5",
+      "orange",
+      []
+    ],
+    [
+      "servo_pan:V+",
+      "nucleo:5V.1",
+      "red",
+      []
+    ],
+    [
+      "servo_pan:GND",
+      "nucleo:GND.5",
+      "black",
+      []
+    ],
+    [
+      "servo_tilt:V+",
+      "nucleo:5V.1",
+      "red",
+      []
+    ],
+    [
+      "servo_tilt:GND",
+      "nucleo:GND.5",
+      "black",
+      []
+    ],
+    [
+      "sd:SCK",
+      "nucleo:PA1",
+      "violet",
+      []
+    ],
+    [
+      "sd:DO",
+      "nucleo:PA6",
+      "violet",
+      []
+    ],
+    [
+      "sd:DI",
+      "nucleo:PA7",
+      "violet",
+      []
+    ],
+    [
+      "sd:CS",
+      "nucleo:PB0.1",
+      "gray",
+      []
+    ],
+    [
+      "sd:VCC",
+      "nucleo:3V3.2",
+      "red",
+      []
+    ],
+    [
+      "sd:GND",
+      "nucleo:GND.6",
+      "black",
+      []
+    ],
+    [
+      "logic:D0",
+      "nucleo:PB8",
+      "gray",
+      []
+    ],
+    [
+      "logic:D1",
+      "nucleo:PB9",
+      "gray",
+      []
+    ],
+    [
+      "logic:D2",
+      "nucleo:PA1",
+      "gray",
+      []
+    ],
+    [
+      "logic:D3",
+      "nucleo:PA7",
+      "gray",
+      []
+    ],
+    [
+      "logic:D4",
+      "nucleo:PB0.2",
+      "gray",
+      []
+    ],
+    [
+      "logic:D5",
+      "nucleo:PB4",
+      "gray",
+      []
+    ],
+    [
+      "logic:D6",
+      "nucleo:PA8",
+      "gray",
+      []
+    ],
+    [
+      "logic:D7",
+      "nucleo:PA2",
+      "gray",
+      []
+    ],
+    [
+      "logic:GND",
+      "nucleo:GND.7",
+      "black",
+      []
+    ]
+  ],
+  "serialMonitor": {
+    "display": "always",
+    "newline": "crlf"
+  },
+  "dependencies": {}
+}
