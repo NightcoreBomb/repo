@@ -38,13 +38,16 @@ def main(paths):
         lines = V.uart_lines(V.uart(ev)) if 'TX' in names else []
         base = os.path.basename(p)
         uart_who = [int(m.group(1), 16) for _, l in lines
-                    for m in [re.search(r'(?:WHO_AM_I = |who=)0x([0-9A-Fa-f]{2})', l)] if m]
+                    for m in [re.search(r'(?:WHO_AM_I = |who=|ST imu PASS id=)0x([0-9A-Fa-f]{2})', l)] if m]
         uart_conv = [dict(re.findall(r'(\w+)=(-?\d+)', l)) for _, l in lines if l.startswith('CAP i2c conv')]
+        # без «cap i2c»: рядок self-test «ST imu PASS ... ax= ay= az= ... t_cC=» друкує середнє
+        # з 8 читань; у статичному стані Wokwi воно дорівнює кожному читанню — порівнюємо з ним
+        st_imu = [dict(re.findall(r'(\w+)=(-?\d+)', l)) for _, l in lines if l.startswith('ST imu PASS')]
         for k, (t, d) in enumerate(pairs(ops, 0x75, 1)):
             exp = uart_who[k] if k < len(uart_who) else None
             who.append((base, t, d[0], exp))
         for k, (t, d) in enumerate(pairs(ops, 0x3B, 14)):
-            conv = uart_conv[k] if k < len(uart_conv) else None
+            conv = uart_conv[k] if k < len(uart_conv) else (st_imu[0] if st_imu else None)
             burst.append((base, t, d, conv))
         notes.append('%s: %d WHO_AM_I, %d burst, %d UART-рядків' %
                      (base, len(pairs(ops, 0x75, 1)), len(pairs(ops, 0x3B, 14)), len(lines)))
