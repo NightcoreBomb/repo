@@ -1,0 +1,4 @@
+Unity (ThrowTheSwitch.org) v2.6.0
+source:  https://github.com/ThrowTheSwitch/Unity/archive/refs/tags/v2.6.0.tar.gz
+sha256 (tar.gz from codeload.github.com): aa4c9fb1ae5fc5242f914c65f3557e817e40cb37f04a31e5ff76d1ab89dbf674
+vendored files: src/unity.c, src/unity.h, src/unity_internals.h, LICENSE.txt (без змін)
