@@ -106,14 +106,23 @@ vpath %.s $(sort $(dir $(ASM_SOURCES)))
 $(OWN_OBJECTS):    CFLAGS = $(BASE_CFLAGS) $(OWN_WARN)
 $(VENDOR_OBJECTS): CFLAGS = $(BASE_CFLAGS) $(VENDOR_WARN)
 
+# V=1 — показати повні команди компілятора
+V ?= 0
+ifeq ($(V), 0)
+Q = @
+endif
+
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
-	$(CC) -c $(CFLAGS) -MMD -MP -MF"$(@:%.o=%.d)" $< -o $@
+	@echo "  CC  $<"
+	$(Q)$(CC) -c $(CFLAGS) -MMD -MP -MF"$(@:%.o=%.d)" $< -o $@
 
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
-	$(AS) -c $(ASFLAGS) $< -o $@
+	@echo "  AS  $<"
+	$(Q)$(AS) -c $(ASFLAGS) $< -o $@
 
 $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+	@echo "  LD  $@"
+	$(Q)$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 	$(SZ) $@
 
 $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)

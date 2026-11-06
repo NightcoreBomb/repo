@@ -26,10 +26,13 @@ void app_init(app_t *a, const bus_i2c_t *i2c, const bus_spi_t *sd_spi)
 static void cmd_scan(app_t *a)
 {
   unsigned n = 0;
+  uint32_t t0 = plat_millis();
   plat_log("SCAN");
   for (uint8_t ad = 0x08; ad <= 0x77; ad++)
     if (a->i2c->probe(a->i2c->ctx, ad) == ST_OK) { plat_log(" 0x%02X", ad); n++; }
-  plat_log(" n=%u\r\n", n);
+  /* окремим рядком: час скану показує, скільки HAL чекає на кожну відсутню адресу
+     (у записі ЛР1 ~5.9 мс на адресу при 105 мкс на шині — аналіз, аномалія А-2) */
+  plat_log(" n=%u\r\nSCAN ms=%lu\r\n", n, (unsigned long)(plat_millis() - t0));
 }
 
 static void cmd_imu(app_t *a)
