@@ -47,8 +47,10 @@ run: $(BINS)
 	@fail=0; for t in $(BINS); do echo "== $$t"; ./$$t || fail=1; done; \
 	if [ $$fail -ne 0 ]; then echo "TESTS FAILED"; exit 1; fi; echo "ALL TESTS PASSED"
 
-# Звіт покриття: build/coverage/index.html + підсумок у консолі. Поріг — COV_MIN.
-COV_MIN ?= 85
+# Звіт покриття: build/coverage/index.html + підсумок у консолі.
+# Пороги (обґрунтування — docs/lab2-report.md §6): рядки ≥ 90 %, гілки ≥ 70 %.
+COV_MIN    ?= 90
+COV_BR_MIN ?= 70
 coverage: clean run
 	lcov --quiet --capture --directory $(BUILD) --output-file $(BUILD)/all.info \
 	     --rc branch_coverage=1 --ignore-errors inconsistent,unused 2>/dev/null || \
@@ -59,7 +61,7 @@ coverage: clean run
 	     --output-file $(BUILD)/cov.info --rc lcov_branch_coverage=1
 	lcov --list $(BUILD)/cov.info --rc branch_coverage=1 2>/dev/null || lcov --list $(BUILD)/cov.info
 	genhtml --quiet $(BUILD)/cov.info --output-directory $(BUILD)/coverage >/dev/null 2>&1 || true
-	@python3 ../tools/cov_gate.py $(BUILD)/cov.info $(COV_MIN)
+	@python3 ../tools/cov_gate.py $(BUILD)/cov.info $(COV_MIN) $(COV_BR_MIN)
 
 clean:
 	rm -rf $(BUILD)
