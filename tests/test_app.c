@@ -88,6 +88,7 @@ static void test_imu_init_failure_reports_register_and_mode(void)
   TEST_ASSERT_NOT_NULL(l);
   TEST_ASSERT_EQUAL_STRING("0x6B", fp_kv(l, "reg", v, sizeof v));
   TEST_ASSERT_EQUAL_STRING("1", fp_kv(l, "i2cmode", v, sizeof v));
+  TEST_ASSERT_NOT_NULL(fp_find("I2CDIAG"));
 }
 
 static void test_i2cmode_command(void)
@@ -102,6 +103,9 @@ static void test_i2cmode_command(void)
   fake_plat_reset();
   app_handle_line(&a, c2);
   TEST_ASSERT_NOT_NULL(fp_find("I2CMODE 1 recoveries=0"));
+  char c4[] = "i2cdiag";
+  app_handle_line(&a, c4);
+  TEST_ASSERT_NOT_NULL(fp_find("I2CDIAG"));
 }
 
 static void test_imu_wrong_magnitude_fails_plausibility(void)

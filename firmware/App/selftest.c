@@ -57,6 +57,7 @@ int selftest_imu(app_t *a)
   if (s != ST_OK) {
     plat_log("ST imu FAIL step=init err=%s reg=0x%02X i2cmode=%d\r\n", st_str(s),
              a->imu.fail_reg, plat_i2c_get_write_mode());
+    plat_i2c_diag();
     return a->imu_ok = 0;
   }
   plat_delay_ms(20);                       /* PLL і перший відлік після пробудження */
@@ -117,7 +118,10 @@ int selftest_oled(app_t *a)
   if (s == ST_OK) { step = "text";  s = ssd1306_text(&a->oled, 0, 0, "LR2 SELF-TEST"); }
   a->oled_ok = (s == ST_OK);
   if (a->oled_ok) plat_log("ST oled PASS addr=0x%02X\r\n", a->oled.addr);
-  else plat_log("ST oled FAIL step=%s err=%s addr=0x%02X\r\n", step, st_str(s), a->oled.addr);
+  else {
+    plat_log("ST oled FAIL step=%s err=%s addr=0x%02X\r\n", step, st_str(s), a->oled.addr);
+    plat_i2c_diag();
+  }
   return a->oled_ok;
 }
 
@@ -213,6 +217,7 @@ st_summary_t selftest_run(app_t *a)
   r[5] = selftest_btn();
   for (int i = 0; i < 6; i++) { if (r[i]) s.pass++; else s.fail++; }
   plat_log("ST END pass=%d fail=%d\r\n", s.pass, s.fail);
+  plat_i2c_diag();
 
   if (a->oled_ok) {             /* FR-12: статус на OLED */
     ssd1306_text(&a->oled, 2, 0, a->imu_ok ? "IMU  OK" : "IMU NOT FOUND");
