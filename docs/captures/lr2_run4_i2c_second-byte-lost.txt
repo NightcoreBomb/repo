@@ -1,0 +1,259 @@
+# lr2_run4_i2c_second-byte-lost.vcd
+канали: SCL, SDA, SCK, MOSI, MISO, CS, TX, MARK; тривалість 8687.708 мс; частота дискретизації Wokwi = 1 ГГц (1 нс), sigrok: downsample 20 → 50 МГц
+
+## I2C — sigrok-cli (i2c)
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 75
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 68
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 6B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: AE
+i2c-1: ACK
+i2c-1: Data write: D5
+i2c-1: ACK
+i2c-1: Data write: 80
+i2c-1: ACK
+i2c-1: Data write: A8
+i2c-1: ACK
+i2c-1: Data write: 3F
+i2c-1: ACK
+i2c-1: Data write: D3
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 8D
+i2c-1: ACK
+i2c-1: Data write: 14
+i2c-1: ACK
+i2c-1: Data write: 20
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: A1
+i2c-1: ACK
+i2c-1: Data write: C8
+i2c-1: ACK
+i2c-1: Data write: DA
+i2c-1: ACK
+i2c-1: Data write: 12
+i2c-1: ACK
+i2c-1: Data write: 81
+i2c-1: ACK
+i2c-1: Data write: CF
+i2c-1: ACK
+i2c-1: Data write: D9
+i2c-1: ACK
+i2c-1: Data write: F1
+i2c-1: ACK
+i2c-1: Data write: DB
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: A4
+i2c-1: ACK
+i2c-1: Data write: A6
+i2c-1: ACK
+i2c-1: Data write: AF
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 07
+i2c-1: ACK
+i2c-1: Stop
+
+## I2C — vcdtool: транзакції, тривалість, пауза до наступної
+      55.587 мс  S 68(W)+ 75+ P                                                195.000 мкс  пауза 23.275 мкс
+      55.806 мс  S 68(R)+ 68- P                                                195.000 мкс  пауза 22.525 мкс
+      56.023 мс  S 68(W)+ 6B+ P                                                22394.050 мкс  пауза 46153.475 мкс
+     124.571 мс  S 3C(W)+ P                                                    105.000 мкс  пауза 72.275 мкс
+     124.748 мс  S 3C(W)+ 00+ AE+ D5+ 80+ A8+ 3F+ D3+ 00+ 40+ 8D+ 14+ 20+ 00+  2512.175 мкс  пауза 35.275 мкс
+     127.295 мс  S 3C(W)+ 00+ 00+ 7F+ 22+ 00+ 07+ P                            27120.225 мкс  пауза -
+  SCL: tHIGH=5.000 мкс tLOW=5.000 мкс період=10.000 мкс → f=100.00 кГц
+  транзакцій: 6, NACK на адресу: 0
+
+## SPI — sigrok-cli (spi, mode 0)
+spi-1: 00
+spi-1: 40
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 95
+spi-1: FF
+spi-1: FF
+spi-1: 01
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: 48
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 01
+spi-1: FF
+spi-1: AA
+spi-1: FF
+spi-1: 87
+spi-1: FF
+spi-1: FF
+spi-1: 01
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 01
+spi-1: FF
+spi-1: AA
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: 77
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 65
+spi-1: FF
+spi-1: FF
+spi-1: 01
+spi-1: FF
+  ... (5448 рядків)
+
+## SPI — vcdtool: кадри під CS#
+       0.000 мс  CS# low 1416.525 мкс    0 байт  MOSI 
+     203.241 мс  CS# low 700.825 мкс    8 байт  MOSI 40 00 00 00 00 95 FF FF
+                                             MISO 00 FF FF FF FF FF FF 01
+     204.074 мс  CS# low 1064.025 мкс   13 байт  MOSI FF 48 00 00 01 AA 87 FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 01 00 00 01 AA
+     205.270 мс  CS# low 825.650 мкс    9 байт  MOSI FF 77 00 00 00 00 65 FF FF
+                                             MISO FF FF FF FF FF FF FF FF 01
+     206.228 мс  CS# low 826.725 мкс    9 байт  MOSI FF 69 40 00 00 00 77 FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00
+     207.187 мс  CS# low 1063.025 мкс   13 байт  MOSI FF 7A 00 00 00 00 FD FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00 C0 FF 80 00
+     208.398 мс  CS# low 12218.800 мкс  528 байт  MOSI FF 51 00 00 00 00 55 FF FF FF FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FE 00 00
+     220.733 мс  CS# low 12219.200 мкс  528 байт  MOSI FF 51 00 00 00 01 47 FF FF FF FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FE 00 00
+     234.354 мс  CS# low 13783.525 мкс  544 байт  MOSI FF 58 00 00 00 01 7D FF FF FF FE A5 A2 AB B0 B9
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FF FF FF
+     248.321 мс  CS# low 12218.650 мкс  528 байт  MOSI FF 51 00 00 00 01 47 FF FF FF FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FE A5 A2
+     262.332 мс  CS# low 13783.275 мкс  544 байт  MOSI FF 58 00 00 00 01 7D FF FF FF FE 00 00 00 00 00
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FF FF FF
+  SCK: період 0.175 мкс → f=5714.3 кГц
+
+## UART — vcdtool (115200 8N1)
+       1.898 мс  �
+       2.093 мс  ==== hello from STM32 ====
+       5.390 мс  LR2 sensor integration | NUCLEO-C031C6 | SYSCLK = 48000000 Hz
+      11.935 мс  [init] USART2         HAL_OK
+      15.485 мс  [init] I2C1           HAL_OK
+      19.012 мс  [init] SPI1           HAL_OK
+      23.387 мс  [init] ADC1           HAL_OK
+      26.891 мс  [init] TIM3 PWM       HAL_OK
+      30.240 мс  [init] ADC1 calib     HAL_OK
+      33.585 мс  [init] PWM CH1        HAL_OK
+      36.935 мс  [init] PWM CH2        HAL_OK
+      40.202 мс  [init] UART RX IRQ    on
+      43.167 мс  [init] I2C write mode 1 (0=HAL preload, 1=TXIS-paced, 2=Mem_Write)
+      50.487 мс  ST BEGIN fw=LR2 board=NUCLEO-C031C6 sysclk=48000000
+     104.994 мс  ST imu FAIL step=init err=TIMEOUT reg=0x6B i2cmode=1
+     112.432 мс  I2CDIAG mode=1 recoveries=1 fallbacks=0 last: phase=S mode=1 addr=0x68 byte=2/2 status=-2 isr=0x00008003 cr2=0x020220D0 t=77
+     182.980 мс  ST oled FAIL step=clear err=TIMEOUT addr=0x3C
+     189.735 мс  I2CDIAG mode=1 recoveries=2 fallbacks=0 last: phase=S mode=1 addr=0x3C byte=7/7 status=-2 isr=0x00008003 cr2=0x02072078 t=153
+     277.902 мс  ST sd PASS type=SDHC ocr=0xC0FF8000 acmd41=1 sig=0x55AA rw_blk=1 rw=OK
+     285.704 мс  ST servo PASS pan_us=1500 tilt_us=1500 period_us=20000
+     291.793 мс  ST pot PASS raw=0 mv=0 dz_cdeg=0
+     295.548 мс  ST btn PASS level=1 presses=0
+     298.872 мс  ST END pass=4 fail=2
+     303.218 мс  I2CDIAG mode=1 recoveries=2 fallbacks=0 last: phase=S mode=1 addr=0x3C byte=7/7 status=-2 isr=0x00008003 cr2=0x02072078 t=153
+     315.677 мс  ==== bring-up done, entering main loop (type 'help') ====
+     322.399 мс  tick 1 | t=320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+    1322.377 мс  tick 2 | t=1320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+    2322.370 мс  tick 3 | t=2320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+    3322.351 мс  tick 4 | t=3320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+    4322.333 мс  tick 5 | t=4320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+    5322.314 мс  tick 6 | t=5320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+    6322.290 мс  tick 7 | t=6320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+    7322.273 мс  tick 8 | t=7320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+    8322.246 мс  tick 9 | t=8320 ms | az=0 mg | adc=0 (0 mV) | btn=0
+
+## UART — sigrok-cli (перші байти)
+uart-1: 0D
+uart-1: 0A
+uart-1: 3D
+uart-1: 3D
+uart-1: 3D
+uart-1: 3D
+uart-1: 20
+uart-1: 68
+uart-1: 65
+uart-1: 6C
+uart-1: 6C
+uart-1: 6F
+uart-1: 20
+uart-1: 66
+uart-1: 72
+uart-1: 6F
+uart-1: 6D
+uart-1: 20
+uart-1: 53
+uart-1: 54
