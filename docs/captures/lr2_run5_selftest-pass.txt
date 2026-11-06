@@ -1,0 +1,4209 @@
+# lr2_run5_selftest-pass.vcd
+канали: SCL, SDA, SCK, MOSI, MISO, CS, TX, MARK; тривалість 5469.412 мс; частота дискретизації Wokwi = 1 ГГц (1 нс), sigrok: downsample 20 → 50 МГц
+
+## I2C — sigrok-cli (i2c)
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 75
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 68
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 6B
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 1A
+i2c-1: ACK
+i2c-1: Data write: 03
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 19
+i2c-1: ACK
+i2c-1: Data write: 04
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 1B
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 1C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 6B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 01
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: AE
+i2c-1: ACK
+i2c-1: Data write: D5
+i2c-1: ACK
+i2c-1: Data write: 80
+i2c-1: ACK
+i2c-1: Data write: A8
+i2c-1: ACK
+i2c-1: Data write: 3F
+i2c-1: ACK
+i2c-1: Data write: D3
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 8D
+i2c-1: ACK
+i2c-1: Data write: 14
+i2c-1: ACK
+i2c-1: Data write: 20
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: A1
+i2c-1: ACK
+i2c-1: Data write: C8
+i2c-1: ACK
+i2c-1: Data write: DA
+i2c-1: ACK
+i2c-1: Data write: 12
+i2c-1: ACK
+i2c-1: Data write: 81
+i2c-1: ACK
+i2c-1: Data write: CF
+i2c-1: ACK
+i2c-1: Data write: D9
+i2c-1: ACK
+i2c-1: Data write: F1
+i2c-1: ACK
+i2c-1: Data write: DB
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: A4
+i2c-1: ACK
+i2c-1: Data write: A6
+i2c-1: ACK
+i2c-1: Data write: AF
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 21
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 07
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 21
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 07
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 09
+i2c-1: ACK
+i2c-1: Data write: 19
+i2c-1: ACK
+i2c-1: Data write: 29
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 42
+i2c-1: ACK
+i2c-1: Data write: 61
+i2c-1: ACK
+i2c-1: Data write: 51
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 31
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 09
+i2c-1: ACK
+i2c-1: Data write: 09
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 31
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 21
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 02
+i2c-1: ACK
+i2c-1: Data write: 07
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 02
+i2c-1: ACK
+i2c-1: Data write: 04
+i2c-1: ACK
+i2c-1: Data write: 02
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 3F
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 3F
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 3E
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 3E
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 14
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 21
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 03
+i2c-1: ACK
+i2c-1: Data write: 07
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 31
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 1C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 3E
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 3E
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 14
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 21
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 22
+i2c-1: ACK
+i2c-1: Data write: 05
+i2c-1: ACK
+i2c-1: Data write: 07
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 31
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 09
+i2c-1: ACK
+i2c-1: Data write: 09
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 08
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 41
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 31
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 01
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7F
+i2c-1: ACK
+i2c-1: Data write: 09
+i2c-1: ACK
+i2c-1: Data write: 09
+i2c-1: ACK
+i2c-1: Data write: 09
+i2c-1: ACK
+i2c-1: Data write: 06
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 7E
+i2c-1: ACK
+i2c-1: Data write: 11
+i2c-1: ACK
+i2c-1: Data write: 11
+i2c-1: ACK
+i2c-1: Data write: 11
+i2c-1: ACK
+i2c-1: Data write: 7E
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 31
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Data write: 40
+i2c-1: ACK
+i2c-1: Data write: 46
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 49
+i2c-1: ACK
+i2c-1: Data write: 31
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 3B
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 40
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: EF
+i2c-1: ACK
+i2c-1: Data read: 5C
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
+
+## I2C — vcdtool: транзакції, тривалість, пауза до наступної
+      55.587 мс  S 68(W)+ 75+ P                                                195.000 мкс  пауза 23.275 мкс
+      55.806 мс  S 68(R)+ 68- P                                                195.000 мкс  пауза 22.525 мкс
+      56.023 мс  S 68(W)+ 6B+ 01+ P                                            1497.475 мкс  пауза 15.025 мкс
+      57.536 мс  S 68(W)+ 1A+ 03+ P                                            1983.425 мкс  пауза 15.025 мкс
+      59.534 мс  S 68(W)+ 19+ 04+ P                                            1986.425 мкс  пауза 14.525 мкс
+      61.535 мс  S 68(W)+ 1B+ 00+ P                                            1986.475 мкс  пауза 15.025 мкс
+  ... (скан адрес пропущено)
+     479.021 мс  S 3C(W)+ 40+ 00+ 00+ 00+ 00+ 00+ 00+ P                        1948.925 мкс  пауза 51.275 мкс
+     481.021 мс  S 3C(W)+ 40+ 00+ 00+ 00+ 00+ 00+ 00+ P                        1948.950 мкс  пауза 51.275 мкс
+     483.021 мс  S 3C(W)+ 40+ 00+ 00+ 00+ 00+ 00+ 00+ P                        1948.925 мкс  пауза 51.275 мкс
+     485.022 мс  S 3C(W)+ 40+ 3E+ 41+ 41+ 41+ 3E+ 00+ P                        1945.925 мкс  пауза 51.275 мкс
+     487.019 мс  S 3C(W)+ 40+ 7F+ 08+ 14+ 22+ 41+ 00+ P                        1948.950 мкс  пауза 38.275 мкс
+     489.006 мс  S 3C(W)+ 00+ 21+ 00+ 7F+ 22+ 05+ 07+ P                        1963.925 мкс  пауза 49.025 мкс
+     491.019 мс  S 3C(W)+ 40+ 46+ 49+ 49+ 49+ 31+ 00+ P                        1948.925 мкс  пауза 51.275 мкс
+     493.019 мс  S 3C(W)+ 40+ 7F+ 49+ 49+ 49+ 41+ 00+ P                        1953.200 мкс  пауза 51.275 мкс
+     495.024 мс  S 3C(W)+ 40+ 7F+ 40+ 40+ 40+ 40+ 00+ P                        1945.925 мкс  пауза 51.275 мкс
+     497.021 мс  S 3C(W)+ 40+ 7F+ 09+ 09+ 01+ 01+ 00+ P                        1948.925 мкс  пауза 51.275 мкс
+     499.021 мс  S 3C(W)+ 40+ 08+ 08+ 08+ 08+ 08+ 00+ P                        1955.750 мкс  пауза 51.275 мкс
+     501.028 мс  S 3C(W)+ 40+ 01+ 01+ 7F+ 01+ 01+ 00+ P                        1943.400 мкс  пауза 51.275 мкс
+     503.023 мс  S 3C(W)+ 40+ 7F+ 49+ 49+ 49+ 41+ 00+ P                        1949.425 мкс  пауза 51.275 мкс
+     505.023 мс  S 3C(W)+ 40+ 46+ 49+ 49+ 49+ 31+ 00+ P                        1949.450 мкс  пауза 51.275 мкс
+     507.024 мс  S 3C(W)+ 40+ 01+ 01+ 7F+ 01+ 01+ 00+ P                        1946.425 мкс  пауза 51.275 мкс
+     509.022 мс  S 3C(W)+ 40+ 00+ 00+ 00+ 00+ 00+ 00+ P                        1952.950 мкс  пауза 51.275 мкс
+     511.026 мс  S 3C(W)+ 40+ 7F+ 09+ 09+ 09+ 06+ 00+ P                        1949.950 мкс  пауза 51.275 мкс
+     513.027 мс  S 3C(W)+ 40+ 7E+ 11+ 11+ 11+ 7E+ 00+ P                        1947.650 мкс  пауза 51.275 мкс
+     515.026 мс  S 3C(W)+ 40+ 46+ 49+ 49+ 49+ 31+ 00+ P                        1949.950 мкс  пауза 51.275 мкс
+     517.027 мс  S 3C(W)+ 40+ 46+ 49+ 49+ 49+ 31+ 00+ P                        1946.950 мкс  пауза 5994.425 мкс
+     524.969 мс  S 68(W)+ 3B+ P                                                195.000 мкс  пауза 25.025 мкс
+     525.189 мс  S 68(R)+ 00+ 00+ 00+ 00+ 40+ 00+ EF+ 5C+ 00+ 00+ 00+ 00+ 00+  1365.000 мкс  пауза 997853.225 мкс
+    1524.407 мс  S 68(W)+ 3B+ P                                                195.000 мкс  пауза 25.025 мкс
+    1524.627 мс  S 68(R)+ 00+ 00+ 00+ 00+ 40+ 00+ EF+ 5C+ 00+ 00+ 00+ 00+ 00+  1365.000 мкс  пауза 998398.400 мкс
+    2524.390 мс  S 68(W)+ 3B+ P                                                195.000 мкс  пауза 25.025 мкс
+    2524.610 мс  S 68(R)+ 00+ 00+ 00+ 00+ 40+ 00+ EF+ 5C+ 00+ 00+ 00+ 00+ 00+  1365.000 мкс  пауза 998390.150 мкс
+    3524.366 мс  S 68(W)+ 3B+ P                                                195.000 мкс  пауза 25.025 мкс
+    3524.586 мс  S 68(R)+ 00+ 00+ 00+ 00+ 40+ 00+ EF+ 5C+ 00+ 00+ 00+ 00+ 00+  1365.000 мкс  пауза 998393.875 мкс
+    4524.345 мс  S 68(W)+ 3B+ P                                                195.000 мкс  пауза 25.025 мкс
+    4524.565 мс  S 68(R)+ 00+ 00+ 00+ 00+ 40+ 00+ EF+ 5C+ 00+ 00+ 00+ 00+ 00+  1365.000 мкс  пауза -
+  SCL: tHIGH=5.000 мкс tLOW=5.000 мкс період=10.000 мкс → f=100.00 кГц
+  транзакцій: 147, NACK на адресу: 0
+
+## SPI — sigrok-cli (spi, mode 0)
+spi-1: 00
+spi-1: 40
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 95
+spi-1: FF
+spi-1: FF
+spi-1: 01
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: 48
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 01
+spi-1: FF
+spi-1: AA
+spi-1: FF
+spi-1: 87
+spi-1: FF
+spi-1: FF
+spi-1: 01
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 01
+spi-1: FF
+spi-1: AA
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: 77
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 00
+spi-1: FF
+spi-1: 65
+spi-1: FF
+spi-1: FF
+spi-1: 01
+spi-1: FF
+  ... (5448 рядків)
+
+## SPI — vcdtool: кадри під CS#
+       0.000 мс  CS# low 1416.525 мкс    0 байт  MOSI 
+     344.777 мс  CS# low 701.025 мкс    8 байт  MOSI 40 00 00 00 00 95 FF FF
+                                             MISO 00 FF FF FF FF FF FF 01
+     345.610 мс  CS# low 1064.025 мкс   13 байт  MOSI FF 48 00 00 01 AA 87 FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 01 00 00 01 AA
+     346.806 мс  CS# low 826.400 мкс    9 байт  MOSI FF 77 00 00 00 00 65 FF FF
+                                             MISO FF FF FF FF FF FF FF FF 01
+     347.764 мс  CS# low 826.800 мкс    9 байт  MOSI FF 69 40 00 00 00 77 FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00
+     348.724 мс  CS# low 1063.050 мкс   13 байт  MOSI FF 7A 00 00 00 00 FD FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00 C0 FF 80 00
+     349.933 мс  CS# low 12203.200 мкс  528 байт  MOSI FF 51 00 00 00 00 55 FF FF FF FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FE 00 00
+     362.252 мс  CS# low 12221.175 мкс  528 байт  MOSI FF 51 00 00 00 01 47 FF FF FF FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FE 00 00
+     375.873 мс  CS# low 13786.250 мкс  544 байт  MOSI FF 58 00 00 00 01 7D FF FF FF FE A5 A2 AB B0 B9
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FF FF FF
+     389.839 мс  CS# low 12218.700 мкс  528 байт  MOSI FF 51 00 00 00 01 47 FF FF FF FF FF FF FF FF FF
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FE A5 A2
+     403.850 мс  CS# low 13785.500 мкс  544 байт  MOSI FF 58 00 00 00 01 7D FF FF FF FE 00 00 00 00 00
+                                             MISO FF FF FF FF FF FF FF FF 00 FF FF FF FF FF FF FF
+  SCK: період 0.175 мкс → f=5714.3 кГц
+
+## UART — vcdtool (115200 8N1)
+       1.898 мс  �
+       2.093 мс  ==== hello from STM32 ====
+       5.390 мс  LR2 sensor integration | NUCLEO-C031C6 | SYSCLK = 48000000 Hz
+      11.935 мс  [init] USART2         HAL_OK
+      15.485 мс  [init] I2C1           HAL_OK
+      19.012 мс  [init] SPI1           HAL_OK
+      23.387 мс  [init] ADC1           HAL_OK
+      26.891 мс  [init] TIM3 PWM       HAL_OK
+      30.240 мс  [init] ADC1 calib     HAL_OK
+      33.585 мс  [init] PWM CH1        HAL_OK
+      36.935 мс  [init] PWM CH2        HAL_OK
+      40.202 мс  [init] UART RX IRQ    on
+      43.167 мс  [init] I2C write mode 1 (0=HAL preload, 1=TXIS-paced, 2=Mem_Write)
+      50.487 мс  ST BEGIN fw=LR2 board=NUCLEO-C031C6 sysclk=48000000
+     102.963 мс  ST imu PASS id=0x68 pwr=0x01 ax=0 ay=0 az=1000 an=1000 gx=0 gy=0 gz=0 t_cC=2400 c_norm=1 c_gyro=1 c_temp=1 c_live=1
+     341.261 мс  ST oled PASS addr=0x3C
+     419.422 мс  ST sd PASS type=SDHC ocr=0xC0FF8000 acmd41=1 sig=0x55AA rw_blk=1 rw=OK
+     427.222 мс  ST servo PASS pan_us=1500 tilt_us=1500 period_us=20000
+     433.304 мс  ST pot PASS raw=0 mv=0 dz_cdeg=0
+     437.050 мс  ST btn PASS level=1 presses=0
+     440.365 мс  ST END pass=6 fail=0
+     444.577 мс  I2CDIAG mode=1 recoveries=0 fallbacks=0 last: phase=- mode=0 addr=0x00 byte=0/0 status=0 isr=0x00000000 cr2=0x00000000 t=0
+     519.214 мс  ==== bring-up done, entering main loop (type 'help') ====
+     527.635 мс  tick 1 | t=523 ms | az=1000 mg | adc=0 (0 mV) | btn=0
+    1527.080 мс  tick 2 | t=1523 ms | az=1000 mg | adc=0 (0 mV) | btn=0
+    2527.073 мс  tick 3 | t=2523 ms | az=1000 mg | adc=0 (0 mV) | btn=0
+    3527.052 мс  tick 4 | t=3523 ms | az=1000 mg | adc=0 (0 mV) | btn=0
+    4527.032 мс  tick 5 | t=4523 ms | az=1000 mg | adc=0 (0 mV) | btn=0
+
+## UART — sigrok-cli (перші байти)
+uart-1: 0D
+uart-1: 0A
+uart-1: 3D
+uart-1: 3D
+uart-1: 3D
+uart-1: 3D
+uart-1: 20
+uart-1: 68
+uart-1: 65
+uart-1: 6C
+uart-1: 6C
+uart-1: 6F
+uart-1: 20
+uart-1: 66
+uart-1: 72
+uart-1: 6F
+uart-1: 6D
+uart-1: 20
+uart-1: 53
+uart-1: 54
