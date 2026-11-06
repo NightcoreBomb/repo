@@ -71,3 +71,12 @@
 6. Solomon Systech, *SSD1306 Advance Information, rev 1.1*.
 7. SD Association, *SD Specifications Part 1: Physical Layer Simplified Specification*. https://www.sdcard.org/downloads/pls/
 8. Wokwi Docs: board-st-nucleo-c031c6, wokwi-mpu6050, wokwi-microsd-card, wokwi-logic-analyzer. https://docs.wokwi.com
+
+## 5. Актуалізація після ЛР2
+
+* Додано службовий пін **PB3 (MARK)** — тригер/гейт логічного аналізатора (`App/capture.c`).
+* Канал **MISO (PA6)** тепер на аналізаторі (профіль `bus`), бо без нього не видно відповідей SD (R1, токени).
+* Ініціалізація SD виправлена: ≥ 74 тактів при **CS# = 1** (у ЛР1 подавались при CS# = 0, див. `docs/captures/analysis.md` §2.1).
+* Робоча частота SPI після ініціалізації SD — 6 МГц (PCLK/8).
+* Для Форми A додано драйвер W25Q64 (`Devices/w25qxx.c`, JEDEC `EF 40 17`), протестований на хості.
+* Повна таблиця пінів, адрес, живлення і розрахунків шин — `docs/pinout.md` (замінює табл. §1 цього файлу як основне джерело).
