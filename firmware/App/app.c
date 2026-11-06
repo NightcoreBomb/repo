@@ -60,7 +60,7 @@ static void cmd_imuchk(app_t *a, char *args)
 
 static void help(void)
 {
-  plat_log("cmds: help selftest imu imuchk scan servo <pan_us> <tilt_us> cap <name> status\r\n");
+  plat_log("cmds: help selftest stimu imu imuchk scan servo <pan_us> <tilt_us> cap <name> status\r\n");
   capture_list();
 }
 
@@ -72,6 +72,8 @@ void app_handle_line(app_t *a, char *line)
   if (!strcmp(line, "selftest"))      selftest_run(a);
   else if (!strcmp(line, "imu"))      cmd_imu(a);
   else if (!strcmp(line, "imuchk"))   cmd_imuchk(a, arg);
+  else if (!strcmp(line, "stimu"))
+    plat_log("STIMU %s\r\n", selftest_imu(a) ? "PASS" : "FAIL");   /* вердикт окремим рядком */
   else if (!strcmp(line, "scan"))     cmd_scan(a);
   else if (!strcmp(line, "cap"))      capture_run(a, arg);
   else if (!strcmp(line, "servo")) {

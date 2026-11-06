@@ -88,7 +88,7 @@ int imu_check(app_t *a, const int32_t e[7], const int32_t tol[3])
   imu_sample_t m;
   imu_measure(a, 4, &m);
   if (m.status != ST_OK) {
-    plat_log("IMUCHK FAIL err=%s\r\n", st_str(m.status));
+    plat_log("IMUCHK FAIL\r\nIMUCHK err=%s\r\n", st_str(m.status));
     return 0;
   }
   const int32_t got[7] = { m.avg.ax_mg, m.avg.ay_mg, m.avg.az_mg,
@@ -98,7 +98,10 @@ int imu_check(app_t *a, const int32_t e[7], const int32_t tol[3])
     int32_t t = tol[i < 3 ? 0 : (i < 6 ? 1 : 2)];
     if (iabs32(got[i] - e[i]) > t) ok = 0;
   }
-  plat_log("IMUCHK %s ax=%ld ay=%ld az=%ld gx=%ld gy=%ld gz=%ld t_cC=%ld\r\n", res(ok),
+  /* вердикт — окремим рядком без змінних частин: його чекає automation
+     scenario Wokwi (tests/sim/mpu6050.test.yaml, крок wait-serial) */
+  plat_log("IMUCHK %s\r\n", res(ok));
+  plat_log("IMUCHK got ax=%ld ay=%ld az=%ld gx=%ld gy=%ld gz=%ld t_cC=%ld\r\n",
            (long)got[0], (long)got[1], (long)got[2], (long)got[3], (long)got[4],
            (long)got[5], (long)got[6]);
   return ok;

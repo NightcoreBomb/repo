@@ -1,0 +1,95 @@
+# Automation scenario Wokwi: MPU-6050 у симуляції проходить ідентифікацію,
+# ініціалізацію і перевірку фізичної правдоподібності, а дані реагують на
+# зміну «фізики» сенсора (set-control) — у тих самих одиницях, що й у Wokwi.
+#
+#   wokwi-cli --timeout 30000 --scenario tests/sim/mpu6050.test.yaml .
+#   (або make sim-test; потрібен WOKWI_CLI_TOKEN)
+#
+# Вердикти друкуються ОКРЕМИМИ рядками без змінних частин (IMUCHK PASS,
+# STIMU PASS), тож wait-serial не залежить від чисел у рядку з подробицями.
+name: 'LR2 MPU-6050 in simulation'
+version: 1
+author: 'Viktoriia Savaryna'
+
+steps:
+  # 1. Завантаження: self-test виконується автоматично
+  - wait-serial: "==== bring-up done, entering main loop (type 'help') ===="
+
+  # 2. Окремий self-test IMU: WHO_AM_I=0x68, init, |a| = 1 g ± 5 %, gyro, temp
+  - write-serial: "stimu\n"
+  - wait-serial: 'STIMU PASS'
+
+  # 3. Стан за замовчуванням Wokwi: az = 1 g, 24 °C
+  - write-serial: "imuchk 0 0 1000 0 0 0 2400\n"
+  - wait-serial: 'IMUCHK PASS'
+
+  # 4. Сенсор «покладено на бік»: +1 g по X
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 1
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0
+  - delay: 50ms
+  - write-serial: "imuchk 1000 0 0 0 0 0 2400\n"
+  - wait-serial: 'IMUCHK PASS'
+
+  # 5. Нахил 45° з від'ємною віссю Y, обертання і температура
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.5
+  - set-control:
+      part-id: imu
+      control: accelY
+      value: -0.5
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.707
+  - set-control:
+      part-id: imu
+      control: rotationX
+      value: 90
+  - set-control:
+      part-id: imu
+      control: rotationZ
+      value: -45
+  - set-control:
+      part-id: imu
+      control: temperature
+      value: 30
+  - delay: 50ms
+  - write-serial: "imuchk 500 -500 707 90000 0 -45000 3000\n"
+  - wait-serial: 'IMUCHK PASS'
+
+  # 6. Негативна перевірка: перевірка ВМІЄ провалитися (інакше тест нічого не доводить)
+  - write-serial: "imuchk 0 0 -1000 0 0 0 2400\n"
+  - wait-serial: 'IMUCHK FAIL'
+
+  # 7. Повернути стан за замовчуванням і ще раз пройти self-test IMU
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0
+  - set-control:
+      part-id: imu
+      control: accelY
+      value: 0
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1
+  - set-control:
+      part-id: imu
+      control: rotationX
+      value: 0
+  - set-control:
+      part-id: imu
+      control: rotationZ
+      value: 0
+  - delay: 50ms
+  - write-serial: "stimu\n"
+  - wait-serial: 'STIMU PASS'

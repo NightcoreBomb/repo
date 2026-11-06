@@ -1,0 +1,14 @@
+# Automation scenario Wokwi: повний self-test усіх пристроїв PRD в одній прошивці.
+#   wokwi-cli --timeout 30000 --scenario tests/sim/selftest.test.yaml --serial-log-file build/serial.log .
+#   python3 tools/parse_selftest.py build/serial.log
+name: 'LR2 full bring-up self-test'
+version: 1
+author: 'Viktoriia Savaryna'
+
+steps:
+  - wait-serial: 'ST BEGIN fw=LR2 board=NUCLEO-C031C6 sysclk=48000000'
+  - wait-serial: 'ST END pass=6 fail=0'
+  - write-serial: "scan\n"
+  - wait-serial: 'SCAN 0x3C 0x68 n=2'
+  - write-serial: "cap all\n"
+  - wait-serial: 'CAP all end'

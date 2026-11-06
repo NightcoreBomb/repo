@@ -122,11 +122,24 @@ static void test_imuchk_command_matches_set_values(void)
   char cmd[] = "imuchk 1000 0 0 0 0 0 3000";
   fake_plat_reset();
   app_handle_line(&a, cmd);
-  TEST_ASSERT_NOT_NULL(fp_find("IMUCHK PASS ax=1000"));
+  TEST_ASSERT_NOT_NULL(fp_find("IMUCHK PASS\r\n"));
+  TEST_ASSERT_NOT_NULL(fp_find("IMUCHK got ax=1000 ay=0 az=0"));
   char cmd2[] = "imuchk 0 0 1000";                      /* очікування не збігається */
   fake_plat_reset();
   app_handle_line(&a, cmd2);
   TEST_ASSERT_NOT_NULL(fp_find("IMUCHK FAIL"));
+}
+
+static void test_stimu_command_verdict_line(void)
+{
+  char c[] = "stimu";
+  app_handle_line(&a, c);
+  TEST_ASSERT_NOT_NULL(fp_find("ST imu PASS"));
+  TEST_ASSERT_NOT_NULL(fp_find("STIMU PASS\r\n"));
+  fake_mpu.present = 0;
+  fake_plat_reset();
+  app_handle_line(&a, c);
+  TEST_ASSERT_NOT_NULL(fp_find("STIMU FAIL\r\n"));
 }
 
 static void test_imuchk_gyro(void)
@@ -253,7 +266,8 @@ static void test_imu_command_reports_bus_error(void)
   app_handle_line(&a, c);
   TEST_ASSERT_NOT_NULL(fp_find("IMU err=NACK"));
   app_handle_line(&a, k);
-  TEST_ASSERT_NOT_NULL(fp_find("IMUCHK FAIL err=NACK"));
+  TEST_ASSERT_NOT_NULL(fp_find("IMUCHK FAIL\r\n"));
+  TEST_ASSERT_NOT_NULL(fp_find("IMUCHK err=NACK"));
 }
 
 static void test_poll_tick_button_and_console(void)
@@ -285,6 +299,7 @@ int main(void)
   RUN_TEST(test_imu_stuck_bus_detected);
   RUN_TEST(test_imu_bus_timeout_on_read);
   RUN_TEST(test_imuchk_command_matches_set_values);
+  RUN_TEST(test_stimu_command_verdict_line);
   RUN_TEST(test_imuchk_gyro);
   RUN_TEST(test_sd_selftest_is_non_destructive);
   RUN_TEST(test_sd_no_write_if_original_block_unreadable);

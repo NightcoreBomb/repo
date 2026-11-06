@@ -70,8 +70,8 @@
       "top": 300,
       "left": 560,
       "attrs": {
-        "bufferSize": "1000000",
-        "channelNames": "SCL,SDA,SCK,MOSI,CS,PWM,BTN,TX"
+        "bufferSize": "2000000",
+        "channelNames": "SCL,SDA,SCK,MOSI,MISO,CS,TX,MARK"
       }
     }
   ],
@@ -239,6 +239,12 @@
       []
     ],
     [
+      "logic:GND",
+      "nucleo:GND.7",
+      "black",
+      []
+    ],
+    [
       "logic:D0",
       "nucleo:PB8",
       "gray",
@@ -264,32 +270,26 @@
     ],
     [
       "logic:D4",
-      "nucleo:PB0.2",
+      "nucleo:PA6",
       "gray",
       []
     ],
     [
       "logic:D5",
-      "nucleo:PB4",
+      "nucleo:PB0.2",
       "gray",
       []
     ],
     [
       "logic:D6",
-      "nucleo:PA8",
-      "gray",
-      []
-    ],
-    [
-      "logic:D7",
       "nucleo:PA2",
       "gray",
       []
     ],
     [
-      "logic:GND",
-      "nucleo:GND.7",
-      "black",
+      "logic:D7",
+      "nucleo:PB3",
+      "gray",
       []
     ]
   ],
