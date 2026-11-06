@@ -1,13 +1,59 @@
-name: build
-on: [push, pull_request]
+name: ci
+on:
+  push:
+  pull_request:
+
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: make image
-      - run: make build
+      - name: Toolchain image
+        run: make image
+      - name: Versions
+        run: make versions
+      - name: Layer rules + pinout consistency
+        run: make check
+      - name: Build firmware (-Wall -Wextra -Werror for own code)
+        run: make build
+      - name: Host unit tests + tool tests
+        run: make test
+      - name: Coverage (Devices + App, gate)
+        run: make coverage
       - uses: actions/upload-artifact@v4
         with:
           name: firmware
           path: firmware/build/firmware.*
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-html
+          path: tests/build/coverage/
+
+  # Симуляція в Wokwi: виконується лише якщо в репозиторії є секрет WOKWI_CLI_TOKEN
+  # (Settings → Secrets → Actions). Без токена job пропускається, а не падає.
+  wokwi:
+    needs: build-test
+    runs-on: ubuntu-latest
+    env:
+      WOKWI_CLI_TOKEN: ${{ secrets.WOKWI_CLI_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.WOKWI_CLI_TOKEN != ''
+      - name: Build
+        if: env.WOKWI_CLI_TOKEN != ''
+        run: make image && make build
+      - name: Install wokwi-cli
+        if: env.WOKWI_CLI_TOKEN != ''
+        run: curl -L https://wokwi.com/ci/install.sh | sh && echo "$HOME/.wokwi/bin" >> $GITHUB_PATH
+      - name: Self-test of all devices
+        if: env.WOKWI_CLI_TOKEN != ''
+        run: make sim
+      - name: MPU-6050 scenario
+        if: env.WOKWI_CLI_TOKEN != ''
+        run: make sim-imu
+      - uses: actions/upload-artifact@v4
+        if: always() && env.WOKWI_CLI_TOKEN != ''
+        with:
+          name: wokwi-serial-logs
+          path: build/*.log

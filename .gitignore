@@ -5,8 +5,13 @@ build/
 *.hex
 *.bin
 *.map
+*.gcda
+*.gcno
 .DS_Store
 .vscode/*
 !.vscode/extensions.json
+__pycache__/
+# VS Code Wokwi пише сюди запис аналізатора; «make capture NAME=...» переносить його в docs/captures/
+/wokwi.vcd
 # CubeMX тимчасові
 .mxproject

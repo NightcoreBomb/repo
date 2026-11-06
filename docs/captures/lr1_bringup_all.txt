@@ -1,0 +1,722 @@
+# lr1_bringup_all.vcd
+канали: SCL, SDA, SCK, MOSI, CS, PWM, BTN, TX; тривалість 4535.574 мс; частота дискретизації Wokwi = 1 ГГц (1 нс), sigrok: downsample 20 → 50 МГц
+
+## I2C — sigrok-cli (i2c)
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 08
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 09
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 0A
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 0B
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 0C
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 0D
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 0E
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 0F
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 10
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 11
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 12
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 13
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 14
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 15
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 16
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 17
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 18
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 19
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 1A
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 1B
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 1C
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 1D
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 1E
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 1F
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 20
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 21
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 22
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 23
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 24
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 25
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 26
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 27
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 28
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 29
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 2A
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 2B
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 2C
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 2D
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 2E
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 2F
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 30
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 31
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 32
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 33
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 34
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 35
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 36
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 37
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 38
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 39
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3A
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3B
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3C
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3D
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3E
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 3F
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 40
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 41
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 42
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 43
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 44
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 45
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 46
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 47
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 48
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 49
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 4A
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 4B
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 4C
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 4D
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 4E
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 4F
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 50
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 51
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 52
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 53
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 54
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 55
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 56
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 57
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 58
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 59
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 5A
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 5B
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 5C
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 5D
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 5E
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 5F
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 60
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 61
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 62
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 63
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 64
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 65
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 66
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 67
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 69
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 6A
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 6B
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 6C
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 6D
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 6E
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 6F
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 70
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 71
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 72
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 73
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 74
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 75
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 76
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 77
+i2c-1: NACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Write
+i2c-1: Address write: 68
+i2c-1: ACK
+i2c-1: Data write: 75
+i2c-1: ACK
+i2c-1: Stop
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 68
+i2c-1: ACK
+i2c-1: Data read: 68
+i2c-1: NACK
+i2c-1: Stop
+
+## I2C — vcdtool: транзакції, тривалість, пауза до наступної
+      37.796 мс  S 08(W)- P                                                    105.000 мкс  пауза 5694.825 мкс
+      43.595 мс  S 09(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+      49.602 мс  S 0A(W)- P                                                    105.000 мкс  пауза 5885.875 мкс
+      55.593 мс  S 0B(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+      61.599 мс  S 0C(W)- P                                                    105.000 мкс  пауза 5886.625 мкс
+      67.591 мс  S 0D(W)- P                                                    105.000 мкс  пауза 5900.625 мкс
+  ... (скан адрес пропущено)
+     535.593 мс  S 5C(W)- P                                                    105.000 мкс  пауза 5886.625 мкс
+     541.585 мс  S 5D(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+     547.591 мс  S 5E(W)- P                                                    105.000 мкс  пауза 5885.875 мкс
+     553.582 мс  S 5F(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+     559.588 мс  S 60(W)- P                                                    105.000 мкс  пауза 5886.625 мкс
+     565.580 мс  S 61(W)- P                                                    105.000 мкс  пауза 5901.125 мкс
+     571.586 мс  S 62(W)- P                                                    105.000 мкс  пауза 5900.875 мкс
+     577.592 мс  S 63(W)- P                                                    105.000 мкс  пауза 5886.625 мкс
+     583.583 мс  S 64(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+     589.590 мс  S 65(W)- P                                                    105.000 мкс  пауза 5885.875 мкс
+     595.581 мс  S 66(W)- P                                                    105.000 мкс  пауза 5901.125 мкс
+     601.587 мс  S 67(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+     607.593 мс  S 68(W)+ P                                                    105.000 мкс  пауза 216.525 мкс
+     607.915 мс  S 69(W)- P                                                    105.000 мкс  пауза 5561.350 мкс
+     613.581 мс  S 6A(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+     619.587 мс  S 6B(W)- P                                                    105.000 мкс  пауза 5886.625 мкс
+     625.579 мс  S 6C(W)- P                                                    105.000 мкс  пауза 5901.125 мкс
+     631.585 мс  S 6D(W)- P                                                    105.000 мкс  пауза 5900.875 мкс
+     637.591 мс  S 6E(W)- P                                                    105.000 мкс  пауза 5886.625 мкс
+     643.583 мс  S 6F(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+     649.589 мс  S 70(W)- P                                                    105.000 мкс  пауза 5885.875 мкс
+     655.580 мс  S 71(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+     661.586 мс  S 72(W)- P                                                    105.000 мкс  пауза 5886.625 мкс
+     667.578 мс  S 73(W)- P                                                    105.000 мкс  пауза 5900.625 мкс
+     673.584 мс  S 74(W)- P                                                    105.000 мкс  пауза 5901.375 мкс
+     679.590 мс  S 75(W)- P                                                    105.000 мкс  пауза 5886.625 мкс
+     685.582 мс  S 76(W)- P                                                    105.000 мкс  пауза 5901.125 мкс
+     691.588 мс  S 77(W)- P                                                    105.000 мкс  пауза 20889.550 мкс
+     712.582 мс  S 68(W)+ 75+ P                                                195.000 мкс  пауза 28.025 мкс
+     712.805 мс  S 68(R)+ 68- P                                                195.000 мкс  пауза -
+  SCL: tHIGH=5.000 мкс tLOW=5.000 мкс період=10.000 мкс → f=100.00 кГц
+  транзакцій: 114, NACK на адресу: 110
+
+## SPI — sigrok-cli (spi, mode 0)
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+spi-1: FF
+
+## SPI — vcdtool: кадри під CS#
+       0.000 мс  CS# low 650.025 мкс    0 байт  MOSI 
+     719.040 мс  CS# low 327.475 мкс   10 байт  MOSI FF FF FF FF FF FF FF FF FF FF
+  SCK: період 2.675 мкс → f=373.8 кГц
+
+## UART — vcdtool (115200 8N1)
+       1.299 мс  �
+       1.592 мс  ==== hello from STM32 ====
+       4.989 мс  LR1 bring-up | NUCLEO-C031C6 | SYSCLK = 48000000 Hz
+      10.405 мс  [init] USART2         HAL_OK
+      13.880 мс  [init] I2C1           HAL_OK
+      17.328 мс  [init] SPI1           HAL_OK
+      21.512 мс  [init] ADC1           HAL_OK
+      24.857 мс  [init] ADC1 calib     HAL_OK
+      28.313 мс  [init] TIM3 PWM       HAL_OK
+      31.578 мс  [init] PWM CH1 start  HAL_OK
+      34.844 мс  [init] PWM CH2 start  HAL_OK
+     697.887 мс  [i2c ] scan 0x08..0x77: 0x3C 0x68  (2 device(s))
+     713.807 мс  [i2c ] MPU-6050 WHO_AM_I = 0x68 (HAL_OK, expected 0x68)
+     719.873 мс  [spi ] 80 probe clocks on SCK: HAL_OK
+     723.686 мс  ==== bring-up done, entering main loop ====
+    1728.724 мс  tick 1 | t=1727 ms | adc=2958 (2383 mV) | btn=0
+    2728.713 мс  tick 2 | t=2727 ms | adc=2958 (2383 mV) | btn=0
+    3728.694 мс  tick 3 | t=3727 ms | adc=2958 (2383 mV) | btn=0
+
+## UART — sigrok-cli (перші байти)
+uart-1: 0D
+uart-1: 0A
+uart-1: 3D
+uart-1: 3D
+uart-1: 3D
+uart-1: 3D
+uart-1: 20
+uart-1: 68
+uart-1: 65
+uart-1: 6C
+uart-1: 6C
+uart-1: 6F
+uart-1: 20
+uart-1: 66
+uart-1: 72
+uart-1: 6F
+uart-1: 6D
+uart-1: 20
+uart-1: 53
+uart-1: 54
+
+## PWM — ширина імпульсу / період
+      31.035 мс  ширина 1507.175 мкс  період 20007.175 мкс
+      51.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+      71.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+      91.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     111.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     131.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     151.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     171.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     191.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     211.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     231.042 мс  ширина 1500.000 мкс  період 20000.025 мкс
+     251.042 мс  ширина 1500.000 мкс  період 19999.975 мкс
+     271.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     291.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     311.042 мс  ширина 1500.025 мкс  період 20000.000 мкс
+     331.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     351.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     371.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     391.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     411.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     431.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     451.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     471.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     491.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     511.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     531.042 мс  ширина 1500.025 мкс  період 20000.000 мкс
+     551.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     571.042 мс  ширина 1500.000 мкс  період 20000.025 мкс
+     591.042 мс  ширина 1499.975 мкс  період 19999.975 мкс
+     611.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     631.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     651.042 мс  ширина 1500.025 мкс  період 20000.000 мкс
+     671.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     691.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     711.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     731.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     751.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     771.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     791.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+     811.042 мс  ширина 1500.000 мкс  період 20000.000 мкс
+
+  sigrok pwm: pwm-1: 7.533196% | pwm-1: 20.0 ms | pwm-1: 7.500000% | pwm-1: 20.0 ms | pwm-1: 7.500000% | pwm-1: 20.0 ms
