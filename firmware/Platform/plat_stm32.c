@@ -67,19 +67,14 @@ void plat_mark(bool level)
 
 void plat_led_toggle(void) { HAL_GPIO_TogglePin(BOARD_LED_Port, BOARD_LED_Pin); }
 
-static volatile uint32_t btn_presses;
-int      plat_btn_level(void)   { return HAL_GPIO_ReadPin(BOARD_BTN_Port, BOARD_BTN_Pin) == GPIO_PIN_SET; }
-uint32_t plat_btn_presses(void) { return btn_presses; }
+static volatile uint32_t btn_edges;
+int      plat_btn_level(void) { return HAL_GPIO_ReadPin(BOARD_BTN_Port, BOARD_BTN_Pin) == GPIO_PIN_SET; }
+uint32_t plat_btn_edges(void) { return btn_edges; }
 
-/* Кнопка: EXTI по спаду, debounce 50 мс (FR-06) */
-void HAL_GPIO_EXTI_Falling_Callback(uint16_t pin)
-{
-  static uint32_t last;
-  if (pin == BOARD_BTN_Pin) {
-    uint32_t now = HAL_GetTick();
-    if (now - last > 50u) { btn_presses++; last = now; }
-  }
-}
+/* EXTI на обидва фронти лише РАХУЄ сирі фронти (видно, скільки брязкоту відфільтровано).
+   Рішення «натиснуто» приймає debounce за стабільністю в app_tick_1ms() (журнал П-12). */
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t pin) { if (pin == BOARD_BTN_Pin) btn_edges++; }
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t pin)  { if (pin == BOARD_BTN_Pin) btn_edges++; }
 
 /* ---------- PWM ---------- */
 void plat_servo_set_us(unsigned ch, uint16_t us)

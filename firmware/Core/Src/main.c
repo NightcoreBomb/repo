@@ -221,9 +221,10 @@ static void MX_GPIO_Init(void)
   g.Pin   = BOARD_MARK_Pin;
   HAL_GPIO_Init(BOARD_MARK_Port, &g);
 
-  /* Кнопка: замикає на GND, внутрішній pull-up, переривання по спаду */
+  /* Кнопка: замикає на GND, внутрішній pull-up; EXTI на обидва фронти — лише
+     лічильник сирих фронтів, debounce — опитування 1 кГц у SysTick (П-12) */
   g.Pin  = BOARD_BTN_Pin;
-  g.Mode = GPIO_MODE_IT_FALLING;
+  g.Mode = GPIO_MODE_IT_RISING_FALLING;
   g.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(BOARD_BTN_Port, &g);
 

@@ -16,7 +16,7 @@ firmware/                  прошивка, шари (docs/architecture.md):
   Drivers/                   HAL 1.4.1 + CMSIS (vendored, docs/third_party.md)
   Interfaces/                контракти: bus_i2c.h, bus_spi.h, plat.h, status.h
   Platform/                  board.h (єдине місце пінів) + реалізації шин над HAL
-  Devices/                   mpu6050, ssd1306, sdcard, w25qxx, servo, pot
+  Devices/                   mpu6050, ssd1306, sdcard, w25qxx, servo, pot, button
   App/                       self-test, консоль, сценарії запису для аналізатора
 tests/                     хостові тести (Unity), дублери шин, вектори з записів, сценарії Wokwi (tests/sim)
 tools/                     check_deps, check_pinout, probe, vcdtool, decode_capture, vcd2vectors, parse_selftest
@@ -51,7 +51,7 @@ ST oled PASS addr=0x3C
 ST sd PASS type=SDHC ...
 ST servo PASS pan_us=1500 tilt_us=1500 period_us=20000
 ST pot PASS raw=... mv=... dz_cdeg=...
-ST btn PASS level=1 presses=0
+ST btn PASS level=1 presses=0 edges=0 debounce_ms=50
 ST END pass=6 fail=0
 ==== bring-up done, entering main loop (type 'help') ====
 tick 1 | t=... ms | az=1000 mg | adc=... | btn=0

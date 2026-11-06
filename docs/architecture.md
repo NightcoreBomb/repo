@@ -9,7 +9,7 @@ firmware/
 ├── Interfaces/   КОНТРАКТИ між шарами: bus_i2c.h, bus_spi.h, plat.h, status.h (лише <std*.h>)
 ├── Platform/     адаптація до плати: board.h (піни, хендли, параметри шин) + реалізації
 │                 bus_i2c_t / bus_spi_t / plat.h над HAL (bus_*_stm32.c, plat_stm32.c)
-├── Devices/      драйвери: mpu6050, ssd1306 (+font5x7), sdcard, w25qxx (Форма A), servo, pot
+├── Devices/      драйвери: mpu6050, ssd1306 (+font5x7), sdcard, w25qxx (Форма A), servo, pot, button (debounce)
 └── App/          прикладна логіка: self-test, консоль, сценарії запису для аналізатора
 tests/            хостові тести (gcc + Unity), дублери шин, вектори з записів аналізатора
 tools/            перевірки (check_deps, check_pinout), декодування VCD, генерація векторів
@@ -110,7 +110,7 @@ flowchart TB
   subgraph Core["Core (CubeMX-стиль)"]
     MAIN["main.c<br/>HAL_Init, SystemClock_Config,<br/>MX_*_Init → board_start → app"]
     MSP["stm32c0xx_hal_msp.c<br/>тактування + AF пінів"]
-    IT["stm32c0xx_it.c<br/>SysTick, EXTI4_15, USART2"]
+    IT["stm32c0xx_it.c<br/>SysTick → app_tick_1ms, EXTI4_15, USART2"]
   end
   subgraph App["App (не знає HAL)"]
     APP["app.c<br/>головний цикл, консоль"]
@@ -122,7 +122,7 @@ flowchart TB
     OLED["ssd1306 + font5x7"]
     SD["sdcard (SPI mode)"]
     W25["w25qxx (Форма A)"]
-    CONV["servo, pot<br/>(чисті перетворення)"]
+    CONV["servo, pot, button<br/>(чиста логіка)"]
   end
   subgraph Interfaces["Interfaces (контракти)"]
     BI2C[["bus_i2c_t"]]
@@ -156,6 +156,7 @@ flowchart TB
   PI2C & PSPI & PPLAT --> BOARD
   BOARD --> HAL
   MSP & IT --> HAL
+  IT --> APP
   DBL -. implements .-> BI2C & BSPI & PLAT
 ```
 
