@@ -1,6 +1,6 @@
 /**
  * MSP (MCU Support Package): тактування периферії + alternate functions пінів.
- * Саме тут видно, який пін за який інтерфейс відповідає (див. datasheet STM32C031, табл. AF).
+ * Номери пінів і AF беруться з Platform/board.h (єдине джерело, див. pinout.md).
  */
 #include "main.h"
 
@@ -17,13 +17,14 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
     /* На STM32C031 USART2 тактується тільки від PCLK — вибору джерела немає */
     __HAL_RCC_USART2_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    /* PA2 -> USART2_TX, PA3 -> USART2_RX (AF1) */
-    g.Pin       = GPIO_PIN_2 | GPIO_PIN_3;
+    g.Pin       = BOARD_VCP_TX_Pin | BOARD_VCP_RX_Pin;
     g.Mode      = GPIO_MODE_AF_PP;
     g.Pull      = GPIO_NOPULL;
     g.Speed     = GPIO_SPEED_FREQ_LOW;
-    g.Alternate = GPIO_AF1_USART2;
-    HAL_GPIO_Init(GPIOA, &g);
+    g.Alternate = BOARD_VCP_AF;
+    HAL_GPIO_Init(BOARD_VCP_TX_Port, &g);
+    HAL_NVIC_SetPriority(USART2_IRQn, 2, 0);
+    HAL_NVIC_EnableIRQ(USART2_IRQn);
   }
 }
 
@@ -36,13 +37,13 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
     pclk.I2c1ClockSelection   = RCC_I2C1CLKSOURCE_PCLK1;
     if (HAL_RCCEx_PeriphCLKConfig(&pclk) != HAL_OK) Error_Handler();
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    /* PB8 -> I2C1_SCL, PB9 -> I2C1_SDA (AF6), open-drain */
-    g.Pin       = GPIO_PIN_8 | GPIO_PIN_9;
+    /* Open-drain: на шині кілька пристроїв, «1» = відпущена лінія (UM10204 §3.1.1) */
+    g.Pin       = BOARD_I2C_SCL_Pin | BOARD_I2C_SDA_Pin;
     g.Mode      = GPIO_MODE_AF_OD;
-    g.Pull      = GPIO_PULLUP;   /* на залізі — ще й зовнішні 4.7 кОм (на GY-521 вже є) */
+    g.Pull      = GPIO_PULLUP;   /* ~40 кОм лише як «страховка»; основні — 4.7 кОм на модулях */
     g.Speed     = GPIO_SPEED_FREQ_LOW;
-    g.Alternate = GPIO_AF6_I2C1;
-    HAL_GPIO_Init(GPIOB, &g);
+    g.Alternate = BOARD_I2C_AF;
+    HAL_GPIO_Init(BOARD_I2C_SCL_Port, &g);
     __HAL_RCC_I2C1_CLK_ENABLE();
   }
 }
@@ -53,14 +54,12 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
   if (hspi->Instance == SPI1) {
     __HAL_RCC_SPI1_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    /* PA1 -> SPI1_SCK, PA6 -> SPI1_MISO, PA7 -> SPI1_MOSI (AF0).
-       SCK винесено з PA5 на PA1, бо PA5 зайнятий LED LD4. */
-    g.Pin       = GPIO_PIN_1 | GPIO_PIN_6 | GPIO_PIN_7;
+    g.Pin       = BOARD_SPI_SCK_Pin | BOARD_SPI_MISO_Pin | BOARD_SPI_MOSI_Pin;
     g.Mode      = GPIO_MODE_AF_PP;
     g.Pull      = GPIO_NOPULL;
     g.Speed     = GPIO_SPEED_FREQ_HIGH;
-    g.Alternate = GPIO_AF0_SPI1;
-    HAL_GPIO_Init(GPIOA, &g);
+    g.Alternate = BOARD_SPI_AF;
+    HAL_GPIO_Init(BOARD_SPI_SCK_Port, &g);
   }
 }
 
@@ -74,11 +73,10 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef *hadc)
     if (HAL_RCCEx_PeriphCLKConfig(&pclk) != HAL_OK) Error_Handler();
     __HAL_RCC_ADC_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    /* PA0 -> ADC1_IN0 */
-    g.Pin  = GPIO_PIN_0;
+    g.Pin  = BOARD_POT_Pin;
     g.Mode = GPIO_MODE_ANALOG;
     g.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &g);
+    HAL_GPIO_Init(BOARD_POT_Port, &g);
   }
 }
 
@@ -94,12 +92,11 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim)
   GPIO_InitTypeDef g = {0};
   if (htim->Instance == TIM3) {
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    /* PB4 -> TIM3_CH1 (pan), PB5 -> TIM3_CH2 (tilt), AF1 */
-    g.Pin       = GPIO_PIN_4 | GPIO_PIN_5;
+    g.Pin       = BOARD_SERVO_PAN_Pin | BOARD_SERVO_TILT_Pin;
     g.Mode      = GPIO_MODE_AF_PP;
     g.Pull      = GPIO_NOPULL;
     g.Speed     = GPIO_SPEED_FREQ_LOW;
-    g.Alternate = GPIO_AF1_TIM3;
-    HAL_GPIO_Init(GPIOB, &g);
+    g.Alternate = BOARD_SERVO_AF;
+    HAL_GPIO_Init(BOARD_SERVO_Port, &g);
   }
 }

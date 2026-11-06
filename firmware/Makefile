@@ -1,39 +1,50 @@
+# Прошивка ЛР2 — NUCLEO-C031C6 (Wokwi). Викликається з кореневого Makefile в Docker.
+#
+#  Шари (див. docs/architecture.md):
+#    Core/        код у стилі CubeMX (init периферії, IRQ, main)
+#    Drivers/     CMSIS + HAL від ST — НЕ редагуються, власні прапорці попереджень
+#    Interfaces/  контракти: bus_i2c.h, bus_spi.h, plat.h, status.h
+#    Platform/    адаптація до плати: board.h + реалізації шин над HAL
+#    Devices/     драйвери пристроїв, залежать лише від Interfaces/
+#    App/         прикладна логіка, не знає про HAL
 
 TARGET    = firmware
 BUILD_DIR = build
 DEBUG    ?= 1
-OPT      ?= -Og
+# -Os: з -Og прошивка ЛР2 не вміщується у 32 КБ Flash C031C6 (журнал проблем, П-3)
+OPT      ?= -Os
 
+# ---------- вендорський код ----------
 HAL = Drivers/STM32C0xx_HAL_Driver/Src
-C_SOURCES = \
-  Core/Src/main.c \
-  Core/Src/stm32c0xx_it.c \
-  Core/Src/stm32c0xx_hal_msp.c \
-  Core/Src/system_stm32c0xx.c \
-  Core/Src/syscalls.c \
-  Core/Src/sysmem.c \
+# Лише модулі, увімкнені в stm32c0xx_hal_conf.h (обґрунтування — там само)
+VENDOR_SOURCES = \
   $(HAL)/stm32c0xx_hal.c \
   $(HAL)/stm32c0xx_hal_cortex.c \
   $(HAL)/stm32c0xx_hal_rcc.c \
   $(HAL)/stm32c0xx_hal_rcc_ex.c \
-  $(HAL)/stm32c0xx_hal_flash.c \
-  $(HAL)/stm32c0xx_hal_flash_ex.c \
   $(HAL)/stm32c0xx_hal_gpio.c \
-  $(HAL)/stm32c0xx_hal_exti.c \
-  $(HAL)/stm32c0xx_hal_dma.c \
-  $(HAL)/stm32c0xx_hal_dma_ex.c \
-  $(HAL)/stm32c0xx_hal_pwr.c \
-  $(HAL)/stm32c0xx_hal_pwr_ex.c \
   $(HAL)/stm32c0xx_hal_uart.c \
   $(HAL)/stm32c0xx_hal_uart_ex.c \
   $(HAL)/stm32c0xx_hal_i2c.c \
   $(HAL)/stm32c0xx_hal_i2c_ex.c \
   $(HAL)/stm32c0xx_hal_spi.c \
-  $(HAL)/stm32c0xx_hal_spi_ex.c \
   $(HAL)/stm32c0xx_hal_adc.c \
   $(HAL)/stm32c0xx_hal_adc_ex.c \
   $(HAL)/stm32c0xx_hal_tim.c \
-  $(HAL)/stm32c0xx_hal_tim_ex.c
+  $(HAL)/stm32c0xx_hal_tim_ex.c \
+  Core/Src/system_stm32c0xx.c \
+  Core/Src/syscalls.c \
+  Core/Src/sysmem.c
+
+# ---------- власний код ----------
+CORE_SOURCES     = Core/Src/main.c Core/Src/stm32c0xx_it.c Core/Src/stm32c0xx_hal_msp.c
+PLATFORM_SOURCES = $(wildcard Platform/*.c)
+# w25qxx.c — драйвер для Форми A; у Wokwi чипа немає, тож у прошивку не лінкується
+# (тестується на хості, tests/test_w25qxx.c)
+DEVICES_SOURCES  = Devices/mpu6050.c Devices/ssd1306.c Devices/font5x7.c \
+                   Devices/sdcard.c Devices/servo.c Devices/pot.c
+APP_SOURCES      = $(wildcard App/*.c)
+OWN_SOURCES      = $(CORE_SOURCES) $(PLATFORM_SOURCES) $(DEVICES_SOURCES) $(APP_SOURCES)
 
 ASM_SOURCES = startup_stm32c031xx.s
 LDSCRIPT    = STM32C031C6Tx_FLASH.ld
@@ -49,36 +60,54 @@ MCU = -mcpu=cortex-m0plus -mthumb
 
 C_DEFS = -DUSE_HAL_DRIVER -DSTM32C031xx
 C_INCLUDES = \
-  -ICore/Inc \
+  -ICore/Inc -IPlatform -IInterfaces -IDevices -IApp \
   -IDrivers/STM32C0xx_HAL_Driver/Inc \
   -IDrivers/STM32C0xx_HAL_Driver/Inc/Legacy \
   -IDrivers/CMSIS/Device/ST/STM32C0xx/Include \
   -IDrivers/CMSIS/Include
 
-ASFLAGS = $(MCU) $(OPT) -Wall -fdata-sections -ffunction-sections
-CFLAGS  = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+BASE_CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -std=gnu11 -fdata-sections -ffunction-sections
 ifeq ($(DEBUG), 1)
-CFLAGS += -g -gdwarf-2
+BASE_CFLAGS += -g -gdwarf-2
 endif
 # Відтворювана збірка: прибираємо шляхи хоста з debug-інфо
-CFLAGS += -ffile-prefix-map=$(CURDIR)=.
-CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
+BASE_CFLAGS += -ffile-prefix-map=$(CURDIR)=.
+
+# Власний код: усі попередження, і вони — помилки (WERROR=0 щоб тимчасово вимкнути)
+WERROR     ?= 1
+OWN_WARN    = -Wall -Wextra -Wshadow -Wundef -Wstrict-prototypes
+ifeq ($(WERROR), 1)
+OWN_WARN   += -Werror
+endif
+# Вендорський код: -Wall -Wextra без -Werror (HAL 1.4.1 під ними чистий — перевірено).
+# Додаткові -Wundef/-Wstrict-prototypes дають 49 попереджень: 48× -Wundef у
+# stm32c0xx_hal_spi.c і 1× -Wstrict-prototypes у syscalls.c (журнал, П-2) —
+# тому ці прапорці лише для власного коду.
+# Якщо оновлення HAL принесе нові попередження, вони буде видно у виводі збірки.
+VENDOR_WARN = -Wall -Wextra
+
+ASFLAGS = $(MCU) $(OPT) -Wall -fdata-sections -ffunction-sections
 
 LIBS    = -lc -lm -lnosys
-# --no-warn-rwx-segments є лише в binutils >= 2.39 (Ubuntu 22.04 має 2.38) — додаємо, тільки якщо ld його знає
+# --no-warn-rwx-segments є лише в binutils >= 2.39 (Ubuntu 22.04 має 2.38)
 LD_RWX := $(shell $(CC) -Wl,--help 2>/dev/null | grep -q no-warn-rwx-segments && echo -Wl,--no-warn-rwx-segments)
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBS) \
-          -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections $(LD_RWX)
+          -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections -Wl,--print-memory-usage $(LD_RWX)
 
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
 
-OBJECTS  = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
-vpath %.c $(sort $(dir $(C_SOURCES)))
-OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
+OWN_OBJECTS    = $(addprefix $(BUILD_DIR)/,$(notdir $(OWN_SOURCES:.c=.o)))
+VENDOR_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(VENDOR_SOURCES:.c=.o)))
+ASM_OBJECTS    = $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
+OBJECTS = $(OWN_OBJECTS) $(VENDOR_OBJECTS) $(ASM_OBJECTS)
+vpath %.c $(sort $(dir $(OWN_SOURCES) $(VENDOR_SOURCES)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 
+$(OWN_OBJECTS):    CFLAGS = $(BASE_CFLAGS) $(OWN_WARN)
+$(VENDOR_OBJECTS): CFLAGS = $(BASE_CFLAGS) $(VENDOR_WARN)
+
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) -MMD -MP -MF"$(@:%.o=%.d)" $< -o $@
 
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
 	$(AS) -c $(ASFLAGS) $< -o $@
