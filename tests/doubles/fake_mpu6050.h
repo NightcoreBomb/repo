@@ -21,6 +21,7 @@ typedef struct {
 } fake_mpu_t;
 
 extern fake_mpu_t fake_mpu;
+extern int fake_mpu_fail_writes;   /* ≠0 — записи ≥2 байтів до MPU повертають цей код */
 extern const bus_i2c_t fake_mpu_bus;
 
 void fake_mpu_reset(void);

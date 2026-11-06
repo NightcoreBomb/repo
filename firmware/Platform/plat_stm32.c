@@ -125,5 +125,7 @@ void board_start(void)
   plat_log("[init] %-14s %s\r\n", "PWM CH2", board_hal_str(HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2)));
   SET_BIT(USART2->CR1, USART_CR1_RXNEIE_RXFNEIE);   /* переривання на прийом байта */
   plat_log("[init] %-14s %s\r\n", "UART RX IRQ", "on");
+  plat_log("[init] %-14s %d (0=HAL preload, 1=TXIS-paced, 2=Mem_Write)\r\n", "I2C write mode",
+           plat_i2c_get_write_mode());
   plat_mark(false);
 }

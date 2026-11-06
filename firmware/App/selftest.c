@@ -55,7 +55,8 @@ int selftest_imu(app_t *a)
   }
   s = mpu6050_init(&a->imu);
   if (s != ST_OK) {
-    plat_log("ST imu FAIL step=init err=%s\r\n", st_str(s));
+    plat_log("ST imu FAIL step=init err=%s reg=0x%02X i2cmode=%d\r\n", st_str(s),
+             a->imu.fail_reg, plat_i2c_get_write_mode());
     return a->imu_ok = 0;
   }
   plat_delay_ms(20);                       /* PLL і перший відлік після пробудження */

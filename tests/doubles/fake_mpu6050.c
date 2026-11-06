@@ -2,6 +2,7 @@
 #include "fake_mpu6050.h"
 
 fake_mpu_t fake_mpu;
+int fake_mpu_fail_writes;   /* ≠0 — лише записи ≥2 байтів до MPU повертають цей код (П-11) */
 
 void fake_mpu_set_raw16(uint8_t reg, int16_t v)
 {
@@ -50,6 +51,7 @@ static int f_write(void *c, uint8_t a, const uint8_t *d, size_t n)
   if (t == 0) return ST_ENACK;
   if (t < 0) return fake_mpu.force_err;
   if (t == 2) { fake_mpu.oled_writes++; return ST_OK; }
+  if (fake_mpu_fail_writes && n >= 2) return fake_mpu_fail_writes;
   fake_mpu.writes++;
   if (n == 0) return ST_OK;
   fake_mpu.ptr = d[0] & 0x7F;

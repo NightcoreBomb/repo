@@ -49,6 +49,10 @@ bool plat_console_getline(char *buf, size_t size)
   return true;
 }
 void plat_i2c_restart(bool on) { fp_restart = on; }
+static int fp_wmode = 1;
+void plat_i2c_write_mode(int m) { if (m >= 0 && m <= 2) fp_wmode = m; }
+int  plat_i2c_get_write_mode(void) { return fp_wmode; }
+uint32_t plat_i2c_recoveries(void) { return 0; }
 const char *plat_board_name(void) { return "HOST-FAKE"; }
 uint32_t plat_sysclk_hz(void) { return 48000000u; }
 

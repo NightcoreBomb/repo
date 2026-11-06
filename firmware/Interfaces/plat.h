@@ -39,6 +39,11 @@ bool     plat_console_getline(char *buf, size_t size);
 /* Режим I²C write_read: true — repeated START (Sr), false — STOP+START.
    Платформа обирає дефолт (BOARD_I2C_USE_RESTART); App може перемкнути для експерименту. */
 void     plat_i2c_restart(bool on);
+/* Спосіб запису ≥2 байтів (0 HAL з передзавантаженням, 1 по TXIS, 2 Mem_Write) */
+void     plat_i2c_write_mode(int mode);
+int      plat_i2c_get_write_mode(void);
+/* Скільки разів периферію I²C скидали після TIMEOUT/BUSY */
+uint32_t plat_i2c_recoveries(void);
 
 /* Ідентифікація платформи для заголовка self-test */
 const char *plat_board_name(void);
