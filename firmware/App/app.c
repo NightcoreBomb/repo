@@ -63,7 +63,7 @@ static void cmd_imuchk(app_t *a, char *args)
 
 static void help(void)
 {
-  plat_log("cmds: help selftest stimu imu imuchk scan i2cmode servo <pan_us> <tilt_us> cap <name> status\r\n");
+  plat_log("cmds: help selftest stimu imu imuchk scan i2cmode i2cdiag servo <pan_us> <tilt_us> cap <name> status\r\n");
   capture_list();
 }
 
@@ -81,6 +81,7 @@ void app_handle_line(app_t *a, char *line)
     plat_log("I2CMODE %d recoveries=%lu\r\n", plat_i2c_get_write_mode(),
              (unsigned long)plat_i2c_recoveries());
   }
+  else if (!strcmp(line, "i2cdiag"))  plat_i2c_diag();
   else if (!strcmp(line, "stimu"))
     plat_log("STIMU %s\r\n", selftest_imu(a) ? "PASS" : "FAIL");   /* вердикт окремим рядком */
   else if (!strcmp(line, "scan"))     cmd_scan(a);

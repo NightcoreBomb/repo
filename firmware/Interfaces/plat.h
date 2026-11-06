@@ -44,6 +44,8 @@ void     plat_i2c_write_mode(int mode);
 int      plat_i2c_get_write_mode(void);
 /* Скільки разів периферію I²C скидали після TIMEOUT/BUSY */
 uint32_t plat_i2c_recoveries(void);
+/* Надрукувати діагностику останньої невдалої I²C-транзакції (рядок I2CDIAG ...) */
+void     plat_i2c_diag(void);
 
 /* Ідентифікація платформи для заголовка self-test */
 const char *plat_board_name(void);

@@ -1,0 +1,10 @@
+# Другий запуск у Wokwi (режим запису 1, без діагностики) — переписано зі скриншота
+[init] I2C write mode 1 (0=HAL preload, 1=TXIS-paced, 2=Mem_Write)
+ST BEGIN fw=LR2 board=NUCLEO-C031C6 sysclk=48000000
+ST imu FAIL step=init err=TIMEOUT reg=0x6B i2cmode=1
+ST oled FAIL step=clear err=TIMEOUT addr=0x3C
+ST sd PASS type=SDHC ocr=0xC0FF8000 acmd41=1 sig=0x55AA rw_blk=1 rw=OK
+ST servo PASS pan_us=1500 tilt_us=1500 period_us=20000
+ST pot PASS raw=0 mv=0 dz_cdeg=0
+ST btn PASS level=1 presses=0
+ST END pass=4 fail=2
