@@ -198,8 +198,8 @@ int selftest_btn(void)
 {
   int lvl = plat_btn_level();
   int ok = (lvl == 1);           /* відпущена + працює pull-up */
-  plat_log("ST btn %s level=%d presses=%lu\r\n", res(ok), lvl,
-           (unsigned long)plat_btn_presses());
+  plat_log("ST btn %s level=%d presses=%lu edges=%lu debounce_ms=%u\r\n", res(ok), lvl,
+           (unsigned long)app_btn_presses(), (unsigned long)plat_btn_edges(), BUTTON_DEBOUNCE_MS);
   return ok;
 }
 

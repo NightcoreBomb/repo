@@ -49,7 +49,7 @@
 #define BOARD_SERVO_PAN_Pin    GPIO_PIN_4
 #define BOARD_SERVO_TILT_Pin   GPIO_PIN_5
 #define BOARD_SERVO_AF         GPIO_AF1_TIM3
-/* Кнопка MODE: PA8, EXTI8 (лінії 4..15 → EXTI4_15_IRQn), внутрішній pull-up */
+/* Кнопка MODE: PA8, EXTI8 обидва фронти (лічильник брязкоту), debounce — опитування 1 кГц; pull-up */
 #define BOARD_BTN_Port         GPIOA
 #define BOARD_BTN_Pin          GPIO_PIN_8
 #define BOARD_BTN_IRQn         EXTI4_15_IRQn

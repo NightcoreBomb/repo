@@ -312,11 +312,18 @@ static void test_poll_tick_button_and_console(void)
 {
   selftest_run(&a);
   fake_plat_reset();
-  fp_btn_presses = 2;
+  /* два натискання з брязкотом через debounce у app_tick_1ms (як із SysTick) */
+  for (int k = 0; k < 2; k++) {
+    fp_btn_level = 0; for (int i = 0; i < 80; i++) app_tick_1ms();
+    fp_btn_level = 1; for (int i = 0; i < 3; i++) app_tick_1ms();   /* брязкіт відпускання */
+    fp_btn_level = 0; app_tick_1ms();
+    fp_btn_level = 1; for (int i = 0; i < 80; i++) app_tick_1ms();
+  }
+  fp_btn_edges = 14;
   fp_console_line = "status";
   app_poll(&a);
   TEST_ASSERT_NOT_NULL(fp_find("STATUS imu=1 oled=1 sd=1"));
-  TEST_ASSERT_NOT_NULL(fp_find("[btn ] pressed, total = 2"));
+  TEST_ASSERT_NOT_NULL(fp_find("[btn ] pressed, total = 2 (raw edges 14)"));
   TEST_ASSERT_NOT_NULL(fp_find("tick 1 |"));
   TEST_ASSERT_NOT_NULL(strstr(fp_find("tick 1"), "az=1000 mg"));
   app_poll(&a);                                               /* до наступного тіку ще не час */

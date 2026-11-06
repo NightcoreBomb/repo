@@ -10,8 +10,22 @@
 #include "servo.h"
 #include "pot.h"
 
+static button_t btn;
+static volatile int btn_ready;
+
+void app_tick_1ms(void)
+{
+  if (btn_ready) button_update(&btn, plat_btn_level(), plat_millis());
+}
+
+uint32_t app_btn_presses(void)     { return btn.presses; }
+int      app_btn_stable_level(void) { return btn.stable; }
+
 void app_init(app_t *a, const bus_i2c_t *i2c, const bus_spi_t *sd_spi)
 {
+  btn_ready = 0;
+  button_init(&btn, plat_btn_level(), plat_millis(), BUTTON_DEBOUNCE_MS);
+  btn_ready = 1;
   memset(a, 0, sizeof *a);
   a->i2c = i2c;
   a->sd_spi = sd_spi;
@@ -107,10 +121,11 @@ void app_poll(app_t *a)
   static char line[48];
   if (plat_console_getline(line, sizeof line)) app_handle_line(a, line);
 
-  uint32_t p = plat_btn_presses();
+  uint32_t p = app_btn_presses();
   if (p != a->last_presses) {
     a->last_presses = p;
-    plat_log("[btn ] pressed, total = %lu\r\n", (unsigned long)p);
+    plat_log("[btn ] pressed, total = %lu (raw edges %lu)\r\n", (unsigned long)p,
+             (unsigned long)plat_btn_edges());
   }
 
   uint32_t now = plat_millis();

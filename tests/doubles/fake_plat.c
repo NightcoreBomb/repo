@@ -10,7 +10,7 @@ uint32_t fp_now;
 uint16_t fp_servo[2];
 int      fp_pot;
 int      fp_btn_level;
-uint32_t fp_btn_presses;
+uint32_t fp_btn_edges;
 int      fp_mark_edges;
 bool     fp_restart;
 const char *fp_console_line;
@@ -19,7 +19,7 @@ static bool mark;
 void fake_plat_reset(void)
 {
   fp_log[0] = 0; fp_len = 0; fp_now = 0; fp_servo[0] = fp_servo[1] = 0;
-  fp_pot = 2048; fp_btn_level = 1; fp_btn_presses = 0; fp_mark_edges = 0;
+  fp_pot = 2048; fp_btn_level = 1; fp_btn_edges = 0; fp_mark_edges = 0;
   fp_restart = false; fp_console_line = NULL; mark = false;
 }
 
@@ -39,7 +39,7 @@ void plat_servo_set_us(unsigned ch, uint16_t us) { fp_servo[ch & 1] = us; }
 uint16_t plat_servo_get_us(unsigned ch) { return fp_servo[ch & 1]; }
 int plat_pot_read_raw(void) { return fp_pot; }
 int plat_btn_level(void) { return fp_btn_level; }
-uint32_t plat_btn_presses(void) { return fp_btn_presses; }
+uint32_t plat_btn_edges(void) { return fp_btn_edges; }
 void plat_led_toggle(void) { }
 bool plat_console_getline(char *buf, size_t size)
 {

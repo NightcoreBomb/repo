@@ -27,9 +27,12 @@ uint16_t plat_servo_get_us(unsigned ch);
 /* Одне перетворення АЦП потенціометра; повертає 0..4095 або -1 */
 int      plat_pot_read_raw(void);
 
-/* Рівень входу кнопки MODE (1 — відпущена, pull-up) і лічильник натискань */
+/* СИРИЙ рівень входу кнопки MODE (1 — відпущена, pull-up), без debounce.
+   Debounce — App/ (Devices/button.c), натискання рахує app_tick_1ms(). */
 int      plat_btn_level(void);
-uint32_t plat_btn_presses(void);
+/* Кількість сирих фронтів на вході кнопки (EXTI, обидва фронти) — для діагностики
+   брязкоту: скільки фронтів відфільтрував debounce */
+uint32_t plat_btn_edges(void);
 
 void     plat_led_toggle(void);
 

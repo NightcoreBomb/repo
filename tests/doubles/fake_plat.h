@@ -12,7 +12,7 @@ extern uint32_t fp_now;
 extern uint16_t fp_servo[2];
 extern int      fp_pot;
 extern int      fp_btn_level;
-extern uint32_t fp_btn_presses;
+extern uint32_t fp_btn_edges;
 extern int      fp_mark_edges;
 extern bool     fp_restart;
 extern const char *fp_console_line;

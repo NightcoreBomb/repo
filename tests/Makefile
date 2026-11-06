@@ -19,12 +19,13 @@ SRC_ssd1306  = $(DEV)/ssd1306.c $(DEV)/font5x7.c $(DBL)/mock_i2c.c $(DBL)/stub_i
 SRC_sdcard   = $(DEV)/sdcard.c $(DBL)/spi_log.c $(DBL)/fake_sd.c
 SRC_w25qxx   = $(DEV)/w25qxx.c $(DBL)/spi_log.c $(DBL)/fake_w25q.c
 SRC_conv     = $(DEV)/servo.c $(DEV)/pot.c
+SRC_button   = $(DEV)/button.c
 SRC_app      = $(APP)/app.c $(APP)/selftest.c $(APP)/capture.c \
                $(DEV)/mpu6050.c $(DEV)/ssd1306.c $(DEV)/font5x7.c $(DEV)/sdcard.c \
-               $(DEV)/servo.c $(DEV)/pot.c \
+               $(DEV)/servo.c $(DEV)/pot.c $(DEV)/button.c \
                $(DBL)/fake_mpu6050.c $(DBL)/spi_log.c $(DBL)/fake_sd.c $(DBL)/fake_plat.c
 
-TESTS = mpu6050 ssd1306 sdcard w25qxx conv app
+TESTS = mpu6050 ssd1306 sdcard w25qxx conv button app
 BINS  = $(addprefix $(BUILD)/test_,$(TESTS))
 
 all: run

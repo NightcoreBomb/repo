@@ -42,7 +42,7 @@ PLATFORM_SOURCES = $(wildcard Platform/*.c)
 # w25qxx.c — драйвер для Форми A; у Wokwi чипа немає, тож у прошивку не лінкується
 # (тестується на хості, tests/test_w25qxx.c)
 DEVICES_SOURCES  = Devices/mpu6050.c Devices/ssd1306.c Devices/font5x7.c \
-                   Devices/sdcard.c Devices/servo.c Devices/pot.c
+                   Devices/sdcard.c Devices/servo.c Devices/pot.c Devices/button.c
 APP_SOURCES      = $(wildcard App/*.c)
 OWN_SOURCES      = $(CORE_SOURCES) $(PLATFORM_SOURCES) $(DEVICES_SOURCES) $(APP_SOURCES)
 
