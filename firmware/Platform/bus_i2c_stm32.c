@@ -13,6 +13,21 @@
  *       CR2 = SADD|NBYTES|AUTOEND|START, далі кожен байт лише по TXIS — ЗА ЗАМОВЧУВАННЯМ;
  *   2 — HAL_I2C_Mem_Write: перший байт як «адреса регістра» (по TXIS, RELOAD/TCR),
  *       решта — дані.
+ *
+ * ROOT CAUSE (записи docs/captures/lr2_run*_*.vcd, П-11): емулятор I2C STM32C0 у
+ * Wokwi передає байти БЕЗ подвійної буферизації — TXIS для наступного байта
+ * з'являється лише після повного завершення попереднього (у вдалих записах між
+ * байтами видно паузу SCL ≈ 7 мкс). Але на старті транзакції TXIS буває
+ * «застарілим» (=1 ще до кінця фази адреси): прошивка, що опитує лише TXIS,
+ * кладе в TXDR другий байт, поки перший ще не забрано, — байт губиться, емулятор
+ * після першого байта тримає SCL і чекає дані, прошивка чекає STOP → взаємне
+ * очікування (на шині: `S 68W+ 6B+` і SCL = 0 до таймауту). Тому в режимі 1
+ * після кожного записаного байта чекаємо, поки TXIS справді скинеться (≤200 мкс),
+ * і лише потім — наступний TXIS. На залізі запис TXDR скидає TXIS миттєво,
+ * тож це не змінює поведінку. Так само для читання (RXNE).
+ * Режим 2 (Mem_Write) у Wokwi не працює взагалі: потрібен TCR (RELOAD), якого
+ * емулятор не виставляє (ISR при зависанні = 0x8003: TXIS=1, TCR=0).
+ *
  * Будь-який TIMEOUT/BUSY → програмний скид периферії (PE=0 → PE=1, RM0490
  * «I2C software reset»), щоб одна невдала транзакція не блокувала шину для
  * інших пристроїв.
@@ -39,8 +54,26 @@ static struct {
   uint32_t isr, cr2, t_ms;
 } diag;
 
+static int diag_lock;        /* під час запасних спроб не затирати першу причину */
+
+/* Мікросекундне очікування умови за SysTick (HAL_GetTick — лише 1 мс). */
+static int wait_clear_us(volatile uint32_t *reg, uint32_t mask, uint32_t us)
+{
+  const uint32_t load = SysTick->LOAD + 1u;
+  const uint32_t need = us * (BOARD_SYSCLK_HZ / 1000000u);
+  uint32_t prev = SysTick->VAL, el = 0;
+  while (*reg & mask) {
+    uint32_t now = SysTick->VAL;
+    el += (prev >= now) ? (prev - now) : (prev + load - now);
+    prev = now;
+    if (el >= need) return 0;
+  }
+  return 1;
+}
+
 static void note(i2c_ctx_t *x, char ph, uint8_t a, size_t i, size_t n, int st)
 {
+  if (diag_lock) return;
   diag.phase = ph; diag.mode = (uint8_t)x->wmode; diag.addr = a;
   diag.byte = (uint8_t)i; diag.len = (uint8_t)n; diag.status = st;
   diag.isr = x->h->Instance->ISR; diag.cr2 = x->h->Instance->CR2;
@@ -67,9 +100,11 @@ static void recover(i2c_ctx_t *x)
 static int map(i2c_ctx_t *x, HAL_StatusTypeDef s)
 {
   if (s == HAL_OK) return ST_OK;
+  if (!diag_lock) {
   diag.phase = 'H'; diag.mode = (uint8_t)x->wmode; diag.status = (int)s;
   diag.isr = x->h->Instance->ISR; diag.cr2 = x->h->Instance->CR2; diag.t_ms = HAL_GetTick();
   diag.addr = (uint8_t)((diag.cr2 & I2C_CR2_SADD) >> 1);
+  }
   uint32_t e = HAL_I2C_GetError(x->h);
   int r;
   if (s == HAL_BUSY)                 r = ST_EBUSY;
@@ -108,6 +143,8 @@ static int ll_write(i2c_ctx_t *x, uint8_t a, const uint8_t *d, size_t n)
       if (HAL_GetTick() - t0 > to) { note(x, 'T', a, i, n, ST_ETIMEOUT); recover(x); return ST_ETIMEOUT; }
     }
     I->TXDR = d[i];
+    /* див. ROOT CAUSE: не довіряти TXIS, доки він не скинувся після запису */
+    if (i + 1 < n) wait_clear_us(&I->ISR, I2C_ISR_TXIS, BOARD_I2C_GUARD_US);
   }
   for (;;) {                                     /* AUTOEND → STOP апаратно */
     uint32_t isr = I->ISR;
@@ -144,6 +181,47 @@ static int write_mode(i2c_ctx_t *x, int m, uint8_t a, const uint8_t *d, size_t n
                                         (uint16_t)n, to_ms(n)));
 }
 
+/* ---- режим 1: читання по RXNE з тим самим захистом від «застарілого» прапорця ---- */
+static int ll_read(i2c_ctx_t *x, uint8_t a, uint8_t *d, size_t n)
+{
+  I2C_TypeDef *I = x->h->Instance;
+  uint32_t t0 = HAL_GetTick(), to = to_ms(n);
+  if (n == 0 || n > 255) return ST_EPARAM;
+  while (I->ISR & I2C_ISR_BUSY)
+    if (HAL_GetTick() - t0 > to) { note(x, 'B', a, 0, n, ST_EBUSY); recover(x); return ST_EBUSY; }
+  I->ICR = I2C_ICR_STOPCF | I2C_ICR_NACKCF | I2C_ICR_BERRCF | I2C_ICR_ARLOCF;
+  while (I->ISR & I2C_ISR_RXNE) (void)I->RXDR;  /* злити залишки */
+  MODIFY_REG(I->CR2,
+             I2C_CR2_SADD | I2C_CR2_NBYTES | I2C_CR2_RELOAD | I2C_CR2_AUTOEND |
+             I2C_CR2_RD_WRN | I2C_CR2_START | I2C_CR2_STOP | I2C_CR2_ADD10,
+             ((uint32_t)a << 1) | ((uint32_t)n << I2C_CR2_NBYTES_Pos) |
+             I2C_CR2_AUTOEND | I2C_CR2_RD_WRN | I2C_CR2_START);
+  for (size_t i = 0; i < n; i++) {
+    for (;;) {
+      uint32_t isr = I->ISR;
+      if (isr & I2C_ISR_RXNE) break;
+      if (isr & I2C_ISR_NACKF) {                 /* адреса без ACK */
+        note(x, 'N', a, i, n, ST_ENACK);
+        I->ICR = I2C_ICR_NACKCF;
+        uint32_t t1 = HAL_GetTick();
+        while (!(I->ISR & I2C_ISR_STOPF)) if (HAL_GetTick() - t1 > 2u) { recover(x); return ST_ENACK; }
+        I->ICR = I2C_ICR_STOPCF;
+        return ST_ENACK;
+      }
+      if (HAL_GetTick() - t0 > to) { note(x, 'R', a, i, n, ST_ETIMEOUT); recover(x); return ST_ETIMEOUT; }
+    }
+    d[i] = (uint8_t)I->RXDR;
+    if (i + 1 < n) wait_clear_us(&I->ISR, I2C_ISR_RXNE, BOARD_I2C_GUARD_US);
+  }
+  for (;;) {
+    if (I->ISR & I2C_ISR_STOPF) break;
+    if (HAL_GetTick() - t0 > to) { note(x, 'S', a, n, n, ST_ETIMEOUT); recover(x); return ST_ETIMEOUT; }
+  }
+  I->ICR = I2C_ICR_STOPCF;
+  CLEAR_BIT(I->CR2, I2C_CR2_SADD | I2C_CR2_NBYTES | I2C_CR2_RELOAD | I2C_CR2_RD_WRN);
+  return ST_OK;
+}
+
 static int w(void *c, uint8_t a, const uint8_t *d, size_t n)
 {
   i2c_ctx_t *x = c;
@@ -151,13 +229,13 @@ static int w(void *c, uint8_t a, const uint8_t *d, size_t n)
   if (s != ST_ETIMEOUT && s != ST_EBUSY) return s;
   /* Запасний шлях (П-11): той самий запис іншими двома способами. Якщо вдалося —
      переходимо на цей режим назавжди і рахуємо fallback (видно в i2cdiag). */
-  for (int k = 1; k <= 2 && n >= 2; k++) {
-    int m = (x->wmode + k) % 3;
-    if (write_mode(x, m, a, d, n) == ST_OK) {
-      x->wmode = m;
-      x->fallbacks++;
-      return ST_OK;
-    }
+  /* режим 2 у запасні не беремо: у Wokwi він гарантовано зависає (немає TCR) */
+  int m = (x->wmode == 1) ? 0 : 1;
+  if (n >= 2) {
+    diag_lock = 1;
+    int s2 = write_mode(x, m, a, d, n);
+    diag_lock = 0;
+    if (s2 == ST_OK) { x->wmode = m; x->fallbacks++; return ST_OK; }
   }
   return s;
 }
@@ -165,6 +243,7 @@ static int w(void *c, uint8_t a, const uint8_t *d, size_t n)
 static int r(void *c, uint8_t a, uint8_t *d, size_t n)
 {
   i2c_ctx_t *x = c;
+  if (x->wmode == 1) return ll_read(x, a, d, n);
   return map(x, HAL_I2C_Master_Receive(x->h, (uint16_t)(a << 1), d, (uint16_t)n, to_ms(n)));
 }
 

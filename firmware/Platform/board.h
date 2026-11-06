@@ -75,6 +75,9 @@
 /* Запис ≥2 байтів: 0 — HAL Master_Transmit (передзавантаження TXDR — у Wokwi
    зависає, П-11), 1 — регістровий по TXIS, 2 — HAL Mem_Write. Див. bus_i2c_stm32.c */
 #define BOARD_I2C_WRITE_MODE   1
+/* Режим 1: скільки чекати скидання TXIS/RXNE після обміну байтом. ≥ 1 байт на шині
+   (9 біт × 10 мкс @100 кГц = 90 мкс) + запас; на залізі прапорець скидається одразу. */
+#define BOARD_I2C_GUARD_US     200u
 /* SPI1 = PCLK/128 = 375 кГц (ініціалізація SD ≤ 400 кГц), робоча — PCLK/8 = 6 МГц */
 #define BOARD_SPI_PRESC_SLOW   SPI_BAUDRATEPRESCALER_128
 #define BOARD_SPI_PRESC_FAST   SPI_BAUDRATEPRESCALER_8
