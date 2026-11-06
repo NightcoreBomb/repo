@@ -134,6 +134,18 @@ static int ll_write(i2c_ctx_t *x, uint8_t a, const uint8_t *d, size_t n)
              ((uint32_t)a << 1) | ((uint32_t)n << I2C_CR2_NBYTES_Pos) |
              I2C_CR2_AUTOEND | I2C_CR2_START);
 
+  /* Перший байт — лише ПІСЛЯ фази адреси (журнал П-11, analysis.md §8.4): у Wokwi
+     TXIS на старті «застарілий»; якщо покласти байт 0 у TXDR під час адреси,
+     емулятор одразу знову виставляє TXIS, і байт 1, записаний поки байт 0 ще
+     передається, губиться (на шині: `00 21 00 7F…` → `00 00 7F…`). Адреса при
+     100 кГц триває 90 мкс; чекаємо ≥ 1 мс (два фронти HAL_GetTick), стежачи за
+     NACK. На залізі це лише трохи довший stretch SCL перед першим байтом. */
+  {
+    uint32_t ts = HAL_GetTick();
+    while (HAL_GetTick() - ts < 2u) {
+      if (I->ISR & I2C_ISR_NACKF) { note(x, 'N', a, 0, n, ST_ENACK); goto nack; }
+    }
+  }
   for (size_t i = 0; i < n; i++) {
     for (;;) {
       uint32_t isr = I->ISR;
