@@ -32,7 +32,8 @@ all: run
 $(BUILD):
 	mkdir -p $@
 
-$(BUILD)/test_%: test_%.c $(UNITY)/unity.c | $(BUILD)
+.SECONDEXPANSION:
+$(BUILD)/test_%: test_%.c $$(SRC_$$*) $(UNITY)/unity.c $(wildcard $(FW)/*/*.h doubles/*.h) | $(BUILD)
 	@rm -f $(BUILD)/test_$*-*.gcda
 	$(CC) $(CFLAGS) $(COVFLAGS) -o $@ $< $(SRC_$*) $(UNITY)/unity.c
 
