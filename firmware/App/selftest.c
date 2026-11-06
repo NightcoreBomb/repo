@@ -149,8 +149,13 @@ int selftest_sd(app_t *a)
     for (unsigned i = 0; s == ST_OK && i < SD_BLOCK; i++)
       if (sd_work[i] != pattern(i)) s = ST_EVERIFY;
   }
-  int r = sd_write_block(&a->sd, ST_SD_TEST_BLOCK, sd_orig);   /* відновлення */
-  if (s == ST_OK) { step = "restore"; s = r; }
+  /* відновлення — ЛИШЕ якщо оригінал справді прочитано (інакше записали б
+     вміст буфера від попереднього виклику; дефект знайдено тестом
+     test_sd_no_write_if_original_block_unreadable) */
+  if (strcmp(step, "rd") != 0) {
+    int r = sd_write_block(&a->sd, ST_SD_TEST_BLOCK, sd_orig);
+    if (s == ST_OK) { step = "restore"; s = r; }
+  }
 
   a->sd_ok = (s == ST_OK);
   plat_log("ST sd %s type=%s ocr=0x%08lX acmd41=%u sig=0x%04X rw_blk=%u rw=%s%s%s\r\n",
