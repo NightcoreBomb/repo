@@ -37,6 +37,7 @@ typedef struct {
   mpu_gyro_fs_t    gyro_fs;
   uint8_t          who_am_i;      /* останнє прочитане значення */
   uint8_t          pwr_mgmt_1;    /* read-back після пробудження */
+  uint8_t          fail_reg;      /* регістр, на якому зупинився init (0xFF — немає) */
 } mpu6050_t;
 
 typedef struct {               /* сирі значення, як на шині (big-endian → int16) */

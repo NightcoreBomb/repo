@@ -11,6 +11,7 @@ void mpu6050_setup(mpu6050_t *d, const bus_i2c_t *bus, uint8_t addr)
   d->gyro_fs    = MPU_GYRO_250;
   d->who_am_i   = 0;
   d->pwr_mgmt_1 = 0xFF;
+  d->fail_reg   = 0xFF;
 }
 
 int mpu6050_identify(mpu6050_t *d)
@@ -32,14 +33,15 @@ int mpu6050_init(mpu6050_t *d)
     { MPU6050_REG_SMPLRT_DIV, 0x04 },  /* 1000/(1+4) = 200 Гц              */
   };
   int s;
+  d->fail_reg = 0xFF;
   for (unsigned i = 0; i < sizeof seq / sizeof seq[0]; i++) {
     s = i2c_reg_write(d->bus, d->addr, seq[i][0], seq[i][1]);
-    if (s != ST_OK) return s;
+    if (s != ST_OK) { d->fail_reg = seq[i][0]; return s; }
   }
   s = i2c_reg_write(d->bus, d->addr, MPU6050_REG_GYRO_CONFIG, (uint8_t)(d->gyro_fs << 3));
-  if (s != ST_OK) return s;
+  if (s != ST_OK) { d->fail_reg = MPU6050_REG_GYRO_CONFIG; return s; }
   s = i2c_reg_write(d->bus, d->addr, MPU6050_REG_ACCEL_CONFIG, (uint8_t)(d->accel_fs << 3));
-  if (s != ST_OK) return s;
+  if (s != ST_OK) { d->fail_reg = MPU6050_REG_ACCEL_CONFIG; return s; }
 
   /* Read-back лише для звіту (у симуляторі може не бути реалізований) */
   uint8_t v = 0xFF;

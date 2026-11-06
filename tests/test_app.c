@@ -13,6 +13,7 @@
 #include "fake_mpu6050.h"
 #include "fake_sd.h"
 #include "fake_plat.h"
+#include "plat.h"
 #include "spi_log.h"
 
 static app_t a;
@@ -68,6 +69,39 @@ static void test_imu_absent_reported_and_servos_centered(void)
   TEST_ASSERT_EQUAL_UINT16(1500, fp_servo[1]);
   TEST_ASSERT_TRUE(fake_mpu.oled_writes > oled_before);   /* «IMU NOT FOUND» на OLED */
   TEST_ASSERT_NOT_NULL(fp_find("ST END pass=5 fail=1"));
+}
+
+/* П-11: запис регістра відмовив (як у Wokwi з передзавантаженням TXDR) —
+   у лозі видно, на якому регістрі і в якому режимі запису */
+static void test_imu_init_failure_reports_register_and_mode(void)
+{
+  fake_mpu.force_err = 0;
+  selftest_imu(&a);                                 /* identify OK */
+  fake_plat_reset();
+  mpu6050_setup(&a.imu, &fake_mpu_bus, 0x68);
+  fake_mpu.present = 1;
+  /* перший запис init — PWR_MGMT_1; змушуємо тільки записи падати */
+  fake_mpu_fail_writes = ST_ETIMEOUT;
+  TEST_ASSERT_FALSE(selftest_imu(&a));
+  fake_mpu_fail_writes = 0;
+  const char *l = fp_find("ST imu FAIL step=init err=TIMEOUT");
+  TEST_ASSERT_NOT_NULL(l);
+  TEST_ASSERT_EQUAL_STRING("0x6B", fp_kv(l, "reg", v, sizeof v));
+  TEST_ASSERT_EQUAL_STRING("1", fp_kv(l, "i2cmode", v, sizeof v));
+}
+
+static void test_i2cmode_command(void)
+{
+  char c1[] = "i2cmode 2", c2[] = "i2cmode", c3[] = "i2cmode 7";
+  app_handle_line(&a, c1);
+  TEST_ASSERT_NOT_NULL(fp_find("I2CMODE 2"));
+  fake_plat_reset();
+  app_handle_line(&a, c3);                          /* неприпустимий — ігнорується */
+  TEST_ASSERT_NOT_NULL(fp_find("I2CMODE 2"));
+  plat_i2c_write_mode(1);
+  fake_plat_reset();
+  app_handle_line(&a, c2);
+  TEST_ASSERT_NOT_NULL(fp_find("I2CMODE 1 recoveries=0"));
 }
 
 static void test_imu_wrong_magnitude_fails_plausibility(void)
@@ -293,6 +327,8 @@ int main(void)
   UNITY_BEGIN();
   RUN_TEST(test_selftest_all_pass_on_default_wokwi_state);
   RUN_TEST(test_imu_absent_reported_and_servos_centered);
+  RUN_TEST(test_imu_init_failure_reports_register_and_mode);
+  RUN_TEST(test_i2cmode_command);
   RUN_TEST(test_imu_wrong_magnitude_fails_plausibility);
   RUN_TEST(test_imu_within_5_percent_passes);
   RUN_TEST(test_imu_gyro_and_temperature_limits);

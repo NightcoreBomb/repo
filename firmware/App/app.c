@@ -63,7 +63,7 @@ static void cmd_imuchk(app_t *a, char *args)
 
 static void help(void)
 {
-  plat_log("cmds: help selftest stimu imu imuchk scan servo <pan_us> <tilt_us> cap <name> status\r\n");
+  plat_log("cmds: help selftest stimu imu imuchk scan i2cmode servo <pan_us> <tilt_us> cap <name> status\r\n");
   capture_list();
 }
 
@@ -75,6 +75,12 @@ void app_handle_line(app_t *a, char *line)
   if (!strcmp(line, "selftest"))      selftest_run(a);
   else if (!strcmp(line, "imu"))      cmd_imu(a);
   else if (!strcmp(line, "imuchk"))   cmd_imuchk(a, arg);
+  else if (!strcmp(line, "i2cmode")) {
+    /* i2cmode [0|1|2] — змінити спосіб запису I²C без перезбирання (П-11) */
+    if (*arg) plat_i2c_write_mode((int)strtol(arg, NULL, 10));
+    plat_log("I2CMODE %d recoveries=%lu\r\n", plat_i2c_get_write_mode(),
+             (unsigned long)plat_i2c_recoveries());
+  }
   else if (!strcmp(line, "stimu"))
     plat_log("STIMU %s\r\n", selftest_imu(a) ? "PASS" : "FAIL");   /* вердикт окремим рядком */
   else if (!strcmp(line, "scan"))     cmd_scan(a);
@@ -87,8 +93,9 @@ void app_handle_line(app_t *a, char *line)
     plat_log("SERVO pan_us=%u tilt_us=%u\r\n", plat_servo_get_us(0), plat_servo_get_us(1));
   }
   else if (!strcmp(line, "status"))
-    plat_log("STATUS imu=%d oled=%d sd=%d t=%lu\r\n", a->imu_ok, a->oled_ok, a->sd_ok,
-             (unsigned long)plat_millis());
+    plat_log("STATUS imu=%d oled=%d sd=%d i2cmode=%d i2c_recov=%lu t=%lu\r\n", a->imu_ok,
+             a->oled_ok, a->sd_ok, plat_i2c_get_write_mode(),
+             (unsigned long)plat_i2c_recoveries(), (unsigned long)plat_millis());
   else if (line[0] == '\0') { }
   else if (!strcmp(line, "help"))     help();
   else { plat_log("ERR unknown '%s'\r\n", line); help(); }

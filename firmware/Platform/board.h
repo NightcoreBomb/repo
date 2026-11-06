@@ -72,6 +72,9 @@
 #define BOARD_I2C_TIMING       BOARD_I2C_TIMING_100K
 /* write_read: 0 — STOP+START (перевірено записом ЛР1), 1 — repeated START */
 #define BOARD_I2C_USE_RESTART  0
+/* Запис ≥2 байтів: 0 — HAL Master_Transmit (передзавантаження TXDR — у Wokwi
+   зависає, П-11), 1 — регістровий по TXIS, 2 — HAL Mem_Write. Див. bus_i2c_stm32.c */
+#define BOARD_I2C_WRITE_MODE   1
 /* SPI1 = PCLK/128 = 375 кГц (ініціалізація SD ≤ 400 кГц), робоча — PCLK/8 = 6 МГц */
 #define BOARD_SPI_PRESC_SLOW   SPI_BAUDRATEPRESCALER_128
 #define BOARD_SPI_PRESC_FAST   SPI_BAUDRATEPRESCALER_8

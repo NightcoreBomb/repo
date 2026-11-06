@@ -57,7 +57,7 @@ ST END pass=6 fail=0
 tick 1 | t=... ms | az=1000 mg | adc=... | btn=0
 ```
 
-Команди в Serial Monitor: `help`, `selftest`, `stimu`, `imu`, `imuchk ax ay az [gx gy gz [t_cC]]`,
+Команди в Serial Monitor: `help`, `selftest`, `stimu`, `i2cmode [0|1|2]`, `imu`, `imuchk ax ay az [gx gy gz [t_cC]]`,
 `scan`, `servo <pan_us> <tilt_us>`, `status`, `cap i2c|nack|rs|spi|spiw|pwm|adc|uart|all`.
 
 Headless (потрібен `WOKWI_CLI_TOKEN`):
@@ -81,6 +81,10 @@ make vectors && make test   # байти з запису стають тесто
 ## Якщо щось не так
 
 * **Wokwi лає `nucleo:PB3`** (невідомий пін): замініть у `tools/probe.py` `PB3` на `D3` і `make probe`.
+* **`ST imu FAIL step=init err=TIMEOUT` / `ST oled FAIL ... err=BUSY`** — спосіб запису I²C (журнал П-11).
+  За замовчуванням режим 1; спробуйте в консолі `i2cmode 2`, потім `selftest` (або `i2cmode 0` — як у ЛР1).
+  Робочий режим зафіксуйте в `BOARD_I2C_WRITE_MODE` (`firmware/Platform/board.h`).
+* **`pot raw=0`** — потенціометр у Wokwi стартує з нуля; покрутіть ручку.
 * **Скан I²C довгий (~0.7 с)** — особливість HAL+Wokwi після NACK, див. `docs/captures/analysis.md`, А-2.
 * **`make build` падає на `check_pinout`** — таблиця `docs/pinout.md`, `diagram.json` і `board.h`
   розійшлися; повідомлення каже, де саме.
