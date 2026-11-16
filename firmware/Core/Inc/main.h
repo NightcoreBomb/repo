@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
- * main.h — ЛР2, NUCLEO-C031C6 (Wokwi). Структура файлу — як у STM32CubeMX:
- * власний код лише між USER CODE BEGIN/END. Піни і хендли — у Platform/board.h.
+ * main.h — ЛР3, NUCLEO-C031C6 (Wokwi). Структура файлу — як у STM32CubeMX:
+ * власний код лише між USER CODE BEGIN/END. Піни й периферія — у Platform/board.h.
  */
 /* USER CODE END Header */
 #ifndef __MAIN_H
@@ -18,7 +18,6 @@ extern "C" {
 /* USER CODE END Includes */
 
 void Error_Handler(void);
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 #ifdef __cplusplus
 }

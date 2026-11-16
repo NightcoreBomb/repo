@@ -9,6 +9,7 @@ Wokwi for VS Code зберігає запис лише ОДНОГО аналіз
 
   python3 tools/probe.py bus            # I²C + SPI + UART + MARK (за замовчуванням)
   python3 tools/probe.py pwm            # PWM pan/tilt + MARK(ADC) + кнопка + UART + LED + I²C
+  python3 tools/probe.py lr3            # ЛР3: кнопка + PROBE0..2 + PWM + TX + MARK + SCL
   python3 tools/probe.py bus --gate     # запис лише поки MARK=1 (triggerMode=level на D7)
   python3 tools/probe.py --show
 """
@@ -19,6 +20,8 @@ PROFILES = {
     #        D0            D1              D2            D3             D4            D5            D6            D7
     'bus': [('SCL', 'PB8'), ('SDA', 'PB9'), ('SCK', 'PA1'), ('MOSI', 'PA7'), ('MISO', 'PA6'), ('CS', 'PB0.2'), ('TX', 'PA2'), ('MARK', 'PB3')],
     'pwm': [('PWM_PAN', 'PB4'), ('PWM_TILT', 'PB5'), ('MARK', 'PB3'), ('BTN', 'PA8'), ('TX', 'PA2'), ('LED', 'PA5'), ('SCL', 'PB8'), ('SDA', 'PB9')],
+    # ЛР3 §5.3: службові GPIO — час задачі, реакція, довга операція (docs/pinout.md)
+    'lr3': [('BTN', 'PA8'), ('P_IMU', 'PA9'), ('P_PWM', 'PA10'), ('P_LONG', 'PA15'), ('PWM_PAN', 'PB4'), ('TX', 'PA2'), ('MARK', 'PB3'), ('SCL', 'PB8')],
 }
 
 def apply(profile, gate):

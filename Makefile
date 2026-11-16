@@ -6,7 +6,8 @@
 #   make coverage   покриття Devices/ + App/ з порогом (tests/build/coverage/index.html)
 #   make check      лише перевірки: check_deps + check_pinout
 #   make sim        headless Wokwi: повний self-test (WOKWI_CLI_TOKEN)
-#   make sim-imu    headless Wokwi: сценарій MPU-6050 (set-control + imuchk)
+#   make sim-imu    headless Wokwi: FR-02 — кути в статиці (set-control + status)
+#   make lab3       headless Wokwi: усі сценарії ЛР3 (tools/run_lab3.sh), WOKWI_CLI_TOKEN
 #   make probe P=bus|pwm [GATE=1]   переставити щупи аналізатора в diagram.json
 #   make capture NAME=i2c_mpu6050_burst   wokwi.vcd → docs/captures/NAME.vcd + декодування
 #   make decode VCD=docs/captures/x.vcd   текстове декодування запису (sigrok-cli + vcdtool)
@@ -25,7 +26,7 @@ ifeq ($(NODOCKER),1)
 DOCKER  =
 endif
 
-.PHONY: image build fw check test coverage sim sim-imu lint probe capture decode vectors \
+.PHONY: image build fw check test coverage sim sim-imu lab3 lint probe capture decode vectors \
         clean shell flash monitor versions
 
 image:
@@ -66,8 +67,11 @@ sim: build
 
 sim-imu: build
 	mkdir -p build
-	wokwi-cli --timeout $(SIM_TIMEOUT) --scenario tests/sim/mpu6050.test.yaml \
+	wokwi-cli --timeout $(SIM_TIMEOUT) --scenario tests/sim/lr3_fr02_static.yaml \
 	          --serial-log-file build/serial-imu.log .
+
+lab3: build
+	tools/run_lab3.sh
 
 lint:
 	wokwi-cli lint .

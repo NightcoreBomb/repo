@@ -1,0 +1,17 @@
+# FR-12 — старт без MPU-6050: повідомлення, серво в центрі, без зависання
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 fr12_noimu'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'ERR IMU not found'
+  - wait-serial: 'READY'
+  - delay: 2000ms
+  - write-serial: "status\n"
+  - wait-serial: 'STATUS'
+  - write-serial: "note NOIMU;\n"
+  - wait-serial: 'NOTE NOIMU;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - delay: 300ms

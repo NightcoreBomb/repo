@@ -1,0 +1,23 @@
+# 6.2.4 — відмова I²C під час роботи і відновлення
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 fault'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - delay: 1000ms
+  - write-serial: "stats reset\n"
+  - delay: 2000ms
+  - write-serial: "fault i2c 1\n"
+  - wait-serial: 'FAULT i2c=1'
+  - delay: 2000ms
+  - write-serial: "fault i2c 0\n"
+  - wait-serial: 'FAULT i2c=0'
+  - delay: 2000ms
+  - write-serial: "note FAULT;\n"
+  - wait-serial: 'NOTE FAULT;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - delay: 300ms

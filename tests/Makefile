@@ -20,12 +20,18 @@ SRC_sdcard   = $(DEV)/sdcard.c $(DBL)/spi_log.c $(DBL)/fake_sd.c
 SRC_w25qxx   = $(DEV)/w25qxx.c $(DBL)/spi_log.c $(DBL)/fake_w25q.c
 SRC_conv     = $(DEV)/servo.c $(DEV)/pot.c
 SRC_button   = $(DEV)/button.c
-SRC_app      = $(APP)/app.c $(APP)/selftest.c $(APP)/capture.c \
+SRC_app      = $(APP)/app.c $(APP)/selftest.c $(APP)/motion.c $(APP)/perf.c $(APP)/traj.c \
+               $(FW)/Platform/fmt.c \
                $(DEV)/mpu6050.c $(DEV)/ssd1306.c $(DEV)/font5x7.c $(DEV)/sdcard.c \
                $(DEV)/servo.c $(DEV)/pot.c $(DEV)/button.c \
                $(DBL)/fake_mpu6050.c $(DBL)/spi_log.c $(DBL)/fake_sd.c $(DBL)/fake_plat.c
 
-TESTS = mpu6050 ssd1306 sdcard w25qxx conv button app
+SRC_motion   = $(APP)/motion.c $(DEV)/mpu6050.c
+SRC_traj     = $(APP)/traj.c
+SRC_perf     = $(APP)/perf.c
+SRC_fmt      = $(FW)/Platform/fmt.c
+
+TESTS = mpu6050 ssd1306 sdcard w25qxx conv button motion traj perf fmt app
 BINS  = $(addprefix $(BUILD)/test_,$(TESTS))
 
 all: run
@@ -36,7 +42,7 @@ $(BUILD):
 .SECONDEXPANSION:
 $(BUILD)/test_%: test_%.c $$(SRC_$$*) $(UNITY)/unity.c $(wildcard $(FW)/*/*.h doubles/*.h) | $(BUILD)
 	@rm -f $(BUILD)/test_$*-*.gcda
-	$(CC) $(CFLAGS) $(COVFLAGS) -o $@ $< $(SRC_$*) $(UNITY)/unity.c
+	$(CC) $(CFLAGS) $(COVFLAGS) -o $@ $< $(SRC_$*) $(UNITY)/unity.c -lm
 
 # vectors з реальних записів — перегенеровуються, якщо змінились .vcd
 vectors/capture_vectors.h: $(wildcard ../docs/captures/*.vcd) ../tools/vcd2vectors.py ../tools/vcdtool.py

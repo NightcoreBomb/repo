@@ -8,7 +8,7 @@
 #include "pot.h"
 
 static uint8_t sd_orig[SD_BLOCK];
-static uint8_t sd_work[SD_BLOCK];
+#define sd_work (a->blk)              /* ЛР3: спільний буфер блоку журналу (RAM 12 КБ) */
 
 static const char *res(int ok) { return ok ? "PASS" : "FAIL"; }
 
@@ -55,9 +55,7 @@ int selftest_imu(app_t *a)
   }
   s = mpu6050_init(&a->imu);
   if (s != ST_OK) {
-    plat_log("ST imu FAIL step=init err=%s reg=0x%02X i2cmode=%d\r\n", st_str(s),
-             a->imu.fail_reg, plat_i2c_get_write_mode());
-    plat_i2c_diag();
+    plat_log("ST imu FAIL step=init err=%s reg=0x%02X\r\n", st_str(s), a->imu.fail_reg);
     return a->imu_ok = 0;
   }
   plat_delay_ms(20);                       /* PLL і перший відлік після пробудження */
@@ -85,30 +83,6 @@ int selftest_imu(app_t *a)
   return a->imu_ok = ok;
 }
 
-int imu_check(app_t *a, const int32_t e[7], const int32_t tol[3])
-{
-  imu_sample_t m;
-  imu_measure(a, 4, &m);
-  if (m.status != ST_OK) {
-    plat_log("IMUCHK FAIL\r\nIMUCHK err=%s\r\n", st_str(m.status));
-    return 0;
-  }
-  const int32_t got[7] = { m.avg.ax_mg, m.avg.ay_mg, m.avg.az_mg,
-                           m.avg.gx_mdps, m.avg.gy_mdps, m.avg.gz_mdps, m.avg.temp_cC };
-  int ok = 1;
-  for (int i = 0; i < 7; i++) {
-    int32_t t = tol[i < 3 ? 0 : (i < 6 ? 1 : 2)];
-    if (iabs32(got[i] - e[i]) > t) ok = 0;
-  }
-  /* вердикт — окремим рядком без змінних частин: його чекає automation
-     scenario Wokwi (tests/sim/mpu6050.test.yaml, крок wait-serial) */
-  plat_log("IMUCHK %s\r\n", res(ok));
-  plat_log("IMUCHK got ax=%ld ay=%ld az=%ld gx=%ld gy=%ld gz=%ld t_cC=%ld\r\n",
-           (long)got[0], (long)got[1], (long)got[2], (long)got[3], (long)got[4],
-           (long)got[5], (long)got[6]);
-  return ok;
-}
-
 int selftest_oled(app_t *a)
 {
   int s = ssd1306_probe(&a->oled);
@@ -120,7 +94,6 @@ int selftest_oled(app_t *a)
   if (a->oled_ok) plat_log("ST oled PASS addr=0x%02X\r\n", a->oled.addr);
   else {
     plat_log("ST oled FAIL step=%s err=%s addr=0x%02X\r\n", step, st_str(s), a->oled.addr);
-    plat_i2c_diag();
   }
   return a->oled_ok;
 }
@@ -217,7 +190,6 @@ st_summary_t selftest_run(app_t *a)
   r[5] = selftest_btn();
   for (int i = 0; i < 6; i++) { if (r[i]) s.pass++; else s.fail++; }
   plat_log("ST END pass=%d fail=%d\r\n", s.pass, s.fail);
-  plat_i2c_diag();
 
   if (a->oled_ok) {             /* FR-12: статус на OLED */
     ssd1306_text(&a->oled, 2, 0, a->imu_ok ? "IMU  OK" : "IMU NOT FOUND");

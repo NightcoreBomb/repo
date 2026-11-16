@@ -1,36 +1,40 @@
 /**
- * bus_spi_stm32.c — реалізація bus_spi_t поверх HAL_SPI + GPIO CS#.
+ * bus_spi_stm32.c — bus_spi_t для SPI1 + програмний CS#, лише регістри (RM0490, SPI).
+ *
+ * ЛР3: HAL_SPI_TransmitReceive прибрано. У ЛР2 читання блоку SD тривало 12.2 мс при
+ * 6 МГц на шині (19.1 мкс/байт замість 1.33 — analysis.md §8.3): HAL опитував прапорці
+ * й стан хендла на кожен байт. Тут — прямий цикл TXE→DR→RXNE→DR, 8-бітний доступ до DR
+ * (FRXTH = 1, інакше RXNE чекає 16 біт).
  */
-#include <string.h>
 #include "board.h"
 
 typedef struct {
-  SPI_HandleTypeDef *h;
+  SPI_TypeDef  *S;
   GPIO_TypeDef *cs_port;
-  uint16_t cs_pin;
+  uint16_t      cs_pin;
 } spi_ctx_t;
 
-static spi_ctx_t sd_ctx = { &hspi1, BOARD_SD_CS_Port, BOARD_SD_CS_Pin };
+static spi_ctx_t sd_ctx = { BOARD_SPI, BOARD_SD_CS_Port, BOARD_SD_CS_Pin };
 
 static void sel(void *c, bool on)
 {
   spi_ctx_t *x = c;
-  HAL_GPIO_WritePin(x->cs_port, x->cs_pin, on ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  x->cs_port->BSRR = on ? (uint32_t)x->cs_pin << 16 : x->cs_pin;   /* CS# активний низький */
 }
 
 static int xfer(void *c, const uint8_t *tx, uint8_t *rx, size_t n)
 {
   spi_ctx_t *x = c;
-  static uint8_t ff[32], sink[32];
-  memset(ff, 0xFF, sizeof ff);
-  while (n) {
-    size_t k = n > sizeof ff ? sizeof ff : n;
-    HAL_StatusTypeDef s = HAL_SPI_TransmitReceive(x->h, tx ? (uint8_t *)tx : ff,
-                                                  rx ? rx : sink, (uint16_t)k, 50);
-    if (s != HAL_OK) return s == HAL_TIMEOUT ? ST_ETIMEOUT : (s == HAL_BUSY ? ST_EBUSY : ST_EIO);
-    if (tx) tx += k;
-    if (rx) rx += k;
-    n -= k;
+  SPI_TypeDef *S = x->S;
+  volatile uint8_t *dr = (volatile uint8_t *)&S->DR;
+  for (size_t i = 0; i < n; i++) {
+    uint32_t guard = 100000u;
+    while (!(S->SR & SPI_SR_TXE)) if (!--guard) return ST_ETIMEOUT;
+    *dr = tx ? tx[i] : 0xFFu;
+    guard = 100000u;
+    while (!(S->SR & SPI_SR_RXNE)) if (!--guard) return ST_ETIMEOUT;
+    uint8_t b = *dr;
+    if (rx) rx[i] = b;
   }
   return ST_OK;
 }
@@ -38,11 +42,11 @@ static int xfer(void *c, const uint8_t *tx, uint8_t *rx, size_t n)
 static void set_fast(void *c, bool fast)
 {
   spi_ctx_t *x = c;
-  uint32_t br = fast ? BOARD_SPI_PRESC_FAST : BOARD_SPI_PRESC_SLOW;
-  __HAL_SPI_DISABLE(x->h);
-  MODIFY_REG(x->h->Instance->CR1, SPI_CR1_BR, br);
-  x->h->Init.BaudRatePrescaler = br;
-  __HAL_SPI_ENABLE(x->h);
+  SPI_TypeDef *S = x->S;
+  while (S->SR & SPI_SR_BSY) { }
+  S->CR1 &= ~SPI_CR1_SPE;
+  MODIFY_REG(S->CR1, SPI_CR1_BR, fast ? BOARD_SPI_BR_FAST : BOARD_SPI_BR_SLOW);
+  S->CR1 |= SPI_CR1_SPE;
 }
 
 const bus_spi_t board_sd_spi = { &sd_ctx, sel, xfer, set_fast };

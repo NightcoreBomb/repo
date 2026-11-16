@@ -1,0 +1,141 @@
+# 6.2.7–6.2.8, FR-09 — старт, журнал після перезапуску, скид під час запису
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 boot_power'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - write-serial: "note BOOT;\n"
+  - wait-serial: 'NOTE BOOT;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "mode rec\n"
+  - wait-serial: 'MODE REC'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.0
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1.0
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.142
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.99
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.267
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.964
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.359
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.933
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.411
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.911
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.421
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.907
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.386
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.922
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.31
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.951
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.198
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.98
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.062
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.998
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.083
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.997
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.217
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.976
+  - delay: 1000ms
+  - write-serial: "mode live\n"
+  - wait-serial: 'MODE LIVE'
+  - write-serial: "reset\n"
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - write-serial: "mode play\n"
+  - wait-serial: 'PLAY done'
+  - write-serial: "mode live\n"
+  - write-serial: "mode rec\n"
+  - wait-serial: 'MODE REC'
+  - delay: 7000ms
+  - write-serial: "reset\n"
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - write-serial: "mode play\n"
+  - wait-serial: 'PLAY done'
+  - write-serial: "mode live\n"
+  - delay: 300ms

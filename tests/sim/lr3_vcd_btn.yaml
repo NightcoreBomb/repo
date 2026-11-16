@@ -1,0 +1,114 @@
+# Запис аналізатора (профіль lr3): кнопка → MARK, IMU/PWM/LONG-пробники
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 vcd_btn'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - write-serial: "telem 0\n"
+  - write-serial: "mode rec\n"
+  - wait-serial: 'MODE REC'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.0
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1.0
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.142
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.99
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.267
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.964
+  - delay: 1000ms
+  - write-serial: "mode live\n"
+  - wait-serial: 'MODE LIVE'
+  - delay: 623ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 1
+  - delay: 80ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 0
+  - delay: 532ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 1
+  - delay: 80ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 0
+  - delay: 666ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 1
+  - delay: 80ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 0
+  - delay: 1000ms
+  - write-serial: "calib\n"
+  - delay: 360ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 1
+  - delay: 80ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 0
+  - delay: 1500ms
+  - write-serial: "calib\n"
+  - delay: 397ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 1
+  - delay: 80ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 0
+  - delay: 1500ms
+  - write-serial: "calib\n"
+  - delay: 61ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 1
+  - delay: 80ms
+  - set-control:
+      part-id: btn
+      control: pressed
+      value: 0
+  - delay: 1500ms
+  - delay: 500ms
+  - write-serial: "note VCD;\n"
+  - wait-serial: 'NOTE VCD;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - delay: 300ms

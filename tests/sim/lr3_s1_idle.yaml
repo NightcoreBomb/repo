@@ -1,0 +1,19 @@
+# S1 — простій: подій немає, працюють лише періодичні задачі
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 s1_idle'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - delay: 2000ms
+  - write-serial: "stats reset\n"
+  - delay: 10000ms
+  - write-serial: "note S1;\n"
+  - wait-serial: 'NOTE S1;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "hist\n"
+  - wait-serial: 'HIST'
+  - delay: 300ms

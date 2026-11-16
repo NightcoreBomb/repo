@@ -41,7 +41,5 @@ int  selftest_btn(void);
 
 /* Усереднене читання IMU (n ≥ 1) */
 void imu_measure(app_t *a, int n, imu_sample_t *out);
-/* Перевірка показів IMU проти очікуваних (для automation scenario Wokwi) */
-int  imu_check(app_t *a, const int32_t exp[7], const int32_t tol[3]);
 
 #endif

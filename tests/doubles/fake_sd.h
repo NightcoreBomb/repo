@@ -1,7 +1,8 @@
 /**
  * fake_sd — FAKE microSD у режимі SPI: розбирає командні кадри (з перевіркою
  * CRC7 для CMD0/CMD8, як справжня карта), моделює idle → ready через ACMD41,
- * має 8 блоків пам'яті, підтримує CMD17/CMD24 з токенами даних.
+ * має 8 блоків пам'яті (LBA 0..7) і вікно журналу ЛР3 (LBA 2048..2087),
+ * підтримує CMD17/CMD24 з токенами даних.
  */
 #ifndef FAKE_SD_H
 #define FAKE_SD_H
@@ -17,6 +18,7 @@ typedef struct {
   bool reject_write;    /* data response = 0x0D (write error) */
   int  fail_read_blk;   /* ≥0 — CMD17 на цей блок дає R1 = 0x08 (помилка) */
   uint8_t mem[8][512];
+  uint8_t hi[40][512];   /* LBA 2048..2087 — журнал траєкторії (App/traj.h) */
   /* внутрішній стан */
   bool idle, ready, app;
   uint8_t cmd[6]; int ncmd;

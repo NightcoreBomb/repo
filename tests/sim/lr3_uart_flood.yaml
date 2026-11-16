@@ -1,0 +1,100 @@
+# 6.2.3 — команди без пауз під час довгої операції: втрати байтів, час відповіді
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 uart_flood'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - write-serial: "mode rec\n"
+  - wait-serial: 'MODE REC'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.0
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1.0
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.142
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.99
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.267
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.964
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.359
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.933
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.411
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.911
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.421
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.907
+  - delay: 1000ms
+  - write-serial: "mode live\n"
+  - wait-serial: 'MODE LIVE'
+  - write-serial: "telem 0\n"
+  - write-serial: "stats reset\n"
+  - write-serial: "status\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\n"
+  - delay: 500ms
+  - write-serial: "\n"
+  - write-serial: "note FLOOD_idle;\n"
+  - wait-serial: 'NOTE FLOOD_idle;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "stats reset\n"
+  - write-serial: "dump\n"
+  - delay: 20ms
+  - write-serial: "status\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\n"
+  - wait-serial: 'DUMP end'
+  - delay: 800ms
+  - write-serial: "\n"
+  - write-serial: "dump\n"
+  - delay: 20ms
+  - write-serial: "status\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\n"
+  - wait-serial: 'DUMP end'
+  - delay: 800ms
+  - write-serial: "\n"
+  - write-serial: "dump\n"
+  - delay: 20ms
+  - write-serial: "status\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\nstatus\n"
+  - wait-serial: 'DUMP end'
+  - delay: 800ms
+  - write-serial: "\n"
+  - write-serial: "note FLOOD_longop;\n"
+  - wait-serial: 'NOTE FLOOD_longop;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - delay: 300ms

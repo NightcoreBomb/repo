@@ -1,0 +1,118 @@
+# 6.2.5 — пошук точки зламу: частота опитування, навантаження, OLED
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 breakpoint'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - delay: 1000ms
+  - write-serial: "rate 200\n"
+  - delay: 3000ms
+  - write-serial: "note RATE_200;\n"
+  - wait-serial: 'NOTE RATE_200;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "rate 300\n"
+  - delay: 3000ms
+  - write-serial: "note RATE_300;\n"
+  - wait-serial: 'NOTE RATE_300;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "rate 400\n"
+  - delay: 3000ms
+  - write-serial: "note RATE_400;\n"
+  - wait-serial: 'NOTE RATE_400;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "rate 600\n"
+  - delay: 3000ms
+  - write-serial: "note RATE_600;\n"
+  - wait-serial: 'NOTE RATE_600;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "rate 800\n"
+  - delay: 3000ms
+  - write-serial: "note RATE_800;\n"
+  - wait-serial: 'NOTE RATE_800;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "rate 1000\n"
+  - delay: 3000ms
+  - write-serial: "note RATE_1000;\n"
+  - wait-serial: 'NOTE RATE_1000;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "rate 1500\n"
+  - delay: 3000ms
+  - write-serial: "note RATE_1500;\n"
+  - wait-serial: 'NOTE RATE_1500;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "rate 2000\n"
+  - delay: 3000ms
+  - write-serial: "note RATE_2000;\n"
+  - wait-serial: 'NOTE RATE_2000;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "rate 200\n"
+  - write-serial: "oled 0\n"
+  - write-serial: "stats reset\n"
+  - delay: 4000ms
+  - write-serial: "note OLED_0;\n"
+  - wait-serial: 'NOTE OLED_0;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "oled 1\n"
+  - write-serial: "stats reset\n"
+  - delay: 4000ms
+  - write-serial: "note OLED_1;\n"
+  - wait-serial: 'NOTE OLED_1;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "oled 2\n"
+  - write-serial: "stats reset\n"
+  - delay: 4000ms
+  - write-serial: "note OLED_2;\n"
+  - wait-serial: 'NOTE OLED_2;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "oled 0\n"
+  - write-serial: "load 500\n"
+  - write-serial: "stats reset\n"
+  - delay: 3000ms
+  - write-serial: "note LOAD_500;\n"
+  - wait-serial: 'NOTE LOAD_500;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "load 1000\n"
+  - write-serial: "stats reset\n"
+  - delay: 3000ms
+  - write-serial: "note LOAD_1000;\n"
+  - wait-serial: 'NOTE LOAD_1000;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "load 2000\n"
+  - write-serial: "stats reset\n"
+  - delay: 3000ms
+  - write-serial: "note LOAD_2000;\n"
+  - wait-serial: 'NOTE LOAD_2000;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "load 3000\n"
+  - write-serial: "stats reset\n"
+  - delay: 3000ms
+  - write-serial: "note LOAD_3000;\n"
+  - wait-serial: 'NOTE LOAD_3000;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "load 4000\n"
+  - write-serial: "stats reset\n"
+  - delay: 3000ms
+  - write-serial: "note LOAD_4000;\n"
+  - wait-serial: 'NOTE LOAD_4000;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "load 0\n"
+  - delay: 300ms

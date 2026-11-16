@@ -1,0 +1,39 @@
+EVT t_us=2391 name=boot
+
+==== LR3 super-loop | fw=51601fab-nogit | NUCLEO-C031C6 | SYSCLK=48000000 | reset=0x00 ====
+CHK imu=OK who=0x68 oled=OK sd=OK type=SDHC adc=OK
+DIR NONE blocks=0 records=0 duration_ms=0
+READY (type 'help')
+OK evt
+271,0,0,1500,1500,LIVE
+OK telem
+EVT t_us=278185 name=rec_start
+MODE RECOK mode
+REC stop records=1001 blocks=5 duration_ms=20020 gaps=100 max_int_ms=79
+EVT t_us=20310841 name=rec_stop
+EVT t_us=20314128 name=live
+MODE LIVEOK mode
+EVT t_us=20894258 name=rec_start
+MODE REC
+EVT t_us=20898505 name=btn lat_db_us=2071 lat_edge_us=53148
+EVT t_us=21786108 name=imu_err
+EVT t_us=21791601 name=imu_ok
+REC stop records=46 blocks=1 duration_ms=920 gaps=5 max_int_ms=74
+EVT t_us=21890964 name=rec_stop
+EVT t_us=21907903 name=play_start
+MODE PLAY
+EVT t_us=21912355 name=btn lat_db_us=61148 lat_edge_us=113217
+EVT t_us=22866771 name=live
+MODE LIVE
+EVT t_us=22870671 name=btn lat_db_us=14664 lat_edge_us=67713
+EVT t_us=23787228 name=rec_start
+MODE REC
+EVT t_us=23791472 name=btn lat_db_us=48 lat_edge_us=52961
+ERR dump busy: recording
+REC stop records=30 blocks=1 duration_ms=600 gaps=3 max_int_ms=83
+EVT t_us=24397846 name=rec_stop
+EVT t_us=24414978 name=play_start
+MODE PLAY
+EVT t_us=24419445 name=btn lat_db_us=81 lat_edge_us=53064
+PLAY done records=30 duration_ms=600 rec_ms=600
+EVT t_us=25005749 name=play_done

@@ -54,6 +54,38 @@ static int set_window(ssd1306_t *d, uint8_t page, uint8_t col)
   return cmds(d, w, sizeof w);
 }
 
+int ssd1306_window(ssd1306_t *d, uint8_t page, uint8_t col)
+{
+  if (page >= SSD1306_PAGES || col >= SSD1306_WIDTH) return ST_EPARAM;
+  return set_window(d, page, col);
+}
+
+int ssd1306_write_data(ssd1306_t *d, const uint8_t *p, size_t n)
+{
+  uint8_t buf[1 + SSD1306_LINE_BYTES];
+  if (n == 0 || n > SSD1306_LINE_BYTES) return ST_EPARAM;
+  buf[0] = SSD1306_CTRL_DATA;
+  memcpy(&buf[1], p, n);
+  return d->bus->write(d->bus->ctx, d->addr, buf, n + 1);
+}
+
+void ssd1306_render_line(const char *s, uint8_t out[SSD1306_LINE_BYTES])
+{
+  for (unsigned i = 0; i < SSD1306_LINE_CHARS; i++) {
+    char c = (s && *s) ? *s++ : ' ';
+    memcpy(&out[i * 6u], font5x7_glyph(c), 5);
+    out[i * 6u + 5u] = 0x00;
+  }
+}
+
+int ssd1306_line(ssd1306_t *d, uint8_t page, const char *s)
+{
+  uint8_t buf[SSD1306_LINE_BYTES];
+  ssd1306_render_line(s, buf);
+  int st = ssd1306_window(d, page, 0);
+  return st != ST_OK ? st : ssd1306_write_data(d, buf, sizeof buf);
+}
+
 static int data(ssd1306_t *d, const uint8_t *p, size_t n)
 {
   uint8_t buf[1 + SSD1306_CHUNK];

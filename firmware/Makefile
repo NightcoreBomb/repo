@@ -1,4 +1,4 @@
-# Прошивка ЛР2 — NUCLEO-C031C6 (Wokwi). Викликається з кореневого Makefile в Docker.
+# Прошивка ЛР3 (super loop) — NUCLEO-C031C6 (Wokwi). Викликається з кореневого Makefile в Docker.
 #
 #  Шари (див. docs/architecture.md):
 #    Core/        код у стилі CubeMX (init периферії, IRQ, main)
@@ -16,22 +16,13 @@ OPT      ?= -Os
 
 # ---------- вендорський код ----------
 HAL = Drivers/STM32C0xx_HAL_Driver/Src
-# Лише модулі, увімкнені в stm32c0xx_hal_conf.h (обґрунтування — там само)
+# Лише модулі, увімкнені в stm32c0xx_hal_conf.h (обґрунтування — там само).
+# ЛР3: I2C/SPI/ADC/TIM/UART — регістри напряму (журнал ЛР3, П-13)
 VENDOR_SOURCES = \
   $(HAL)/stm32c0xx_hal.c \
   $(HAL)/stm32c0xx_hal_cortex.c \
   $(HAL)/stm32c0xx_hal_rcc.c \
-  $(HAL)/stm32c0xx_hal_rcc_ex.c \
   $(HAL)/stm32c0xx_hal_gpio.c \
-  $(HAL)/stm32c0xx_hal_uart.c \
-  $(HAL)/stm32c0xx_hal_uart_ex.c \
-  $(HAL)/stm32c0xx_hal_i2c.c \
-  $(HAL)/stm32c0xx_hal_i2c_ex.c \
-  $(HAL)/stm32c0xx_hal_spi.c \
-  $(HAL)/stm32c0xx_hal_adc.c \
-  $(HAL)/stm32c0xx_hal_adc_ex.c \
-  $(HAL)/stm32c0xx_hal_tim.c \
-  $(HAL)/stm32c0xx_hal_tim_ex.c \
   Core/Src/system_stm32c0xx.c \
   Core/Src/syscalls.c \
   Core/Src/sysmem.c
@@ -67,6 +58,8 @@ C_INCLUDES = \
   -IDrivers/CMSIS/Include
 
 BASE_CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -std=gnu11 -fdata-sections -ffunction-sections
+# ЛР3 §5.4: статична оцінка стека — build/*.su (кадр кожної функції)
+BASE_CFLAGS += -fstack-usage
 ifeq ($(DEBUG), 1)
 BASE_CFLAGS += -g -gdwarf-2
 endif
@@ -75,7 +68,16 @@ BASE_CFLAGS += -ffile-prefix-map=$(CURDIR)=.
 
 # Власний код: усі попередження, і вони — помилки (WERROR=0 щоб тимчасово вимкнути)
 WERROR     ?= 1
-OWN_WARN    = -Wall -Wextra -Wshadow -Wundef -Wstrict-prototypes
+OWN_WARN    = -Wall -Wextra -Wshadow -Wundef -Wstrict-prototypes -Wstack-usage=256
+# Ідентифікатор збірки в банері й логах (ЛР3 §6: «та сама збірка»): хеш вихідних кодів
+# власного шару — однаковий і в Docker, і поза ним; плюс git-хеш, якщо є
+FW_SRC_HASH := $(shell cat $(sort $(wildcard Core/Src/*.c App/*.[ch] Devices/*.[ch] Platform/*.[ch] Interfaces/*.h)) 2>/dev/null | sha1sum | cut -c1-8)
+FW_GIT      := $(shell git rev-parse --short HEAD 2>/dev/null || echo nogit)
+C_DEFS     += -DFW_ID=\"$(FW_SRC_HASH)-$(FW_GIT)\"
+# ЛР3 П-20: FW_ID «вшивається» лише в app.o — без цієї залежності зміна main.c не оновлювала
+# банер (обидва прогони показали той самий fw=51601fab). Штамп змінюється разом з ідентифікатором.
+FW_ID_STAMP := $(BUILD_DIR)/fw_id.stamp
+$(shell mkdir -p $(BUILD_DIR); echo '$(FW_SRC_HASH)-$(FW_GIT)' | cmp -s - $(FW_ID_STAMP) 2>/dev/null || echo '$(FW_SRC_HASH)-$(FW_GIT)' > $(FW_ID_STAMP))
 ifeq ($(WERROR), 1)
 OWN_WARN   += -Werror
 endif
@@ -139,3 +141,6 @@ clean:
 
 .PHONY: all clean
 -include $(wildcard $(BUILD_DIR)/*.d)
+
+# FW_ID (див. вище): app.o перекомпільовується, коли змінився ідентифікатор збірки
+$(BUILD_DIR)/app.o: $(FW_ID_STAMP)

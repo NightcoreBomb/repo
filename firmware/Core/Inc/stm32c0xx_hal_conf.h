@@ -38,10 +38,10 @@ extern "C" {
    навіщо він потрібен; .c-файли в firmware/Makefile (VENDOR_SOURCES) збігаються
    з цим списком. */
 #define HAL_MODULE_ENABLED          /* HAL_Init, HAL_GetTick/HAL_Delay (SysTick)          */
-#define HAL_ADC_MODULE_ENABLED      /* ADC1_IN0 — потенціометр dead-zone (FR-04)         */
+/* #define HAL_ADC_MODULE_ENABLED   ЛР3: регістри напряму (Platform/plat_stm32.c, Core/Src/main.c) — П-13 */
 /* #define HAL_CRC_MODULE_ENABLED   */
 /* #define HAL_CRYP_MODULE_ENABLED   */
-#define HAL_I2C_MODULE_ENABLED      /* I2C1 — MPU-6050 + SSD1306 (FR-01, FR-10)          */
+/* #define HAL_I2C_MODULE_ENABLED   ЛР3: регістри напряму (Platform/bus_i2c_stm32.c) — П-13 */
 /* #define HAL_I2S_MODULE_ENABLED   */
 /* #define HAL_IWDG_MODULE_ENABLED   */
 /* #define HAL_IRDA_MODULE_ENABLED   */
@@ -50,20 +50,15 @@ extern "C" {
 /* #define HAL_RTC_MODULE_ENABLED   */
 /* #define HAL_SMARTCARD_MODULE_ENABLED   */
 /* #define HAL_SMBUS_MODULE_ENABLED   */
-#define HAL_SPI_MODULE_ENABLED      /* SPI1 — microSD (FR-07..FR-09)                     */
-#define HAL_TIM_MODULE_ENABLED      /* TIM3 CH1/CH2 PWM — два серво (FR-03, FR-05)        */
-#define HAL_UART_MODULE_ENABLED     /* USART2 — VCP: лог, self-test, консоль (FR-11)     */
+/* #define HAL_SPI_MODULE_ENABLED   ЛР3: регістри напряму (Platform/bus_spi_stm32.c) — П-13 */
+/* #define HAL_TIM_MODULE_ENABLED   ЛР3: регістри напряму (MX_TIM3_Init) — П-13 */
+/* #define HAL_UART_MODULE_ENABLED   ЛР3: регістри напряму (plat_log, board_uart_rx_irq) — П-13 */
 /* #define HAL_USART_MODULE_ENABLED   */
 /* #define HAL_WWDG_MODULE_ENABLED   */
 #define HAL_GPIO_MODULE_ENABLED     /* LED, CS# SD, MARK, кнопка + EXTI-обробник         */
 /* #define HAL_EXTI_MODULE_ENABLED     вимкнено: EXTI кнопки обслуговує HAL_GPIO_EXTI_*,
                                        API HAL_EXTI_* не використовується              */
-#define HAL_DMA_MODULE_ENABLED      /* DMA не використовується, АЛЕ заголовки ADC/SPI/TIM
-                                       містять DMA_HandleTypeDef безумовно — без цього
-                                       define HAL не компілюється (журнал проблем, П-4).
-                                       stm32c0xx_hal_dma.c НЕ компілюється: після
-                                       відмови від HAL_UART_IRQHandler на DMA-функції
-                                       ніхто не посилається */
+/* #define HAL_DMA_MODULE_ENABLED   ЛР3: потрібен був лише заголовкам ADC/SPI/TIM — вимкнено разом з ними */
 #define HAL_RCC_MODULE_ENABLED      /* тактування SYSCLK=48 МГц і периферії              */
 #define HAL_FLASH_MODULE_ENABLED    /* лише заголовок: FLASH_LATENCY_1 у HAL_RCC_ClockConfig;
                                        stm32c0xx_hal_flash.c не компілюється             */

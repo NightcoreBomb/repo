@@ -49,7 +49,7 @@ jobs:
       - name: Self-test of all devices
         if: env.WOKWI_CLI_TOKEN != ''
         run: make sim
-      - name: MPU-6050 scenario
+      - name: FR-02 static angles scenario
         if: env.WOKWI_CLI_TOKEN != ''
         run: make sim-imu
       - uses: actions/upload-artifact@v4

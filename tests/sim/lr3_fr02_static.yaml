@@ -1,0 +1,62 @@
+# FR-02 — pitch/roll у статиці: 0°, 30°, 45°, −30° (≤ 3°)
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 fr02_static'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.0
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1.0
+  - delay: 2000ms
+  - write-serial: "note FR02_0\n"
+  - wait-serial: 'NOTE FR02_0'
+  - write-serial: "status\n"
+  - wait-serial: 'STATUS'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.5
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.866
+  - delay: 2000ms
+  - write-serial: "note FR02_30\n"
+  - wait-serial: 'NOTE FR02_30'
+  - write-serial: "status\n"
+  - wait-serial: 'STATUS'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.707
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.707
+  - delay: 2000ms
+  - write-serial: "note FR02_45\n"
+  - wait-serial: 'NOTE FR02_45'
+  - write-serial: "status\n"
+  - wait-serial: 'STATUS'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.5
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.866
+  - delay: 2000ms
+  - write-serial: "note FR02_-30\n"
+  - wait-serial: 'NOTE FR02_-30'
+  - write-serial: "status\n"
+  - wait-serial: 'STATUS'
+  - delay: 300ms

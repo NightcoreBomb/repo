@@ -1,0 +1,302 @@
+# 6.2.1 — довга операція (dump, calib) і періодична задача IMU
+# Згенеровано tools/lr3_gen_scenarios.py (SEED=3) — не редагувати вручну.
+name: 'LR3 longop'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - write-serial: "mode rec\n"
+  - wait-serial: 'MODE REC'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.0
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1.0
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.142
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.99
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.267
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.964
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.359
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.933
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.411
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.911
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.421
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.907
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.386
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.922
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.31
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.951
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.198
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.98
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.062
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.998
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.083
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.997
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.217
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.976
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.324
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.946
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.394
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.919
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.422
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.907
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.406
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.914
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.347
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.938
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.25
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.968
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.122
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.993
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.022
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1.0
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.163
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.987
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.283
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.959
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.37
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.929
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.416
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.91
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.418
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.908
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.378
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.926
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.296
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.955
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.179
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.984
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.04
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.999
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: 0.104
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.995
+  - delay: 1000ms
+  - write-serial: "mode live\n"
+  - wait-serial: 'MODE LIVE'
+  - write-serial: "stats reset\n"
+  - write-serial: "dump\n"
+  - wait-serial: 'DUMP end'
+  - delay: 500ms
+  - write-serial: "dump\n"
+  - wait-serial: 'DUMP end'
+  - delay: 500ms
+  - write-serial: "dump\n"
+  - wait-serial: 'DUMP end'
+  - delay: 500ms
+  - write-serial: "calib\n"
+  - wait-serial: 'CALIB n='
+  - write-serial: "note LONGOP;\n"
+  - wait-serial: 'NOTE LONGOP;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "hist\n"
+  - wait-serial: 'HIST'
+  - delay: 300ms

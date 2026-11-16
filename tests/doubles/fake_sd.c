@@ -16,6 +16,12 @@ void fake_sd_reset(void)
 static void push(uint8_t b) { fake_sd.q[fake_sd.qt++ & 15] = b; }
 
 static uint32_t blk_of(uint32_t arg) { return fake_sd.sdhc ? arg : arg / 512; }
+static uint8_t *blk_ptr(uint32_t b)
+{
+  if (b < 8) return fake_sd.mem[b];
+  if (b >= 2048 && b < 2048 + 40) return fake_sd.hi[b - 2048];
+  return 0;
+}
 
 static void process(void)
 {
@@ -49,7 +55,7 @@ static void process(void)
     case 16: push(idle); break;
     case 17: {
       uint32_t b = blk_of(arg);
-      if (!fake_sd.ready || b >= 8) { push(0x40 | idle); break; }   /* parameter error */
+      if (!fake_sd.ready || !blk_ptr(b)) { push(0x40 | idle); break; }   /* parameter error */
       if ((int)b == fake_sd.fail_read_blk) { push(0x08); break; }
       push(0x00);
       fake_sd.wstate = 10; fake_sd.wblk = b; fake_sd.widx = -2;     /* -2: пауза, -1: токен */
@@ -57,7 +63,7 @@ static void process(void)
     }
     case 24: {
       uint32_t b = blk_of(arg);
-      if (!fake_sd.ready || b >= 8) { push(0x40 | idle); break; }
+      if (!fake_sd.ready || !blk_ptr(b)) { push(0x40 | idle); break; }
       fake_sd.writes++;
       push(0x00);
       fake_sd.wstate = 1; fake_sd.wblk = b; fake_sd.widx = 0;
@@ -76,7 +82,7 @@ static uint8_t byte(uint8_t mo)
     int i = fake_sd.widx++;
     if (i == -2) return 0xFF;
     if (i == -1) return SD_TOKEN_START;
-    if (i < 512) return fake_sd.mem[fake_sd.wblk][i];
+    if (i < 512) return blk_ptr(fake_sd.wblk)[i];
     if (i < 513) return 0x12;                               /* CRC16 (не перевіряється) */
     fake_sd.wstate = 0;
     return 0x34;
@@ -90,7 +96,7 @@ static uint8_t byte(uint8_t mo)
     if (fake_sd.widx == 514) {
       fake_sd.wstate = 0;
       if (fake_sd.reject_write) { push(0x0D); return 0xFF; }
-      memcpy(fake_sd.mem[fake_sd.wblk], fake_sd.wbuf, 512);
+      memcpy(blk_ptr(fake_sd.wblk), fake_sd.wbuf, 512);
       push(0x05); push(0x00); push(0x00); push(0x00);       /* accepted + busy */
     }
     return 0xFF;
