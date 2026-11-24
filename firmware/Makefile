@@ -1,4 +1,11 @@
-# Прошивка ЛР3 (super loop) — NUCLEO-C031C6 (Wokwi). Викликається з кореневого Makefile в Docker.
+# Прошивка ЛР4 (FreeRTOS) — NUCLEO-C031C6 (Wokwi). Викликається з кореневого Makefile в Docker.
+# Прошивка ЛР3 (super loop) — git-тег lab3 (`git worktree add ../lab3 lab3 && make -C ../lab3/firmware`).
+#
+#  Варіанти для сценаріїв ЛР4 §7.2 (окремий каталог збірки):
+#    make TICK_HZ=100    BUILD_DIR=build-tick100   — вплив частоти тіку (7.2.6)
+#    make HEAP_BYTES=3000 BUILD_DIR=build-heapsmall — вичерпання heap при створенні задач (7.2.5)
+#    make STACK_CHECK=0  BUILD_DIR=build-nocheck   — переповнення стека без контролю (7.2.2)
+#    make OSTEST=1       BUILD_DIR=build-ostest    — стенд сценаріїв ОС 7.2.1–7.2.5 + вартість перемикання
 #
 #  Шари (див. docs/architecture.md):
 #    Core/        код у стилі CubeMX (init периферії, IRQ, main)
@@ -9,7 +16,11 @@
 #    App/         прикладна логіка, не знає про HAL
 
 TARGET    = firmware
-BUILD_DIR = build
+BUILD_DIR ?= build
+TICK_HZ     ?= 1000
+HEAP_BYTES  ?= 5632
+STACK_CHECK ?= 2
+OSTEST      ?= 0
 DEBUG    ?= 1
 # -Os: з -Og прошивка ЛР2 не вміщується у 32 КБ Flash C031C6 (журнал проблем, П-3)
 OPT      ?= -Os
@@ -26,6 +37,13 @@ VENDOR_SOURCES = \
   Core/Src/system_stm32c0xx.c \
   Core/Src/syscalls.c \
   Core/Src/sysmem.c
+
+# ---------- FreeRTOS-Kernel V11.1.0 (Middlewares/FreeRTOS/VERSION.md) ----------
+RTOS = Middlewares/FreeRTOS/Source
+RTOS_SOURCES = $(RTOS)/tasks.c $(RTOS)/queue.c $(RTOS)/list.c \
+               $(RTOS)/portable/GCC/ARM_CM0/port.c $(RTOS)/portable/GCC/ARM_CM0/portasm.c \
+               $(RTOS)/portable/MemMang/heap_4.c
+VENDOR_SOURCES += $(RTOS_SOURCES)
 
 # ---------- власний код ----------
 CORE_SOURCES     = Core/Src/main.c Core/Src/stm32c0xx_it.c Core/Src/stm32c0xx_hal_msp.c
@@ -49,29 +67,41 @@ SZ  = $(PREFIX)size
 # Cortex-M0+ не має FPU. (Для F411/F446: -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard)
 MCU = -mcpu=cortex-m0plus -mthumb
 
-C_DEFS = -DUSE_HAL_DRIVER -DSTM32C031xx
+C_DEFS = -DUSE_HAL_DRIVER -DSTM32C031xx \
+         -DLR4_TICK_HZ=$(TICK_HZ) -DLR4_HEAP_BYTES=$(HEAP_BYTES) -DLR4_STACK_CHECK=$(STACK_CHECK)
+ifeq ($(OSTEST), 1)
+C_DEFS += -DLR4_OSTEST
+# тестові задачі сценаріїв 7.2 створюються під час роботи — потрібен запас heap
+ifeq ($(origin HEAP_BYTES), file)
+C_DEFS := $(subst -DLR4_HEAP_BYTES=$(HEAP_BYTES),-DLR4_HEAP_BYTES=6656,$(C_DEFS))
+endif
+# стенду ОС не потрібен self-test ЛР2 (2.6 КБ) — без цього тести ОС не вміщуються
+APP_SOURCES := $(filter-out App/selftest.c,$(APP_SOURCES))
+endif
 C_INCLUDES = \
   -ICore/Inc -IPlatform -IInterfaces -IDevices -IApp \
+  -I$(RTOS)/include -I$(RTOS)/portable/GCC/ARM_CM0 \
   -IDrivers/STM32C0xx_HAL_Driver/Inc \
   -IDrivers/STM32C0xx_HAL_Driver/Inc/Legacy \
   -IDrivers/CMSIS/Device/ST/STM32C0xx/Include \
   -IDrivers/CMSIS/Include
 
 BASE_CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -std=gnu11 -fdata-sections -ffunction-sections
-# ЛР3 §5.4: статична оцінка стека — build/*.su (кадр кожної функції)
-BASE_CFLAGS += -fstack-usage
+# ЛР3 §5.4: статична оцінка стека — build/*.su (кадр кожної функції);
+# ЛР4: + граф викликів (*.ci) для оцінки стека кожної задачі (tools/stack_tree.py)
+BASE_CFLAGS += -fstack-usage -fcallgraph-info=su
 ifeq ($(DEBUG), 1)
 BASE_CFLAGS += -g -gdwarf-2
 endif
 # Відтворювана збірка: прибираємо шляхи хоста з debug-інфо
-BASE_CFLAGS += -ffile-prefix-map=$(CURDIR)=.
+BASE_CFLAGS += '-ffile-prefix-map=$(CURDIR)=.'   # лапки: шлях репозиторію може мати пробіли й дужки
 
 # Власний код: усі попередження, і вони — помилки (WERROR=0 щоб тимчасово вимкнути)
 WERROR     ?= 1
 OWN_WARN    = -Wall -Wextra -Wshadow -Wundef -Wstrict-prototypes -Wstack-usage=256
 # Ідентифікатор збірки в банері й логах (ЛР3 §6: «та сама збірка»): хеш вихідних кодів
 # власного шару — однаковий і в Docker, і поза ним; плюс git-хеш, якщо є
-FW_SRC_HASH := $(shell cat $(sort $(wildcard Core/Src/*.c App/*.[ch] Devices/*.[ch] Platform/*.[ch] Interfaces/*.h)) 2>/dev/null | sha1sum | cut -c1-8)
+FW_SRC_HASH := $(shell (cat $(sort $(wildcard Core/Src/*.c Core/Inc/FreeRTOSConfig.h App/*.[ch] Devices/*.[ch] Platform/*.[ch] Interfaces/*.h)); echo $(TICK_HZ) $(HEAP_BYTES) $(STACK_CHECK) $(OSTEST)) 2>/dev/null | sha1sum | cut -c1-8)
 FW_GIT      := $(shell git rev-parse --short HEAD 2>/dev/null || echo nogit)
 C_DEFS     += -DFW_ID=\"$(FW_SRC_HASH)-$(FW_GIT)\"
 # ЛР3 П-20: FW_ID «вшивається» лише в app.o — без цієї залежності зміна main.c не оновлювала
@@ -93,7 +123,7 @@ ASFLAGS = $(MCU) $(OPT) -Wall -fdata-sections -ffunction-sections
 LIBS    = -lc -lm -lnosys
 # --no-warn-rwx-segments є лише в binutils >= 2.39 (Ubuntu 22.04 має 2.38)
 LD_RWX := $(shell $(CC) -Wl,--help 2>/dev/null | grep -q no-warn-rwx-segments && echo -Wl,--no-warn-rwx-segments)
-LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBS) \
+LDFLAGS = $(MCU) $(OPT) $(LTO) -specs=nano.specs -T$(LDSCRIPT) $(LIBS) \
           -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections -Wl,--print-memory-usage $(LD_RWX)
 
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
@@ -107,6 +137,13 @@ vpath %.s $(sort $(dir $(ASM_SOURCES)))
 
 $(OWN_OBJECTS):    CFLAGS = $(BASE_CFLAGS) $(OWN_WARN)
 $(VENDOR_OBJECTS): CFLAGS = $(BASE_CFLAGS) $(VENDOR_WARN)
+# Обробник SysTick порту викликається з нашого SysTick_Handler (Core/Src/stm32c0xx_it.c)
+$(BUILD_DIR)/port.o: CFLAGS += -DSysTick_Handler=xPortSysTickHandler
+# LTO (ЛР4): ядро + застосунок не вміщувались у 32 КБ (+6.6 КБ); -flto прибирає дублікати
+# і вбудовує дрібні функції між файлами. Порт (naked-асемблер з літеральними пулами) — без LTO.
+LTO ?= -flto
+$(OWN_OBJECTS) $(VENDOR_OBJECTS): CFLAGS += $(LTO)
+$(BUILD_DIR)/port.o $(BUILD_DIR)/portasm.o: LTO =
 
 # V=1 — показати повні команди компілятора
 V ?= 0

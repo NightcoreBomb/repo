@@ -87,3 +87,12 @@ int perf_load_poll(perf_load_t *l, uint32_t now)
   l->win_start = now;
   return 1;
 }
+
+/* ЛР4: вікно завантаження, пораховане зовні (100 % − частка idle за run-time stats) */
+void perf_load_set(perf_load_t *l, uint8_t pct)
+{
+  l->last_pct = pct;
+  if (!l->windows || pct < l->min_pct) l->min_pct = pct;
+  if (pct > l->max_pct) l->max_pct = pct;
+  l->windows++;
+}

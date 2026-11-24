@@ -7,12 +7,15 @@
  */
 #include "board.h"
 #include "plat.h"
+#include "os.h"
 
-extern volatile uint32_t uwTick;          /* HAL: лічильник мс, інкремент у SysTick */
+extern volatile uint32_t uwTick;          /* HAL: лічильник мс; ЛР4 — інкремент у tick hook FreeRTOS */
 
 /* ================= час ================= */
 uint32_t plat_millis(void)         { return HAL_GetTick(); }
-void     plat_delay_ms(uint32_t ms) { HAL_Delay(ms); }
+/* ЛР4: після старту планувальника очікування — блокування задачі (процесор вільний для інших),
+   до старту (ініціалізація пристроїв у app_start) — активне очікування HAL, як у ЛР3 */
+void     plat_delay_ms(uint32_t ms) { if (os_running()) os_delay_ms(ms); else HAL_Delay(ms); }
 uint32_t plat_cyc_per_us(void)     { return BOARD_SYSCLK_HZ / 1000000u; }
 
 /* Пара (uwTick, VAL) має бути узгоджена: читаємо мс, VAL, ще раз мс. Якщо
@@ -26,7 +29,9 @@ static void tick_pair(uint32_t *ms, uint32_t *el)
     v = SysTick->VAL;
   } while (m != uwTick);
   uint32_t load = SysTick->LOAD;
-  if ((SCB->ICSR & SCB_ICSR_PENDSTSET_Msk) && v > load / 2u) m++;
+  /* uwTickFreq — мс на один тік (1 при 1 кГц, 10 при TICK_HZ=100): формула
+     «мс × тактів_на_мс + (LOAD − VAL)» лишається правильною для будь-якої частоти тіку */
+  if ((SCB->ICSR & SCB_ICSR_PENDSTSET_Msk) && v > load / 2u) m += uwTickFreq;
   *ms = m;
   *el = load - v;                         /* тактів від початку поточної мс */
 }
@@ -52,9 +57,25 @@ static void uart_putc(char c)
   BOARD_UART->TDR = (uint8_t)c;
 }
 
+/* ЛР4: рядок виводиться під м'ютексом UART (кілька задач пишуть у консоль) — рядки
+   різних задач не перемішуються; буфер спільний, тож форматування теж під м'ютексом. */
 void plat_log(const char *fmt, ...)
 {
   static char buf[160];
+  os_uart_lock();
+  va_list ap;
+  va_start(ap, fmt);
+  size_t n = plat_vfmt(buf, sizeof buf, fmt, ap);
+  va_end(ap);
+  if (n >= sizeof buf) n = sizeof buf - 1;
+  for (size_t i = 0; i < n; i++) uart_putc(buf[i]);
+  os_uart_unlock();
+}
+
+/* Без м'ютекса — для хуків ядра (переривання вимкнені або планувальник зупинено) */
+void plat_log_raw(const char *fmt, ...)
+{
+  static char buf[96];
   va_list ap;
   va_start(ap, fmt);
   size_t n = plat_vfmt(buf, sizeof buf, fmt, ap);
@@ -72,6 +93,9 @@ static volatile uint32_t rx_dropped, rx_ore, rx_bytes;
    Кільце з 4 міток: на випадок, коли кілька рядків уже чекають у буфері. */
 static volatile uint32_t eol_cyc[4];
 static volatile uint8_t  eol_head, eol_tail;
+static void *volatile    console_waiter;    /* ЛР4: задача, яку будить кінець рядка */
+
+void plat_console_set_waiter(void *task) { console_waiter = task; }
 
 void board_uart_rx_irq(void)
 {
@@ -88,6 +112,7 @@ void board_uart_rx_irq(void)
     if (c == '\r' || c == '\n') {
       uint8_t e = (uint8_t)((eol_head + 1u) & 3u);
       if (e != eol_tail) { eol_cyc[eol_head] = plat_cycles(); eol_head = e; }
+      os_notify_isr(console_waiter);      /* ISR лише будить задачу cmd (методичка §4.10) */
     }
   }
 }

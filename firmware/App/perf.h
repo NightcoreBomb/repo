@@ -53,5 +53,7 @@ void perf_load_reset(perf_load_t *l, uint32_t now_cyc, uint32_t win_cyc);
 void perf_load_busy(perf_load_t *l, uint32_t cyc);
 /* true — вікно закрилося (last_pct оновлено) */
 int  perf_load_poll(perf_load_t *l, uint32_t now_cyc);
+/* ЛР4: закрити вікно з готовим відсотком (за часом idle-задачі) */
+void perf_load_set(perf_load_t *l, uint8_t pct);
 
 #endif

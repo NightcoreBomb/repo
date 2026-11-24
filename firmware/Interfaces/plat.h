@@ -37,6 +37,8 @@ bool     plat_console_getline(char *buf, size_t size, uint32_t *t_cyc);
 uint32_t plat_console_rx_dropped(void);   /* байтів відкинуто: кільце RX переповнене */
 uint32_t plat_console_rx_overrun(void);   /* апаратних ORE (байт не встигли забрати) */
 uint32_t plat_console_rx_bytes(void);
+/* ЛР4: задача, яку RX-переривання будить сповіщенням, коли прийнято кінець рядка */
+void     plat_console_set_waiter(void *task);
 
 /* ---------- GPIO ---------- */
 /* Службові піни для логічного аналізатора (docs/pinout.md): 0 IMU, 1 PWM, 2 LONG, 3 MARK */

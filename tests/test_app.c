@@ -75,7 +75,7 @@ static void test_selftest_all_pass_on_default_wokwi_state(void)
   st_summary_t s = selftest_run(&a);
   TEST_ASSERT_EQUAL_INT(6, s.pass);
   TEST_ASSERT_EQUAL_INT(0, s.fail);
-  TEST_ASSERT_NOT_NULL(fp_find("ST BEGIN fw=LR3 board=HOST-FAKE sysclk=48000000"));
+  TEST_ASSERT_NOT_NULL(fp_find("ST BEGIN fw=LR4 board=HOST-FAKE sysclk=48000000"));
   const char *imu = fp_find("ST imu PASS");
   TEST_ASSERT_EQUAL_INT(0x68, kv(imu, "id"));
   TEST_ASSERT_EQUAL_INT(1000, kv(imu, "az"));
@@ -203,7 +203,7 @@ static void test_start_checks_and_ready(void)
   TEST_ASSERT_NOT_NULL(fp_find("CHK imu=OK who=0x68 oled=OK sd=OK type=SDHC adc=OK"));
   TEST_ASSERT_NOT_NULL(fp_find("DIR NONE blocks=0"));
   TEST_ASSERT_NOT_NULL(fp_find("READY"));
-  TEST_ASSERT_NOT_NULL(strstr(fp_log, "LR3 super-loop"));
+  TEST_ASSERT_NOT_NULL(strstr(fp_log, "LR4 FreeRTOS"));
 }
 
 /* FR-12: без IMU — повідомлення, серво в центрі, цикл не зависає і не рухає серво */
@@ -446,8 +446,10 @@ static void test_dump_and_misc_commands(void)
   char r[] = "mode rec", p[] = "mode play", d[] = "dump", d2[] = "dump", n[] = "note S3 phase";
   app_handle_line(&a, r);
   run_ms(500);
-  app_handle_line(&a, d2);                           /* у REC буфер блоку зайнятий записом */
-  TEST_ASSERT_NOT_NULL(fp_find("ERR dump busy: recording"));
+  /* ЛР4: у dump власний буфер — у REC він працює і не псує запис (обмеження 5 ЛР3) */
+  app_handle_line(&a, d2);
+  TEST_ASSERT_NULL(fp_find("ERR dump busy"));
+  TEST_ASSERT_NOT_NULL(fp_find("DUMP end"));
   app_handle_line(&a, n);
   TEST_ASSERT_NOT_NULL(fp_find("NOTE S3 phase\r\n"));
   app_handle_line(&a, p);

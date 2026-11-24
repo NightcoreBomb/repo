@@ -5,7 +5,7 @@ BUILD   = build
 UNITY   = vendor/unity
 CFLAGS  = -std=gnu11 -O0 -g -Wall -Wextra -Werror -Wshadow -Wundef \
           -I$(FW)/Interfaces -I$(FW)/Devices -I$(FW)/App -I. -Idoubles -I$(UNITY) \
-          -DUNITY_INCLUDE_DOUBLE -DUNITY_OUTPUT_COLOR
+          -DUNITY_INCLUDE_DOUBLE -DUNITY_OUTPUT_COLOR -DAPP_COOP
 # Покриття вимірюється лише для коду, що тестується (Devices/, App/)
 COVFLAGS = --coverage -fprofile-update=atomic
 
@@ -24,7 +24,7 @@ SRC_app      = $(APP)/app.c $(APP)/selftest.c $(APP)/motion.c $(APP)/perf.c $(AP
                $(FW)/Platform/fmt.c \
                $(DEV)/mpu6050.c $(DEV)/ssd1306.c $(DEV)/font5x7.c $(DEV)/sdcard.c \
                $(DEV)/servo.c $(DEV)/pot.c $(DEV)/button.c \
-               $(DBL)/fake_mpu6050.c $(DBL)/spi_log.c $(DBL)/fake_sd.c $(DBL)/fake_plat.c
+               $(DBL)/fake_mpu6050.c $(DBL)/spi_log.c $(DBL)/fake_sd.c $(DBL)/fake_plat.c $(DBL)/fake_os.c
 
 SRC_motion   = $(APP)/motion.c $(DEV)/mpu6050.c
 SRC_traj     = $(APP)/traj.c

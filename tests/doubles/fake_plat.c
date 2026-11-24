@@ -130,3 +130,5 @@ const char *fp_kv(const char *line, const char *key, char *out, int max)
   out[i] = 0;
   return out;
 }
+
+void plat_console_set_waiter(void *task) { (void)task; }

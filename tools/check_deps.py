@@ -50,9 +50,12 @@ def index_headers(fw):
         for root, _, files in os.walk(base):
             for f in files:
                 if f.endswith('.h'): where.setdefault(f, layer)
-    for root, _, files in os.walk(os.path.join(fw, 'Drivers')):
-        for f in files:
-            if f.endswith('.h'): where.setdefault(f, 'Vendor')
+    # ЛР4: ядро FreeRTOS (Middlewares/) — вендорський код, як HAL: доступне лише Platform і Core;
+    # App отримує сервіси ОС через Interfaces/os.h
+    for vend in ('Drivers', 'Middlewares'):
+        for root, _, files in os.walk(os.path.join(fw, vend)):
+            for f in files:
+                if f.endswith('.h'): where.setdefault(f, 'Vendor')
     return where
 
 def layer_of(fw, path):

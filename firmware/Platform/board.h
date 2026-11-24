@@ -112,4 +112,10 @@ void board_uart_rx_irq(void);   /* USART2_IRQHandler */
 void board_btn_exti(void);      /* EXTI4_15_IRQHandler */
 int  board_adc_calibrate(void); /* ADCAL; 0 — OK */
 
+/* ЛР4: службове для Platform/ і Core/ (не для App) */
+void plat_log_raw(const char *fmt, ...) __attribute__((format(printf, 1, 2)));  /* без м'ютекса */
+void os_uart_lock(void);
+void os_uart_unlock(void);
+void os_tick_account(uint32_t systick_val_on_entry);   /* вартість тіку (SysTick_Handler) */
+
 #endif

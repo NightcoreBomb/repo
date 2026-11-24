@@ -9,7 +9,7 @@ steps:
   - wait-serial: 'CHK imu=OK who=0x68 oled=OK sd=OK type=SDHC adc=OK'
   - wait-serial: 'READY'
   - write-serial: "selftest\n"
-  - wait-serial: 'ST BEGIN fw=LR3 board=NUCLEO-C031C6 sysclk=48000000'
+  - wait-serial: 'ST BEGIN fw=LR4 board=NUCLEO-C031C6 sysclk=48000000'
   - wait-serial: 'ST END pass=6 fail=0'
   - write-serial: "status\n"
   - wait-serial: 'STATUS mode=LIVE'

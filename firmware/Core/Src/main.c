@@ -9,6 +9,7 @@
  */
 /* USER CODE END Header */
 #include "main.h"
+#include "FreeRTOS.h"
 
 /* USER CODE BEGIN Includes */
 #include "plat.h"
@@ -51,15 +52,11 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
   app_init(&app, &board_i2c1, &board_sd_spi);
-  app_start(&app, adc == 0);      /* банер, FR-12 (перевірки), EVT boot */
+  app_start(&app, adc == 0);      /* банер, FR-12 (перевірки) — ще без планувальника, HAL_Delay */
+  /* ЛР4: далі HAL-час веде tick hook FreeRTOS: HAL_IncTick додає uwTickFreq мс на тік ядра */
+  uwTickFreq = (HAL_TickFreqTypeDef)(1000u / configTICK_RATE_HZ);
+  app_rtos_start(&app);           /* м'ютекси, черги, задачі + vTaskStartScheduler(); не повертається */
   /* USER CODE END 2 */
-
-  while (1)
-  {
-    /* USER CODE BEGIN 3 */
-    app_poll(&app);               /* super loop: одна ітерація — усі задачі по черзі */
-    /* USER CODE END 3 */
-  }
 }
 
 /* HSI 48 МГц, без дільників: SYSCLK = HCLK = PCLK = 48 МГц (RM0490, RCC) */

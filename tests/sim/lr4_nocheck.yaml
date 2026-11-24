@@ -1,0 +1,17 @@
+# Переповнення стека з configCHECK_FOR_STACK_OVERFLOW = 0 (збірка STACK_CHECK=0)
+# Згенеровано tools/lr4_gen_scenarios.py (SEED=4) — не редагувати вручну.
+name: 'LR4 nocheck'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - write-serial: "telem 0\n"
+  - delay: 300ms
+  - write-serial: "os overflow\n"
+  - wait-serial: 'OVF start'
+  - delay: 1500ms
+  - write-serial: "status\n"
+  - delay: 500ms
+  - delay: 300ms

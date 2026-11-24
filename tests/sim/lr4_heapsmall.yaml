@@ -1,0 +1,10 @@
+# configTOTAL_HEAP_SIZE замалий для задач продукту (збірка HEAP_BYTES=3000)
+# Згенеровано tools/lr4_gen_scenarios.py (SEED=4) — не редагувати вручну.
+name: 'LR4 heapsmall'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'HOOK malloc_failed'
+  - delay: 1000ms
+  - delay: 300ms
