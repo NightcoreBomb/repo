@@ -18,11 +18,11 @@
 |---|---:|---|---|---|---:|
 | `btn` | **6** | сповіщення від tick hook | подія (debounce 30 мс) | реакція на кнопку: LIVE→REC→PLAY | 104 (416) |
 | `imu` | **5** | `vTaskDelayUntil` | 5 мс (`rate`), округлено до тіків | I²C-читання MPU-6050, фільтр, CCR серво; раз на 50 мс — потенціометр; раз на 1 с — вікно CPU | 140 (560) |
-| `journal` | **4** | REC: `xQueueReceive(q_rec)`; PLAY: `vTaskDelayUntil` | 20 мс | REC: споживач черги → кодер → блок 512 Б на SD; PLAY: відтворення | 96 (384) |
+| `journal` | **4** | REC: `xQueueReceive(q_rec)`; PLAY: `vTaskDelayUntil` | 20 мс | REC: споживач черги → кодер → блок 512 Б на SD; PLAY: відтворення | 112 (448) |
 | `cmd` | **3** | сповіщення від USART RX ISR (кінець рядка), таймаут 100 мс | подія | розбір рядка CLI, відповідь | 220 (880) |
 | `telem` | 2 | `vTaskDelayUntil` | `telem <ms>` (100 мс) | рядок CSV телеметрії | 120 (480) |
 | `oled` | 2 | `vTaskDelayUntil` | 200 мс (режими 1/2 — частинами) | кадр SSD1306 | 168 (672) |
-| `long_op` | 1 | `xQueueReceive(q_long)` | подія | `dump`, `calib`; `load N` — штучне навантаження | 140 (560) |
+| `long_op` | 1 | `xQueueReceive(q_long)` | подія | `dump`, `calib`; `load N` — штучне навантаження | 156 (624) |
 | idle | 0 | — | — | облік часу простою (run-time stats) | 64 (256) |
 
 ### 1.1 Чому саме такі пріоритети
@@ -138,11 +138,11 @@ FreeRTOS-Kernel **V11.1.0**, порт `GCC/ARM_CM0`, `heap_4`
 |---|---|---:|---:|
 | `btn` | `app_btn_run → app_set_mode → rec_stop → journal_flush → sd_write_block → spi` | 360 | 416 |
 | `imu` | `app_imu_run → mpu6050_read → lk_read → i2c_mem_read → plat_log (помилка)` | 432 | 560 |
-| `journal` | `app_rec_drain → rec_add → enc → sd_write_block` | 320 | 384 |
+| `journal` | `app_rec_drain → rec_add → enc → sd_write_block` | 320 (виміряно 292) | 448 |
 | `cmd` | `app_handle_line → selftest → imu_measure → lk_* → I²C` | 768 | 880 |
 | `telem` | `app_telem_run → plat_log → os_uart_lock → xQueueSemaphoreTake` | 304 (виміряно 308) | 480 |
 | `oled` | `app_oled_run → ssd1306_render → font → lk_write` | 528 | 672 |
-| `long_op` | `cmd_dump → sd_read_to → plat_log` | 488 | 560 |
+| `long_op` | `cmd_dump → sd_read_to → plat_log` | 488 (виміряно 436) | 624 |
 
 **Фінальна перевірка — high water mark** (`tasks`: `stack_free_min`) після найгіршого сценарію
 S3 і сценарію `lr4_s3_os`. Виміряні значення і висновок — `docs/comparison.md` §3.

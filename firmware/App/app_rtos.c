@@ -15,11 +15,11 @@
 /*                     статична оцінка (stack_tree.py, з кадром перемикання 64 Б) → слів (≈ +15 %) */
 #define STK_BTN      104u   /* 360 Б  */
 #define STK_IMU      140u   /* 432 Б → 560 Б: запас ≥ 120 Б за HWM (П-25) */
-#define STK_JOURNAL   96u   /* 320 Б  */
+#define STK_JOURNAL  112u   /* 320 Б → 448 Б: HWM 92 Б < 25 % (web-soak, П-25) */
 #define STK_CMD      220u   /* 768 Б (selftest → imu_measure → I²C під м'ютексом) */
 #define STK_TELEM    120u   /* 304 Б → 480 Б: HWM у Wokwi показав лише 44 Б запасу (П-25) */
 #define STK_OLED     168u   /* 528 Б → 672 Б (П-25) */
-#define STK_LONG     140u   /* 488 Б  */
+#define STK_LONG     156u   /* 488 Б → 624 Б: HWM 124 Б < 25 % (web-soak, П-25) */
 
 static uint32_t ms_ticks(uint32_t ms) { return os_ms_to_ticks(ms); }
 
