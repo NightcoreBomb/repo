@@ -14,11 +14,11 @@
    tools/stack_tree.py) + запас; фінальні — за high water mark після S3 (docs/rtos-design.md §3) */
 /*                     статична оцінка (stack_tree.py, з кадром перемикання 64 Б) → слів (≈ +15 %) */
 #define STK_BTN      104u   /* 360 Б  */
-#define STK_IMU      124u   /* 432 Б  */
+#define STK_IMU      140u   /* 432 Б → 560 Б: запас ≥ 120 Б за HWM (П-25) */
 #define STK_JOURNAL   96u   /* 320 Б  */
 #define STK_CMD      220u   /* 768 Б (selftest → imu_measure → I²C під м'ютексом) */
-#define STK_TELEM     88u   /* 304 Б  */
-#define STK_OLED     152u   /* 528 Б  */
+#define STK_TELEM    120u   /* 304 Б → 480 Б: HWM у Wokwi показав лише 44 Б запасу (П-25) */
+#define STK_OLED     168u   /* 528 Б → 672 Б (П-25) */
 #define STK_LONG     140u   /* 488 Б  */
 
 static uint32_t ms_ticks(uint32_t ms) { return os_ms_to_ticks(ms); }
@@ -94,7 +94,8 @@ static void task_telem(void *arg)
   app_t *a = arg;
   uint32_t last = os_ticks();
   for (;;) {
-    os_delay_until(&last, ms_ticks(a->telem_ms ? a->telem_ms : 100u));
+    uint32_t ms = a->telem_ms;                 /* одне читання: cmd може змінити його між двома (П-26) */
+    os_delay_until(&last, ms_ticks(ms ? ms : 100u));
     if (a->telem_ms) app_telem_run(a);
   }
 }

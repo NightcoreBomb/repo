@@ -18,7 +18,7 @@
 TARGET    = firmware
 BUILD_DIR ?= build
 TICK_HZ     ?= 1000
-HEAP_BYTES  ?= 5632
+HEAP_BYTES  ?= 5888
 STACK_CHECK ?= 2
 OSTEST      ?= 0
 DEBUG    ?= 1
@@ -73,7 +73,7 @@ ifeq ($(OSTEST), 1)
 C_DEFS += -DLR4_OSTEST
 # тестові задачі сценаріїв 7.2 створюються під час роботи — потрібен запас heap
 ifeq ($(origin HEAP_BYTES), file)
-C_DEFS := $(subst -DLR4_HEAP_BYTES=$(HEAP_BYTES),-DLR4_HEAP_BYTES=6656,$(C_DEFS))
+C_DEFS := $(subst -DLR4_HEAP_BYTES=$(HEAP_BYTES),-DLR4_HEAP_BYTES=6912,$(C_DEFS))
 endif
 # стенду ОС не потрібен self-test ЛР2 (2.6 КБ) — без цього тести ОС не вміщуються
 APP_SOURCES := $(filter-out App/selftest.c,$(APP_SOURCES))

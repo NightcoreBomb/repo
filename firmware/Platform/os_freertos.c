@@ -168,7 +168,8 @@ void vApplicationStackOverflowHook(TaskHandle_t t, char *name)
 void os_assert_failed(const char *file, int line)
 {
   taskDISABLE_INTERRUPTS();
-  plat_log_raw("FATAL assert %s:%d\r\n", file, line);
+  plat_log_raw("FATAL assert %s:%d task=%s\r\n", file, line,
+               xTaskGetSchedulerState() == taskSCHEDULER_NOT_STARTED ? "-" : pcTaskGetName(NULL));
   for (;;) { }
 }
 
@@ -205,7 +206,11 @@ uint32_t os_idle_us(void)
 }
 
 /* ---------------- хронологія ---------------- */
+#ifdef LR4_OSTEST
+#define TRACE_N 32u                 /* OSTEST: −128 Б RAM на користь heap тестових задач */
+#else
 #define TRACE_N 48u
+#endif
 static struct { uint32_t t_us; TaskHandle_t h; } trace_buf[TRACE_N];
 static volatile uint8_t trace_n, trace_on, trace_pins;
 

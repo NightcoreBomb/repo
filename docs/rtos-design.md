@@ -17,11 +17,11 @@
 | Задача | Пріоритет | Чекає на | Період / подія | Що робить | Стек, слів (Б) |
 |---|---:|---|---|---|---:|
 | `btn` | **6** | сповіщення від tick hook | подія (debounce 30 мс) | реакція на кнопку: LIVE→REC→PLAY | 104 (416) |
-| `imu` | **5** | `vTaskDelayUntil` | 5 мс (`rate`), округлено до тіків | I²C-читання MPU-6050, фільтр, CCR серво; раз на 50 мс — потенціометр; раз на 1 с — вікно CPU | 124 (496) |
+| `imu` | **5** | `vTaskDelayUntil` | 5 мс (`rate`), округлено до тіків | I²C-читання MPU-6050, фільтр, CCR серво; раз на 50 мс — потенціометр; раз на 1 с — вікно CPU | 140 (560) |
 | `journal` | **4** | REC: `xQueueReceive(q_rec)`; PLAY: `vTaskDelayUntil` | 20 мс | REC: споживач черги → кодер → блок 512 Б на SD; PLAY: відтворення | 96 (384) |
 | `cmd` | **3** | сповіщення від USART RX ISR (кінець рядка), таймаут 100 мс | подія | розбір рядка CLI, відповідь | 220 (880) |
-| `telem` | 2 | `vTaskDelayUntil` | `telem <ms>` (100 мс) | рядок CSV телеметрії | 88 (352) |
-| `oled` | 2 | `vTaskDelayUntil` | 200 мс (режими 1/2 — частинами) | кадр SSD1306 | 152 (608) |
+| `telem` | 2 | `vTaskDelayUntil` | `telem <ms>` (100 мс) | рядок CSV телеметрії | 120 (480) |
+| `oled` | 2 | `vTaskDelayUntil` | 200 мс (режими 1/2 — частинами) | кадр SSD1306 | 168 (672) |
 | `long_op` | 1 | `xQueueReceive(q_long)` | подія | `dump`, `calib`; `load N` — штучне навантаження | 140 (560) |
 | idle | 0 | — | — | облік часу простою (run-time stats) | 64 (256) |
 
@@ -73,7 +73,7 @@ flowchart LR
 | сповіщення `cmd` | task notification | USART RX ISR → `cmd` | будити лише на кінець рядка, а не на кожен байт |
 | `q_rec` | черга 8 × 8 Б | `imu` → `journal` | розв'язує 5-мс IMU і повільний запис SD; 8 записів = 160 мс запасу проти 4.5 мс запису блоку |
 | `q_long` | черга 4 × `int` | `cmd` → `long_op` | довга операція не блокує CLI; переповнення → `ERR busy` |
-| `i2c_mx` | м'ютекс (успадкування пріоритету) | `imu`, `oled`, `cmd` (selftest, `fault`), `long_op` (`calib`) | одна шина на два пристрої; береться **на одну транзакцію**, тому `imu` чекає щонайбільше одну транзакцію OLED (≈ 0.6 мс), а не кадр. Час очікування `imu` — `STAT name=bus_wait` |
+| `i2c_mx` | м'ютекс (успадкування пріоритету), **без тайм-ауту** (П-27) | `imu`, `oled`, `cmd` (selftest, `fault`), `long_op` (`calib`) | одна шина на два пристрої; береться **на одну транзакцію** (≤ 33 Б, ≈ 3.5 мс), тому `imu` чекає щонайбільше одну транзакцію OLED, а не кадр. Час очікування `imu` — `STAT name=bus_wait` |
 | `jr_mx` | м'ютекс | `journal`, `cmd` (`mode`, `dump`, `status`), `long_op`, `btn` | журнал, буфер блоку, SD і поле `mode` змінюються разом |
 | `uart_mx` | м'ютекс | усі, через `plat_log` | рядок логу не розривається іншою задачею. До старту планувальника та у хуках — `plat_log_raw` без блокування |
 
@@ -111,7 +111,7 @@ FreeRTOS-Kernel **V11.1.0**, порт `GCC/ARM_CM0`, `heap_4`
 | `configMAX_PRIORITIES` | 7 | 0…6, кожен рівень використано; більше — зайва RAM на списки готовності |
 | `configUSE_PORT_OPTIMISED_TASK_SELECTION` | 0 | на M0+ немає `CLZ` |
 | `configMINIMAL_STACK_SIZE` | 64 слова | лише для idle (хуку idle немає) |
-| `configTOTAL_HEAP_SIZE` | **5632 Б** (`OSTEST=1`: 6656) | 7 стеків (3 696 Б) + 8 TCB (≈ 8 × 92 Б) + 2 черги + 3 м'ютекси + idle ≈ 5 080 Б; решта — запас (див. `HEAP min_ever_free`) |
+| `configTOTAL_HEAP_SIZE` | **5888 Б** (`OSTEST=1`: 6912) | 7 стеків (3 952 Б) + 8 TCB + 2 черги + 3 м'ютекси + стек idle (256 Б) ≈ 5 470 Б; решта — запас (`HEAP min_ever_free`) |
 | алокатор | `heap_4` | об'єднує вільні блоки; потрібен для `vTaskDelete` у тестах ОС (7.2.1–7.2.5) |
 | `configCHECK_FOR_STACK_OVERFLOW` | **2** (варіант `STACK_CHECK=0`) | перевірка шаблону в кінці стека при кожному перемиканні; хук друкує `FATAL stack overflow task=…` і зупиняє систему |
 | `configUSE_MALLOC_FAILED_HOOK` | 1 | `HOOK malloc_failed free=…`, лічильник `HEAP malloc_fail=` |
@@ -128,7 +128,8 @@ FreeRTOS-Kernel **V11.1.0**, порт `GCC/ARM_CM0`, `heap_4`
 
 ## 4. Розмір стеків
 
-Початковий розмір — **статична оцінка**: `-fcallgraph-info=su` дає кадр кожної функції й граф
+Початковий розмір — **статична оцінка** (див. також журнал П-25: оцінка виявилась занадто
+оптимістичною для `telem`): `-fcallgraph-info=su` дає кадр кожної функції й граф
 викликів, `tools/stack_tree.py` шукає найглибший ланцюжок від тіла задачі. Непрямі виклики
 (`bus_i2c_t`, `hal_*_ops`) зіставляються вручну. До оцінки додано 64 Б кадру перемикання
 контексту і ≈ 15 % запасу.
@@ -136,11 +137,11 @@ FreeRTOS-Kernel **V11.1.0**, порт `GCC/ARM_CM0`, `heap_4`
 | Задача | Найглибший ланцюжок | Статично, Б | Виділено, Б |
 |---|---|---:|---:|
 | `btn` | `app_btn_run → app_set_mode → rec_stop → journal_flush → sd_write_block → spi` | 360 | 416 |
-| `imu` | `app_imu_run → mpu6050_read → lk_read → i2c_mem_read → plat_log (помилка)` | 432 | 496 |
+| `imu` | `app_imu_run → mpu6050_read → lk_read → i2c_mem_read → plat_log (помилка)` | 432 | 560 |
 | `journal` | `app_rec_drain → rec_add → enc → sd_write_block` | 320 | 384 |
 | `cmd` | `app_handle_line → selftest → imu_measure → lk_* → I²C` | 768 | 880 |
-| `telem` | `app_telem_run → plat_log → plat_vfmt` | 304 | 352 |
-| `oled` | `app_oled_run → ssd1306_render → font → lk_write` | 528 | 608 |
+| `telem` | `app_telem_run → plat_log → os_uart_lock → xQueueSemaphoreTake` | 304 (виміряно 308) | 480 |
+| `oled` | `app_oled_run → ssd1306_render → font → lk_write` | 528 | 672 |
 | `long_op` | `cmd_dump → sd_read_to → plat_log` | 488 | 560 |
 
 **Фінальна перевірка — high water mark** (`tasks`: `stack_free_min`) після найгіршого сценарію

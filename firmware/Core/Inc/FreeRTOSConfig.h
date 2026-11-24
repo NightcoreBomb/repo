@@ -48,7 +48,7 @@
 #define configSUPPORT_STATIC_ALLOCATION         0
 #define configSUPPORT_DYNAMIC_ALLOCATION        1
 #ifndef LR4_HEAP_BYTES
-#define LR4_HEAP_BYTES                          5632
+#define LR4_HEAP_BYTES                          5888
 #endif
 /* Стеки задач + TCB + черги + м'ютекси; виміряне використання — команда `heap` */
 #define configTOTAL_HEAP_SIZE                   ( ( size_t ) LR4_HEAP_BYTES )

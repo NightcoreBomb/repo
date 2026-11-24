@@ -106,7 +106,10 @@ static int sd_read(app_t *a, uint32_t lba) { return sd_read_to(a, lba, a->blk); 
 static int lk_take(locked_i2c_t *l)
 {
   uint32_t t0 = plat_cycles();
-  bool ok = os_lock(l->mx, 50);
+  /* ЛР4 П-27: без тайм-ауту. Час утримання шини обмежений однією транзакцією (≤ 15 мс),
+     а успадкування пріоритету не дає задачі нижчого пріоритету затримати власника. Тайм-аут
+     лише додавав рідкісний шлях vTaskPriorityDisinheritAfterTimeout. */
+  bool ok = os_lock(l->mx, OS_FOREVER);
   if (os_task_self() == l->app->t_imu) done(l->app, B_BUS_WAIT, t0);   /* скільки IMU чекав шину */
   return ok ? ST_OK : ST_EBUSY;
 }
