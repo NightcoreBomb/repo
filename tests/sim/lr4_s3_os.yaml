@@ -7,7 +7,7 @@ author: 'Paniushkin Vladyslav'
 steps:
   - wait-serial: 'READY'
   - write-serial: "evt on\n"
-  - write-serial: "telem 20\n"
+  - write-serial: "telem 100\n"
   - write-serial: "mode rec\n"
   - wait-serial: 'MODE REC'
   - set-control:
@@ -88,7 +88,7 @@ steps:
   - write-serial: "trace start\n"
   - wait-serial: 'OK trace'
   - write-serial: "dump\n"
-  - wait-serial: 'DUMP end'
+  - delay: 3000ms
   - write-serial: "trace dump\n"
   - wait-serial: 'TRACE END'
   - set-control:

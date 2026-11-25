@@ -46,10 +46,12 @@ def build():
     out = []
 
     s = Sc('s3_os', 'S3 + метрики ОС: run-time stats, high water mark стеків, heap, тік, хронологія під час dump')
-    s.boot(); s.cmd('telem 20'); s.record(8)
+    # telem 100 (а не 20): з 20 мс CPU завантажений на 100 % і dump (пріоритет 1) не отримує
+    # процесора взагалі — перший прогін завершився таймаутом (журнал П-30)
+    s.boot(); s.cmd('telem 100'); s.record(8)
     s.cmd('stats reset')
     s.cmd('trace start'); s.wait('OK trace')                 # 48 перемикань від початку dump
-    s.cmd('dump'); s.wait('DUMP end')
+    s.cmd('dump'); s.delay(3000)
     s.cmd('trace dump'); s.wait('TRACE END')
     for i in range(12):                                     # як S3: dump, кнопка, команди, рух
         s.tilt(25 * math.sin(i / 2))
