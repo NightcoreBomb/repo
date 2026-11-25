@@ -1,0 +1,13 @@
+EVT t_us=2451 name=boot
+
+==== LR4 FreeRTOS | fw=3c16e2aa-827d8d5 | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
+CHK imu=OK who=0x68 oled=OK sd=OK type=SDHC adc=OK
+DIR NONE blocks=0 records=0 duration_ms=0
+READY (type 'help')
+OK evt
+OK telem
+OVF start stack_words=64 need_bytes=~400 pad=OK
+OVF survived (check disabled?)
+OVF end (no hook)
+OK os
+STATUS mode=LIVE pitch_cd=0 roll_cd=0 pan_us=1500 tilt_us=1500 dz_cd=0 imu=OK sd=1 dir=0 t=2024

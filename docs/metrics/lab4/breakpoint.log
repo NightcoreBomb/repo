@@ -1,0 +1,117 @@
+EVT t_us=2450 name=boot
+
+==== LR4 FreeRTOS | fw=fd9e8eb3-827d8d5 | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
+CHK imu=OK who=0x68 oled=OK sd=OK type=SDHC adc=OK
+DIR NONE blocks=0 records=0 duration_ms=0
+READY (type 'help')
+OK evt
+313,0,0,1500,1500,LIVE
+414,0,0,1500,1500,LIVE
+519,0,0,1500,1500,LIVE
+613,0,0,1500,1500,LIVE
+719,0,0,1500,1500,LIVE
+813,0,0,1500,1500,LIVE
+919,0,0,1500,1500,LIVE
+1014,0,0,1500,1500,LIVE
+1119,0,0,1500,1500,LIVE
+RATE period_us=5000 hz=200
+OK rate
+1215,0,0,1500,1500,LIVE
+1315,0,0,1500,1500,LIVE
+1413,0,0,1500,1500,LIVE
+1520,0,0,1500,1500,LIVE
+1613,0,0,1500,1500,LIVE
+1719,0,0,1500,1500,LIVE
+1814,0,0,1500,1500,LIVE
+1919,0,0,1500,1500,LIVE
+2013,0,0,1500,1500,LIVE
+2119,0,0,1500,1500,LIVE
+2213,0,0,1500,1500,LIVE
+2319,0,0,1500,1500,LIVE
+2414,0,0,1500,1500,LIVE
+2519,0,0,1500,1500,LIVE
+2613,0,0,1500,1500,LIVE
+2719,0,0,1500,1500,LIVE
+2813,0,0,1500,1500,LIVE
+2919,0,0,1500,1500,LIVE
+3014,0,0,1500,1500,LIVE
+3119,0,0,1500,1500,LIVE
+3213,0,0,1500,1500,LIVE
+3319,0,0,1500,1500,LIVE
+3413,0,0,1500,1500,LIVE
+3519,0,0,1500,1500,LIVE
+3613,0,0,1500,1500,LIVE
+3719,0,0,1500,1500,LIVE
+3813,0,0,1500,1500,LIVE
+3919,0,0,1500,1500,LIVE
+4013,0,0,1500,1500,LIVE
+4119,0,0,1500,1500,LIVE
+NOTE RATE_200;STAT BEGIN fw=fd9e8eb3-827d8d5 t_ms=4213 mode=LIVE oled_mode=0 telem_ms=100 imu_hz=200 load_us=0
+STAT name=cmd n=2 min_us=1680 avg_us=4056 max_us=6432
+STAT name=imu n=607 min_us=2100 avg_us=3205 max_us=5682
+STAT name=pot n=58 min_us=22 avg_us=23 max_us=61
+STAT name=oled n=15 min_us=140046 avg_us=143036 max_us=145254
+STAT name=telem n=30 min_us=9672 avg_us=21327 max_us=34980
+STAT name=i2c_burst n=616 min_us=1706 avg_us=2775 max_us=5289
+STAT name=ctrl n=618 min_us=24 avg_us=25 max_us=82
+STAT name=oled_txn n=300 min_us=1732 avg_us=7095 max_us=10518
+STAT name=uart_line n=30 min_us=9635 avg_us=21083 max_us=34944
+STAT name=bus_wait n=625 min_us=37 avg_us=1003216 max_us=89478406
+LAT name=cmd n=2 min_us=244 avg_us=1922 max_us=3601
+JIT name=imu period_us=5000 n=629 min_us=-1031 max_us=1030 p99_us=1000 missed=0
+LOAD last_pct=85 min_pct=85 max_pct=85 windows=3
+RX bytes=37 dropped=0 ore=0
+I2C recov=0 timeouts=0 imu_err=0 imu_samples=835
+REC records=0 blocks=0 gaps=0 max_int_ms=0
+OLED frames=15 fps_x10=49
+MEM stack_used=576 stack_size=768 ram_static=10748 heap=5672 first_imu_us=218075
+QREC drops=0
+STAT END4435,0,0,1500,1500,LIVE
+RATE period_us=3000 hz=333
+OK rate
+4471,0,0,1500,1500,LIVE
+4570,0,0,1500,1500,LIVE
+4657,0,0,1500,1500,LIVE
+4792,0,0,1500,1500,LIVE
+4924,0,0,1500,1500,LIVE
+5017,0,0,1500,1500,LIVE
+5167,0,0,1500,1500,LIVE
+5254,0,0,1500,1500,LIVE
+5368,0,0,1500,1500,LIVE
+5497,0,0,1500,1500,LIVE
+5575,0,0,1500,1500,LIVE
+5743,0,0,1500,1500,LIVE
+5887,0,0,1500,1500,LIVE
+5983,0,0,1500,1500,LIVE
+6076,0,0,1500,1500,LIVE
+6241,0,0,1500,1500,LIVE
+6379,0,0,1500,1500,LIVE
+6505,0,0,1500,1500,LIVE
+6658,0,0,1500,1500,LIVE
+6787,0,0,1500,1500,LIVE
+6937,0,0,1500,1500,LIVE
+7054,0,0,1500,1500,LIVE
+7201,0,0,1500,1500,LIVE
+7255,0,0,1500,1500,LIVE
+7387,0,0,1500,1500,LIVE
+NOTE RATE_300;STAT BEGIN fw=fd9e8eb3-827d8d5 t_ms=7471 mode=LIVE oled_mode=0 telem_ms=100 imu_hz=333 load_us=0
+STAT name=cmd n=2 min_us=15131 avg_us=24055 max_us=32980
+STAT name=imu n=1037 min_us=1093 avg_us=2562 max_us=5929
+STAT name=pot n=61 min_us=22 avg_us=22 max_us=61
+STAT name=oled n=8 min_us=336481 avg_us=355287 max_us=399558
+STAT name=telem n=25 min_us=33476 avg_us=108895 max_us=165079
+STAT name=i2c_burst n=1076 min_us=717 avg_us=2142 max_us=5500
+STAT name=ctrl n=1087 min_us=24 avg_us=25 max_us=81
+STAT name=oled_txn n=168 min_us=9178 avg_us=17430 max_us=45832
+STAT name=uart_line n=26 min_us=33437 avg_us=103446 max_us=147418
+STAT name=bus_wait n=1117 min_us=37 avg_us=160675 max_us=89478403
+LAT name=cmd n=2 min_us=2408 avg_us=10008 max_us=17609
+JIT name=imu period_us=3000 n=1137 min_us=-1752 max_us=3076 p99_us=5000 missed=2
+LOAD last_pct=100 min_pct=100 max_pct=100 windows=3
+RX bytes=67 dropped=0 ore=0
+I2C recov=0 timeouts=0 imu_err=0 imu_samples=2008
+REC records=0 blocks=0 gaps=0 max_int_ms=0
+OLED frames=8 fps_x10=26
+MEM stack_used=576 stack_size=768 ram_static=10748 heap=5672 first_imu_us=218075
+QREC drops=0
+STAT END

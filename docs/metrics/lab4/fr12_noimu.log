@@ -1,0 +1,49 @@
+EVT t_us=2450 name=boot
+
+==== LR4 FreeRTOS | fw=fd9e8eb3-827d8d5 | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
+CHK imu=NACK who=0x00 oled=OK sd=OK type=SDHC adc=OK
+ERR IMU not found: servo centered, LIVE disabled
+DIR NONE blocks=0 records=0 duration_ms=0
+READY (type 'help')
+315,0,0,1500,1500,LIVE
+416,0,0,1500,1500,LIVE
+515,0,0,1500,1500,LIVE
+616,0,0,1500,1500,LIVE
+715,0,0,1500,1500,LIVE
+816,0,0,1500,1500,LIVE
+915,0,0,1500,1500,LIVE
+1016,0,0,1500,1500,LIVE
+1115,0,0,1500,1500,LIVE
+1216,0,0,1500,1500,LIVE
+1315,0,0,1500,1500,LIVE
+1416,0,0,1500,1500,LIVE
+1515,0,0,1500,1500,LIVE
+1616,0,0,1500,1500,LIVE
+1715,0,0,1500,1500,LIVE
+1816,0,0,1500,1500,LIVE
+1915,0,0,1500,1500,LIVE
+2016,0,0,1500,1500,LIVE
+2115,0,0,1500,1500,LIVE
+STATUS mode=LIVE pitch_cd=0 roll_cd=0 pan_us=1500 tilt_us=1500 dz_cd=0 imu=NACK sd=1 dir=0 t=2212
+NOTE NOIMU;STAT BEGIN fw=fd9e8eb3-827d8d5 t_ms=2225 mode=LIVE oled_mode=0 telem_ms=100 imu_hz=200 load_us=0
+STAT name=cmd n=2 min_us=1368 avg_us=6085 max_us=10802
+STAT name=imu n=405 min_us=33 avg_us=66 max_us=69
+STAT name=pot n=41 min_us=22 avg_us=22 max_us=22
+STAT name=oled n=9 min_us=71377 avg_us=71859 max_us=72272
+STAT name=telem n=19 min_us=2615 avg_us=4094 max_us=6070
+STAT name=oled_txn n=180 min_us=1577 avg_us=3543 max_us=4905
+STAT name=uart_line n=19 min_us=2583 avg_us=4059 max_us=6032
+LAT name=cmd n=3 min_us=209 avg_us=2992 max_us=8289
+JIT name=imu period_us=5000 n=412 min_us=-64 max_us=62 p99_us=100 missed=0
+LOAD last_pct=41 min_pct=34 max_pct=41 windows=2
+RX bytes=25 dropped=0 ore=0
+I2C recov=1 timeouts=0 imu_err=0 imu_samples=0
+REC records=0 blocks=0 gaps=0 max_int_ms=0
+OLED frames=9 fps_x10=44
+MEM stack_used=592 stack_size=768 ram_static=10748 heap=5672 first_imu_us=0
+QREC drops=0
+STAT END2324,0,0,1500,1500,LIVE
+2331,0,0,1500,1500,LIVE
+2415,0,0,1500,1500,LIVE
+2515,0,0,1500,1500,LIVE
+2616,0,0,1500,1500,LIVE
