@@ -1,0 +1,9 @@
+# П-29: перевірка маскування SysTick/PendSV через PRIMASK у симуляторі (збірка DIAG=1)
+name: 'LR4 primask'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'PRIMASK_TEST'
+  - wait-serial: 'CRIT_TEST'
+  - delay: 500ms

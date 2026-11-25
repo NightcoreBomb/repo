@@ -90,10 +90,14 @@ void os_resume_all(void)                            { xTaskResumeAll(); }
 
 /* ---------------- сповіщення ---------------- */
 void os_notify(os_task_t t) { if (t) xTaskNotifyGive((TaskHandle_t)t); }
+void os_task_suspend(os_task_t t) { if (t) vTaskSuspend((TaskHandle_t)t); }
+void os_task_resume(os_task_t t)  { if (t) vTaskResume((TaskHandle_t)t); }
 
 void os_notify_isr(os_task_t t)
 {
-  if (!t || xTaskGetSchedulerState() != taskSCHEDULER_RUNNING) return;
+  /* П-29: до старту — нікого будити; при зупиненому планувальнику ядро саме відкладе пробудження
+     (xPendingReadyList), тож сповіщення не можна відкидати — інакше губиться натискання кнопки */
+  if (!t || xTaskGetSchedulerState() == taskSCHEDULER_NOT_STARTED) return;
   BaseType_t woken = pdFALSE;
   vTaskNotifyGiveFromISR((TaskHandle_t)t, &woken);
   portYIELD_FROM_ISR(woken);
@@ -207,7 +211,7 @@ uint32_t os_idle_us(void)
 
 /* ---------------- хронологія ---------------- */
 #ifdef LR4_OSTEST
-#define TRACE_N 32u                 /* OSTEST: −128 Б RAM на користь heap тестових задач */
+#define TRACE_N 16u                 /* OSTEST: −512 Б RAM на користь heap тестових задач */
 #else
 #define TRACE_N 48u
 #endif
@@ -299,3 +303,53 @@ unsigned os_task_report(os_task_info_t *out, unsigned max, uint32_t *total_us)
 }
 
 static void run_t0_clear(unsigned i) { run_t0[i] = 0; }
+
+#ifdef LR4_DIAG
+/* П-29: чи маскує PRIMASK (cpsid i) переривання SysTick у симуляторі? До старту планувальника
+   SysTick_Handler лише збільшує uwTick, тож зміна uwTick усередині cpsid — пряме свідчення. */
+extern volatile uint32_t uwTick;
+void os_diag_primask(void)
+{
+  uint32_t t0 = uwTick;
+  __disable_irq();
+  for (volatile uint32_t i = 0; i < 200000u; i++) { }
+  uint32_t t1 = uwTick;
+  __enable_irq();
+  for (volatile uint32_t i = 0; i < 1000u; i++) { }
+  uint32_t t2 = uwTick;
+  for (volatile uint32_t i = 0; i < 200000u; i++) { }
+  uint32_t t3 = uwTick;
+  plat_log_raw("PRIMASK_TEST ticks_masked=%lu after_enable=%lu unmasked=%lu\r\n",
+               (unsigned long)(t1 - t0), (unsigned long)(t2 - t1), (unsigned long)(t3 - t2));
+}
+
+/* П-29: те саме вже під планувальником: чи виконуються SysTick і PendSV усередині
+   taskENTER_CRITICAL (лічильник тіків і лічильник перемикань не мають змінитися) */
+void os_diag_crit(void)
+{
+  uint32_t k0 = xTaskGetTickCount(), c0 = ctx_sw;
+  taskENTER_CRITICAL();
+  portYIELD();                                     /* PENDSVSET — має чекати виходу з секції */
+  for (volatile uint32_t i = 0; i < 200000u; i++) { }
+  uint32_t k1 = xTaskGetTickCount(), c1 = ctx_sw;
+  taskEXIT_CRITICAL();
+  uint32_t k2 = xTaskGetTickCount(), c2 = ctx_sw;
+  plat_log_raw("CRIT_TEST ticks_in=%lu ctxsw_in=%lu ticks_after=%lu ctxsw_after=%lu\r\n",
+               (unsigned long)(k1 - k0), (unsigned long)(c1 - c0), (unsigned long)(k2 - k1), (unsigned long)(c2 - c1));
+}
+
+/* П-27: idle hook — повна перевірка списків ядра; tick hook — «канарка» стека поточної задачі */
+int  os_diag_check(char *out, size_t n);
+void os_diag_tick(void);
+void vApplicationIdleHook(void)
+{
+  static char why[80];
+  static uint32_t runs;
+  if (os_diag_check(why, sizeof why)) {
+    taskDISABLE_INTERRUPTS();
+    plat_log_raw("FATAL diag %s runs=%lu\r\n", why, (unsigned long)runs);
+    for (;;) { }
+  }
+  runs++;
+}
+#endif

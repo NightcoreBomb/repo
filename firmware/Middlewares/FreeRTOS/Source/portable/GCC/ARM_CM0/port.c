@@ -288,6 +288,7 @@ void vPortEnterCritical( void ) PRIVILEGED_FUNCTION;
  * @brief Exit from critical section.
  */
 void vPortExitCritical( void ) PRIVILEGED_FUNCTION;
+void vPortSimCriticalExit( void );  /* LR4 (П-29): Core/Src/os_simfix.c */
 
 /**
  * @brief SysTick handler.
@@ -364,7 +365,9 @@ portDONT_DISCARD void vPortSVCHandler_C( uint32_t * pulCallerStackAddress ) PRIV
  * @brief Each task maintains its own interrupt status in the critical nesting
  * variable.
  */
-PRIVILEGED_DATA static volatile uint32_t ulCriticalNesting = 0xaaaaaaaaUL;
+/* LR4 (П-29): не static — обробники SysTick/PendSV продукту перевіряють, чи ядро в критичній секції
+ * (симулятор Wokwi STM32C0 не маскує SysTick/PendSV через PRIMASK). */
+PRIVILEGED_DATA volatile uint32_t ulCriticalNesting = 0xaaaaaaaaUL;
 
 #if ( configUSE_TICKLESS_IDLE == 1 )
 
@@ -806,6 +809,7 @@ void vPortExitCritical( void ) /* PRIVILEGED_FUNCTION */
     if( ulCriticalNesting == 0 )
     {
         portENABLE_INTERRUPTS();
+        vPortSimCriticalExit();   /* LR4 (П-29): відкладені всередині секції тік/перемикання */
     }
 }
 

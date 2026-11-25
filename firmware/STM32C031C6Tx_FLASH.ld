@@ -56,7 +56,7 @@ ENTRY(Reset_Handler)
 _estack = ORIGIN(RAM) + LENGTH(RAM);    /* end of RAM */
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0x0;        /* ЛР4: malloc newlib не використовується; heap ОС — configTOTAL_HEAP_SIZE */
-_Min_Stack_Size = 0x400; /* required amount of stack */
+_Min_Stack_Size = 0x300; /* ЛР4: після старту ОС MSP — лише переривання; виміряно ≤ 624 Б (ініціалізація) */
 
 /* Specify the memory areas */
 MEMORY

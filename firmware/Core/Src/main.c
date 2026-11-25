@@ -87,7 +87,7 @@ static void MX_USART2_UART_Init(void)
           GPIO_NOPULL, GPIO_SPEED_FREQ_LOW, BOARD_VCP_AF);
   BOARD_UART->BRR = BOARD_UART_BRR;
   BOARD_UART->CR1 = USART_CR1_TE | USART_CR1_RE | USART_CR1_RXNEIE_RXFNEIE | USART_CR1_UE;
-  HAL_NVIC_SetPriority(USART2_IRQn, 2, 0);
+  HAL_NVIC_SetPriority(USART2_IRQn, 3, 0);   /* П-29: як SysTick/PendSV — без вкладення ISR */
   HAL_NVIC_EnableIRQ(USART2_IRQn);
 }
 

@@ -1,0 +1,15 @@
+graph: { title: "Core/Src/os_simfix.c"
+node: { title: "SysTick_Handler" label: "SysTick_Handler\nCore/Src/os_simfix.c:32:6\n16 bytes (static)" }
+node: { title: "xTaskGetSchedulerState" label: "xTaskGetSchedulerState\nMiddlewares/FreeRTOS/Source/include/task.h:3604:12" shape : ellipse }
+edge: { sourcename: "SysTick_Handler" targetname: "xTaskGetSchedulerState" label: "Core/Src/os_simfix.c:34:7" }
+node: { title: "HAL_IncTick" label: "HAL_IncTick\nDrivers/STM32C0xx_HAL_Driver/Inc/stm32c0xx_hal.h:723:6" shape : ellipse }
+edge: { sourcename: "SysTick_Handler" targetname: "HAL_IncTick" label: "Core/Src/os_simfix.c:35:5" }
+node: { title: "app_tick_1ms" label: "app_tick_1ms\nApp/app.h:158:10" shape : ellipse }
+edge: { sourcename: "SysTick_Handler" targetname: "app_tick_1ms" label: "Core/Src/os_simfix.c:36:5" }
+node: { title: "xPortSysTickHandler" label: "xPortSysTickHandler\nCore/Src/os_simfix.c:23:6" shape : ellipse }
+edge: { sourcename: "SysTick_Handler" targetname: "xPortSysTickHandler" label: "Core/Src/os_simfix.c:44:5" }
+node: { title: "os_tick_account" label: "os_tick_account\nCore/Src/os_simfix.c:25:6" shape : ellipse }
+edge: { sourcename: "SysTick_Handler" targetname: "os_tick_account" label: "Core/Src/os_simfix.c:45:5" }
+node: { title: "vPortSimCriticalExit" label: "vPortSimCriticalExit\nCore/Src/os_simfix.c:50:6\n0 bytes (static)" }
+node: { title: "PendSV_Handler" label: "PendSV_Handler\nCore/Src/os_simfix.c:60:6\n0 bytes (static)" }
+}

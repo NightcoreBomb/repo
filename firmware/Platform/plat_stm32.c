@@ -97,6 +97,13 @@ static void *volatile    console_waiter;    /* ЛР4: задача, яку бу�
 
 void plat_console_set_waiter(void *task) { console_waiter = task; }
 
+extern volatile uint32_t ulCriticalNesting;           /* FreeRTOS port.c */
+static volatile uint8_t rx_wake_pending;
+void plat_console_tick(void)                          /* tick hook (ISR) */
+{
+  if (rx_wake_pending) { rx_wake_pending = 0; os_notify_isr(console_waiter); }
+}
+
 void board_uart_rx_irq(void)
 {
   uint32_t isr = BOARD_UART->ISR;
@@ -112,7 +119,9 @@ void board_uart_rx_irq(void)
     if (c == '\r' || c == '\n') {
       uint8_t e = (uint8_t)((eol_head + 1u) & 3u);
       if (e != eol_tail) { eol_cyc[eol_head] = plat_cycles(); eol_head = e; }
-      os_notify_isr(console_waiter);      /* ISR лише будить задачу cmd (методичка §4.10) */
+      /* ISR лише будить задачу cmd (методичка §4.10). П-29: якщо RX перервав критичну секцію
+         ядра (симулятор ігнорує PRIMASK), пробудження робить наступний тік */
+      if (ulCriticalNesting) rx_wake_pending = 1; else os_notify_isr(console_waiter);
     }
   }
 }

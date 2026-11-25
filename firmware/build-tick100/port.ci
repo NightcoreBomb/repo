@@ -1,0 +1,36 @@
+graph: { title: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c"
+node: { title: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:prvTaskExitError" label: "prvTaskExitError\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:646:13\n16 bytes (static)" }
+node: { title: "os_assert_failed" label: "os_assert_failed\nCore/Inc/FreeRTOSConfig.h:120:6" shape : ellipse }
+edge: { sourcename: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:prvTaskExitError" targetname: "os_assert_failed" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:655:5" }
+node: { title: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:vPortSetupTimerInterrupt" label: "vPortSetupTimerInterrupt\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:617:32\n0 bytes (static)" }
+node: { title: "vPortYield" label: "vPortYield\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:778:6\n0 bytes (static)" }
+node: { title: "vPortEnterCritical" label: "vPortEnterCritical\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:791:6\n0 bytes (static)" }
+node: { title: "vPortExitCritical" label: "vPortExitCritical\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:804:6\n8 bytes (static)" }
+edge: { sourcename: "vPortExitCritical" targetname: "os_assert_failed" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:806:5" }
+node: { title: "vPortSimCriticalExit" label: "vPortSimCriticalExit\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:291:6" shape : ellipse }
+edge: { sourcename: "vPortExitCritical" targetname: "vPortSimCriticalExit" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:812:9" }
+node: { title: "xPortSysTickHandler" label: "xPortSysTickHandler\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:818:6\n8 bytes (static)" }
+node: { title: "ulSetInterruptMask" label: "ulSetInterruptMask\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/portasm.h:82:10" shape : ellipse }
+edge: { sourcename: "xPortSysTickHandler" targetname: "ulSetInterruptMask" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:822:22" }
+node: { title: "xTaskIncrementTick" label: "xTaskIncrementTick\nMiddlewares/FreeRTOS/Source/include/task.h:3482:12" shape : ellipse }
+edge: { sourcename: "xPortSysTickHandler" targetname: "xTaskIncrementTick" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:827:13" }
+node: { title: "vClearInterruptMask" label: "vClearInterruptMask\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/portasm.h:87:6" shape : ellipse }
+edge: { sourcename: "xPortSysTickHandler" targetname: "vClearInterruptMask" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:839:5" }
+node: { title: "vPortSVCHandler_C" label: "vPortSVCHandler_C\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:844:6\n8 bytes (static)" }
+node: { title: "vRestoreContextOfFirstTask" label: "vRestoreContextOfFirstTask\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/portasm.h:42:6" shape : ellipse }
+edge: { sourcename: "vPortSVCHandler_C" targetname: "vRestoreContextOfFirstTask" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:878:13" }
+edge: { sourcename: "vPortSVCHandler_C" targetname: "os_assert_failed" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:905:13" }
+node: { title: "pxPortInitialiseStack" label: "pxPortInitialiseStack\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1204:19\n8 bytes (static)" }
+node: { title: "xPortStartScheduler" label: "xPortStartScheduler\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1269:12\n8 bytes (static)" }
+edge: { sourcename: "xPortStartScheduler" targetname: "os_assert_failed" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1300:9" }
+edge: { sourcename: "xPortStartScheduler" targetname: "os_assert_failed" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1301:9" }
+edge: { sourcename: "xPortStartScheduler" targetname: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:vPortSetupTimerInterrupt" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1320:5" }
+node: { title: "vStartFirstTask" label: "vStartFirstTask\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/portasm.h:77:6" shape : ellipse }
+edge: { sourcename: "xPortStartScheduler" targetname: "vStartFirstTask" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1332:5" }
+node: { title: "vTaskSwitchContext" label: "vTaskSwitchContext\nMiddlewares/FreeRTOS/Source/include/task.h:3573:27" shape : ellipse }
+edge: { sourcename: "xPortStartScheduler" targetname: "vTaskSwitchContext" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1340:5" }
+edge: { sourcename: "xPortStartScheduler" targetname: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:prvTaskExitError" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1341:5" }
+node: { title: "vPortEndScheduler" label: "vPortEndScheduler\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1349:6\n8 bytes (static)" }
+edge: { sourcename: "vPortEndScheduler" targetname: "os_assert_failed" label: "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1353:5" }
+node: { title: "xPortIsInsideInterrupt" label: "xPortIsInsideInterrupt\nMiddlewares/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c:1549:12\n0 bytes (static)" }
+}

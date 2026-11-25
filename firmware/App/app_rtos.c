@@ -21,6 +21,8 @@
 #define STK_OLED     168u   /* 528 Б → 672 Б (П-25) */
 #define STK_LONG     156u   /* 488 Б → 624 Б: HWM 124 Б < 25 % (web-soak, П-25) */
 
+#define IMU_RETRY_MS 50u
+
 static uint32_t ms_ticks(uint32_t ms) { return os_ms_to_ticks(ms); }
 
 /* ---------------- задачі продукту ---------------- */
@@ -47,6 +49,10 @@ static void task_imu(void *arg)
     uint32_t per = (a->imu_period_us * os_tick_hz() + 999999u) / 1000000u;
     os_delay_until(&last, per ? per : 1u);
     app_imu_run(a);
+    /* П-28: при збої шини кожне читання — це таймаут драйвера (≈ 34 мс активного очікування).
+       З пріоритетом 5 і періодом 5 мс imu тоді забирав би весь CPU (телеметрія, CLI мовчать —
+       сценарій 6.2.4). Повтор не частіше ніж раз на IMU_RETRY_MS. */
+    if (a->imu_ok && a->imu_status != ST_OK) { os_delay_ms(IMU_RETRY_MS); last = os_ticks(); }
     uint32_t ms = plat_millis();
     if ((int32_t)(ms - pot_t) >= 0) { pot_t = ms + POT_PERIOD_MS; app_pot_run(a); }
     uint32_t now = plat_us(), win = now - a->load_win_t0;
@@ -83,6 +89,9 @@ static void task_journal(void *arg)
 static void task_cmd(void *arg)
 {
   app_t *a = arg;
+#ifdef LR4_DIAG
+  { void os_diag_crit(void); os_diag_crit(); }
+#endif
   for (;;) {
     os_wait(100);
     app_cmd_run(a);
@@ -134,8 +143,14 @@ static os_task_t make(void (*fn)(void *), const char *name, uint16_t words, app_
   return t;
 }
 
+#ifdef LR4_DIAG
+void os_diag_primask(void);
+#endif
 void app_rtos_start(app_t *a)
 {
+#ifdef LR4_DIAG
+  os_diag_primask();
+#endif
   app_os_objects(a);
   a->t_btn     = make(task_btn,     "btn",     STK_BTN,     a, PRIO_BTN);
   a->t_imu     = make(task_imu,     "imu",     STK_IMU,     a, PRIO_IMU);
@@ -246,14 +261,19 @@ static void inv_high(void *arg)
   for (;;) os_wait(OS_FOREVER);
 }
 
+static app_t *g_app;
 static void os_inversion(bool mutex)
 {
+  /* Продукт завантажує CPU на ~90 %: L (пріоритет 1) не отримав би часу захопити ресурс.
+     Періодичні задачі продукту на час досліду призупинено — інверсію видно «в чистому вигляді». */
+  os_task_t quiet[] = { g_app->t_imu, g_app->tk_oled, g_app->tk_telem, g_app->t_journal };
+  for (unsigned i = 0; i < 4; i++) os_task_suspend(quiet[i]);
   memset((void *)&inv, 0, sizeof inv);
   inv.cmd = os_task_self();
   inv.res = os_mutex_new(mutex);
-  os_task_t h = os_task_new(inv_high, "invH", 72, NULL, 5);   /* обидві одразу чекають старту */
-  os_task_t m = os_task_new(inv_med, "invM", 72, NULL, 4);
-  os_task_t l = os_task_new(inv_low, "invL", 72, NULL, 1);
+  os_task_t h = os_task_new(inv_high, "invH", 56, NULL, 5);   /* обидві одразу чекають старту */
+  os_task_t m = os_task_new(inv_med, "invM", 56, NULL, 4);
+  os_task_t l = os_task_new(inv_low, "invL", 56, NULL, 1);
   os_wait(1000);                          /* L захопив ресурс і почав працювати */
   /* H і M стають готовими одночасно: першим виконується H (5) і блокується на ресурсі;
      далі між L і M вирішує успадкування пріоритету */
@@ -270,6 +290,7 @@ static void os_inversion(bool mutex)
   if (m) os_task_delete(m);
   os_mutex_delete(inv.res);
   os_delay_ms(5);                         /* idle звільняє пам'ять видалених задач */
+  for (unsigned i = 0; i < 4; i++) os_task_resume(quiet[i]);
 }
 
 /* ---------- 7.2.3 голодування: задача з найвищим пріоритетом не блокується ---------- */
@@ -403,6 +424,9 @@ static uint32_t num(const char *p) { uint32_t v = 0; while (*p >= '0' && *p <= '
 
 bool app_os_cmd(app_t *a, const char *cmd, char *arg)
 {
+#ifdef LR4_OSTEST
+  g_app = a;
+#endif
   (void)a;
   if (!strcmp(cmd, "tasks")) { tasks_report(); return true; }
   if (!strcmp(cmd, "trace")) {

@@ -95,6 +95,11 @@ def build():
     s.cmd('status'); s.delay(500)                           # чи живий продукт після переповнення?
     out.append(s.write())
 
+    s = Sc('diag', 'П-27: відтворення збою (запис із рухом після telem 20) на збірці DIAG=1')
+    s.boot(); s.cmd('telem 20'); s.record(8); s.tasks()
+    s.cmd('telem 100'); s.record(10); s.stats('DIAG'); s.tasks()
+    out.append(s.write())
+
     s = Sc('heapsmall', 'configTOTAL_HEAP_SIZE замалий для задач продукту (збірка HEAP_BYTES=3000)')
     s.wait('HOOK malloc_failed'); s.delay(1000)
     out.append(s.write())

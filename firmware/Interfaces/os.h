@@ -22,7 +22,9 @@ typedef void *os_queue_t;
 /* ---------- задачі ---------- */
 os_task_t os_task_new(void (*fn)(void *), const char *name, uint16_t stack_words, void *arg,
                       unsigned prio);
-void      os_task_delete(os_task_t t);              /* NULL — поточна */
+void      os_task_delete(os_task_t t);
+void      os_task_suspend(os_task_t t);           /* сценарії ОС: ізолювати експеримент від продукту */
+void      os_task_resume(os_task_t t);              /* NULL — поточна */
 os_task_t os_task_self(void);
 void      os_start(void) __attribute__((__noreturn__));
 bool      os_running(void);

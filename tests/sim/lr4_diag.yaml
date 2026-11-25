@@ -1,0 +1,190 @@
+# П-27: відтворення збою (запис із рухом після telem 20) на збірці DIAG=1
+# Згенеровано tools/lr4_gen_scenarios.py (SEED=4) — не редагувати вручну.
+name: 'LR4 diag'
+version: 1
+author: 'Paniushkin Vladyslav'
+
+steps:
+  - wait-serial: 'READY'
+  - write-serial: "evt on\n"
+  - write-serial: "telem 20\n"
+  - write-serial: "mode rec\n"
+  - wait-serial: 'MODE REC'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.0
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1.0
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.142
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.99
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.267
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.964
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.359
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.933
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.411
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.911
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.421
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.907
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.386
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.922
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.31
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.951
+  - delay: 1000ms
+  - write-serial: "mode live\n"
+  - wait-serial: 'MODE LIVE'
+  - write-serial: "tasks\n"
+  - wait-serial: 'TASKS END'
+  - write-serial: "telem 100\n"
+  - write-serial: "mode rec\n"
+  - wait-serial: 'MODE REC'
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.0
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 1.0
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.142
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.99
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.267
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.964
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.359
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.933
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.411
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.911
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.421
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.907
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.386
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.922
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.31
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.951
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.198
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.98
+  - delay: 1000ms
+  - set-control:
+      part-id: imu
+      control: accelX
+      value: -0.062
+  - set-control:
+      part-id: imu
+      control: accelZ
+      value: 0.998
+  - delay: 1000ms
+  - write-serial: "mode live\n"
+  - wait-serial: 'MODE LIVE'
+  - write-serial: "note DIAG;\n"
+  - wait-serial: 'NOTE DIAG;'
+  - write-serial: "stats\n"
+  - wait-serial: 'STAT END'
+  - write-serial: "tasks\n"
+  - wait-serial: 'TASKS END'
+  - delay: 300ms

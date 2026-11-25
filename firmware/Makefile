@@ -21,6 +21,7 @@ TICK_HZ     ?= 1000
 HEAP_BYTES  ?= 5888
 STACK_CHECK ?= 2
 OSTEST      ?= 0
+DIAG        ?= 0
 DEBUG    ?= 1
 # -Os: з -Og прошивка ЛР2 не вміщується у 32 КБ Flash C031C6 (журнал проблем, П-3)
 OPT      ?= -Os
@@ -46,7 +47,7 @@ RTOS_SOURCES = $(RTOS)/tasks.c $(RTOS)/queue.c $(RTOS)/list.c \
 VENDOR_SOURCES += $(RTOS_SOURCES)
 
 # ---------- власний код ----------
-CORE_SOURCES     = Core/Src/main.c Core/Src/stm32c0xx_it.c Core/Src/stm32c0xx_hal_msp.c
+CORE_SOURCES     = Core/Src/main.c Core/Src/stm32c0xx_it.c Core/Src/stm32c0xx_hal_msp.c Core/Src/os_simfix.c
 PLATFORM_SOURCES = $(wildcard Platform/*.c)
 # w25qxx.c — драйвер для Форми A; у Wokwi чипа немає, тож у прошивку не лінкується
 # (тестується на хості, tests/test_w25qxx.c)
@@ -69,11 +70,16 @@ MCU = -mcpu=cortex-m0plus -mthumb
 
 C_DEFS = -DUSE_HAL_DRIVER -DSTM32C031xx \
          -DLR4_TICK_HZ=$(TICK_HZ) -DLR4_HEAP_BYTES=$(HEAP_BYTES) -DLR4_STACK_CHECK=$(STACK_CHECK)
+ifeq ($(DIAG), 1)
+C_DEFS += -DLR4_DIAG -DLR4_NO_SELFTEST
+# діагностиці П-27 не потрібен self-test ЛР2 — без цього не вміщується у Flash
+APP_SOURCES := $(filter-out App/selftest.c,$(APP_SOURCES))
+endif
 ifeq ($(OSTEST), 1)
-C_DEFS += -DLR4_OSTEST
+C_DEFS += -DLR4_OSTEST -DLR4_NO_SELFTEST
 # тестові задачі сценаріїв 7.2 створюються під час роботи — потрібен запас heap
 ifeq ($(origin HEAP_BYTES), file)
-C_DEFS := $(subst -DLR4_HEAP_BYTES=$(HEAP_BYTES),-DLR4_HEAP_BYTES=6912,$(C_DEFS))
+C_DEFS := $(subst -DLR4_HEAP_BYTES=$(HEAP_BYTES),-DLR4_HEAP_BYTES=7168,$(C_DEFS))
 endif
 # стенду ОС не потрібен self-test ЛР2 (2.6 КБ) — без цього тести ОС не вміщуються
 APP_SOURCES := $(filter-out App/selftest.c,$(APP_SOURCES))
@@ -143,7 +149,11 @@ $(BUILD_DIR)/port.o: CFLAGS += -DSysTick_Handler=xPortSysTickHandler
 # і вбудовує дрібні функції між файлами. Порт (naked-асемблер з літеральними пулами) — без LTO.
 LTO ?= -flto
 $(OWN_OBJECTS) $(VENDOR_OBJECTS): CFLAGS += $(LTO)
-$(BUILD_DIR)/port.o $(BUILD_DIR)/portasm.o: LTO =
+$(BUILD_DIR)/port.o $(BUILD_DIR)/portasm.o $(BUILD_DIR)/os_simfix.o: LTO =
+# П-29: PendSV_Handler порту стає xPortPendSVHandler; вектор — обгортка в Core/Src/os_simfix.c
+$(BUILD_DIR)/portasm.o: CFLAGS += -DPendSV_Handler=xPortPendSVHandler
+# П-29: ядро (списки через приведення MiniListItem_t/ListItem_t) — без strict aliasing
+$(BUILD_DIR)/tasks.o $(BUILD_DIR)/queue.o $(BUILD_DIR)/list.o: CFLAGS += -fno-strict-aliasing
 
 # V=1 — показати повні команди компілятора
 V ?= 0

@@ -766,7 +766,7 @@ void app_handle_line(app_t *a, char *line)
   }
   else if (!strcmp(line, "fault")) { plat_i2c_fault(strstr(arg, "1") != NULL); plat_log("FAULT i2c=%d\r\n", plat_i2c_fault_get()); }
   else if (!strcmp(line, "note"))   { plat_log("NOTE %s\r\n", arg); return; }   /* мітка фази сценарію */
-#ifndef LR4_OSTEST
+#ifndef LR4_NO_SELFTEST
   else if (!strcmp(line, "selftest")) {          /* self-test пише в a->blk і SD — під м'ютексом журналу */
     os_lock(a->jr_mx, OS_FOREVER);
     selftest_run(a);

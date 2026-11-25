@@ -26,7 +26,11 @@
 #define configUSE_TICKLESS_IDLE                 0
 /* 7 рівнів: 0 idle, 1 long_op, 2 telem/oled, 3 cmd, 4 journal, 5 imu, 6 btn (rtos-design.md §1) */
 #define configMAX_PRIORITIES                    7
-#define configMINIMAL_STACK_SIZE                ( ( uint16_t ) 64 )   /* слів: лише для idle */
+#ifdef LR4_DIAG
+#define configMINIMAL_STACK_SIZE                ( ( uint16_t ) 112 )
+#else
+#define configMINIMAL_STACK_SIZE                ( ( uint16_t ) 64 )
+#endif   /* слів: лише для idle */
 #define configMAX_TASK_NAME_LEN                 8
 #define configTICK_TYPE_WIDTH_IN_BITS           TICK_TYPE_WIDTH_32_BITS
 #define configIDLE_SHOULD_YIELD                 1
@@ -39,7 +43,7 @@
 #define configUSE_QUEUE_SETS                    0
 #define configUSE_NEWLIB_REENTRANT              0       /* malloc/printf newlib не використовуються */
 #define configENABLE_BACKWARD_COMPATIBILITY     0
-#define configUSE_MINI_LIST_ITEM                1
+#define configUSE_MINI_LIST_ITEM                0       /* П-29: MiniListItem_t + strict aliasing + LTO → пошкодження списків */
 #define configSTACK_DEPTH_TYPE                  uint16_t
 #define configMESSAGE_BUFFER_LENGTH_TYPE        size_t
 #define configHEAP_CLEAR_MEMORY_ON_FREE         0
@@ -55,7 +59,12 @@
 #define configAPPLICATION_ALLOCATED_HEAP        0
 
 /* ---------- хуки і діагностика (методичка §4.11) ---------- */
+#ifdef LR4_DIAG                                 /* П-27: перевірка цілісності ядра в idle */
+#define configUSE_IDLE_HOOK                     1
+#define configINCLUDE_FREERTOS_TASK_C_ADDITIONS_H 1
+#else
 #define configUSE_IDLE_HOOK                     0
+#endif
 #define configUSE_TICK_HOOK                     1       /* HAL_IncTick + debounce кнопки */
 #ifndef LR4_STACK_CHECK
 #define LR4_STACK_CHECK                         2
