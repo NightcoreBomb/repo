@@ -1,72 +1,72 @@
 EVT t_us=2451 name=boot
 
-==== LR4 FreeRTOS | fw=0a4385a4-827d8d5 | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
+==== LR4 FreeRTOS | fw=6956c414-445c53b | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
 CHK imu=OK who=0x68 oled=OK sd=OK type=SDHC adc=OK
 DIR NONE blocks=0 records=0 duration_ms=0
 READY (type 'help')
 OK evt
 OK telem
-CTXSW_COST n=200 min_cyc=4692 avg_cyc=6647 max_cyc=123664 avg_ns=138479
+CTXSW_COST n=200 min_cyc=4704 avg_cyc=6651 max_cyc=123676 avg_ns=138562
 OK os
-INV kind=mutex h_wait_us=49 l_hold_us=0 m_busy_us=300000 heap_ok=1
+INV kind=mutex h_wait_us=49516 l_hold_us=50037 m_busy_us=300000 heap_ok=1
 OK os
-INV kind=binsem h_wait_us=45 l_hold_us=0 m_busy_us=300000 heap_ok=1
+INV kind=binsem h_wait_us=300604 l_hold_us=300828 m_busy_us=300000 heap_ok=1
 OK os
 STATS reset
 STARVE start ms=300
 STARVE endOK os
-NOTE STARVE;STAT BEGIN fw=0a4385a4-827d8d5 t_ms=4043 mode=LIVE oled_mode=0 telem_ms=0 imu_hz=200 load_us=0
-STAT name=cmd n=3 min_us=3903 avg_us=296070 max_us=880372
-STAT name=imu n=330 min_us=1102 avg_us=3086 max_us=5577
-STAT name=pot n=26 min_us=22 avg_us=22 max_us=22
-STAT name=oled n=8 min_us=131175 avg_us=351137 max_us=1316360
-STAT name=i2c_burst n=336 min_us=717 avg_us=2660 max_us=5174
-STAT name=ctrl n=339 min_us=24 avg_us=25 max_us=63
-STAT name=oled_txn n=157 min_us=1566 avg_us=17550 max_us=1165785
-STAT name=bus_wait n=344 min_us=36 avg_us=261055 max_us=89478404
-LAT name=cmd n=3 min_us=2133 avg_us=3349 max_us=5510
-JIT name=imu period_us=5000 n=347 min_us=-3750 max_us=296994 p99_us=5000 missed=1
+NOTE STARVE;STAT BEGIN fw=6956c414-445c53b t_ms=4154 mode=LIVE oled_mode=0 telem_ms=0 imu_hz=200 load_us=0
+STAT name=cmd n=3 min_us=1475 avg_us=294032 max_us=876675
+STAT name=imu n=326 min_us=1101 avg_us=3099 max_us=5567
+STAT name=pot n=26 min_us=22 avg_us=23 max_us=61
+STAT name=oled n=8 min_us=131232 avg_us=365458 max_us=1435008
+STAT name=i2c_burst n=333 min_us=717 avg_us=2671 max_us=5170
+STAT name=ctrl n=336 min_us=25 avg_us=25 max_us=63
+STAT name=oled_txn n=156 min_us=1566 avg_us=18402 max_us=1284059
+STAT name=bus_wait n=340 min_us=36 avg_us=974 max_us=3483
+LAT name=cmd n=3 min_us=143 avg_us=2052 max_us=3762
+JIT name=imu period_us=5000 n=344 min_us=-3745 max_us=298199 p99_us=5000 missed=1
 LOAD last_pct=100 min_pct=100 max_pct=100 windows=1
 RX bytes=93 dropped=0 ore=0
-I2C recov=0 timeouts=0 imu_err=0 imu_samples=797
+I2C recov=0 timeouts=0 imu_err=0 imu_samples=819
 REC records=0 blocks=0 gaps=0 max_int_ms=0
 OLED frames=8 fps_x10=49
-MEM stack_used=616 stack_size=768 ram_static=11512 heap=6736 first_imu_us=218078
+MEM stack_used=624 stack_size=768 ram_static=11516 heap=6728 first_imu_us=217078
 QREC drops=0
-STAT ENDTASKS BEGIN total_us=1824277 tick_hz=1000
+STAT ENDTASKS BEGIN total_us=1814718 tick_hz=1000
 TASK name=btn prio=6 base=6 state=B run_us=0 cpu_x10=0 stack=416 stack_free_min=292
-TASK name=imu prio=5 base=5 state=B run_us=855462 cpu_x10=469 stack=560 stack_free_min=216
-TASK name=journal prio=4 base=4 state=B run_us=8109 cpu_x10=4 stack=448 stack_free_min=300
-TASK name=cmd prio=3 base=3 state=R run_us=117252 cpu_x10=64 stack=880 stack_free_min=460
-TASK name=telem prio=2 base=2 state=r run_us=3073 cpu_x10=1 stack=480 stack_free_min=332
-TASK name=oled prio=2 base=2 state=r run_us=537240 cpu_x10=294 stack=672 stack_free_min=204
+TASK name=imu prio=5 base=5 state=B run_us=838939 cpu_x10=462 stack=560 stack_free_min=216
+TASK name=journal prio=4 base=4 state=B run_us=9972 cpu_x10=5 stack=448 stack_free_min=300
+TASK name=cmd prio=3 base=3 state=R run_us=116944 cpu_x10=64 stack=880 stack_free_min=460
+TASK name=telem prio=2 base=2 state=r run_us=3184 cpu_x10=1 stack=480 stack_free_min=312
+TASK name=oled prio=2 base=2 state=r run_us=537260 cpu_x10=296 stack=672 stack_free_min=204
 TASK name=long_op prio=1 base=1 state=B run_us=0 cpu_x10=0 stack=624 stack_free_min=340
-TASK name=starve prio=6 base=6 state=D run_us=299136 cpu_x10=164 stack=256 stack_free_min=148
+TASK name=starve prio=6 base=6 state=D run_us=300120 cpu_x10=165 stack=256 stack_free_min=148
 TASK name=IDLE prio=0 base=0 state=r run_us=0 cpu_x10=0 stack=256 stack_free_min=164
-HEAP total=7168 free=1136 min_ever_free=432 used_max=6736 malloc_fail=0
-OSTICK n=1824 min_ns=18750 avg_ns=26625 max_ns=59750
-CTXSW n=1077 per_s=1077
-MSP stack_used=616 stack_size=768
-TASKS ENDQFLOOD n=50 len=8 consumer_ms=10 nb_sent=22 nb_dropped=28 nb_us=170670 blk_sent=50 blk_max_wait_us=21072 consumed=63
+HEAP total=7168 free=1144 min_ever_free=440 used_max=6728 malloc_fail=0
+OSTICK n=1815 min_ns=18750 avg_ns=26645 max_ns=59750
+CTXSW n=1104 per_s=1104
+MSP stack_used=624 stack_size=768
+TASKS ENDQFLOOD n=50 len=8 consumer_ms=10 nb_sent=21 nb_dropped=29 nb_us=164707 blk_sent=50 blk_max_wait_us=20095 consumed=62
 OK os
-HOOK malloc_failed free=48
-HOOK malloc_failed free=48
-HEAPX blocks=8 block=128 free_before=1136 free_after=48 hook_calls=2 queue_create=FAIL
-HEAP free=1136 min_ever_free=48
+HOOK malloc_failed free=56
+HOOK malloc_failed free=56
+HEAPX blocks=8 block=128 free_before=1144 free_after=56 hook_calls=2 queue_create=FAIL
+HEAP free=1144 min_ever_free=56
 OK os
-TASKS BEGIN total_us=3288020 tick_hz=1000
+TASKS BEGIN total_us=3230110 tick_hz=1000
 TASK name=btn prio=6 base=6 state=B run_us=0 cpu_x10=0 stack=416 stack_free_min=292
-TASK name=imu prio=5 base=5 state=B run_us=1554741 cpu_x10=472 stack=560 stack_free_min=216
-TASK name=journal prio=4 base=4 state=B run_us=18931 cpu_x10=5 stack=448 stack_free_min=300
-TASK name=cmd prio=3 base=3 state=R run_us=291223 cpu_x10=88 stack=880 stack_free_min=460
-TASK name=telem prio=2 base=2 state=B run_us=5219 cpu_x10=1 stack=480 stack_free_min=300
-TASK name=oled prio=2 base=2 state=r run_us=1104954 cpu_x10=336 stack=672 stack_free_min=204
+TASK name=imu prio=5 base=5 state=B run_us=1518655 cpu_x10=470 stack=560 stack_free_min=216
+TASK name=journal prio=4 base=4 state=B run_us=18972 cpu_x10=5 stack=448 stack_free_min=292
+TASK name=cmd prio=3 base=3 state=R run_us=289087 cpu_x10=89 stack=880 stack_free_min=460
+TASK name=telem prio=2 base=2 state=B run_us=4977 cpu_x10=1 stack=480 stack_free_min=312
+TASK name=oled prio=2 base=2 state=r run_us=1083787 cpu_x10=335 stack=672 stack_free_min=204
 TASK name=long_op prio=1 base=1 state=B run_us=0 cpu_x10=0 stack=624 stack_free_min=340
-TASK name=starve prio=6 base=6 state=D run_us=299136 cpu_x10=90 stack=256 stack_free_min=148
+TASK name=starve prio=6 base=6 state=D run_us=300120 cpu_x10=92 stack=256 stack_free_min=148
 TASK name=IDLE prio=0 base=0 state=r run_us=0 cpu_x10=0 stack=256 stack_free_min=164
-HEAP total=7168 free=1136 min_ever_free=48 used_max=7120 malloc_fail=2
-OSTICK n=3288 min_ns=18750 avg_ns=28041 max_ns=75500
-CTXSW n=2380 per_s=793
-MSP stack_used=616 stack_size=768
+HEAP total=7168 free=1144 min_ever_free=56 used_max=7112 malloc_fail=2
+OSTICK n=3230 min_ns=18750 avg_ns=28145 max_ns=75500
+CTXSW n=2388 per_s=796
+MSP stack_used=624 stack_size=768
 TASKS ENDOVF start stack_words=64 need_bytes=~400 pad=OK
 FATAL stack overflow task=ovf

@@ -218,6 +218,7 @@ static struct {
   os_mutex_t res;
   os_task_t  cmd;
   volatile uint32_t h_wait_us, l_hold_us;
+  volatile uint8_t l_has;
   volatile int done;
 } inv;
 
@@ -231,7 +232,8 @@ static void inv_low(void *arg)
 {
   (void)arg;
   os_lock(inv.res, OS_FOREVER);
-  os_notify(inv.cmd);                     /* «ресурс зайнято» */
+  inv.l_has = 1;                          /* «ресурс зайнято» (прапорець, а не сповіщення: у cmd
+                                             можуть бути непрочитані сповіщення від RX ISR) */
   uint32_t t0 = plat_us();
   spin_us(50000u);                        /* 50 мс CPU-роботи (у кожному тіку може бути витіснена) */
   inv.l_hold_us = plat_us() - t0;
@@ -274,7 +276,7 @@ static void os_inversion(bool mutex)
   os_task_t h = os_task_new(inv_high, "invH", 56, NULL, 5);   /* обидві одразу чекають старту */
   os_task_t m = os_task_new(inv_med, "invM", 56, NULL, 4);
   os_task_t l = os_task_new(inv_low, "invL", 56, NULL, 1);
-  os_wait(1000);                          /* L захопив ресурс і почав працювати */
+  for (unsigned i = 0; i < 1000u && !inv.l_has; i++) os_delay_ms(1);   /* L захопив ресурс */
   /* H і M стають готовими одночасно: першим виконується H (5) і блокується на ресурсі;
      далі між L і M вирішує успадкування пріоритету */
   os_suspend_all();
