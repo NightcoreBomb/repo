@@ -457,36 +457,112 @@
 | Задача | prio (base) | стан | CPU, % | стек, Б | мін. вільно, Б | використано, Б |
 |---|---|---|---:|---:|---:|---:|
 | btn | 6 (6) | B | 0.0 | 416 | 292 | 124 |
-| imu | 5 (5) | B | 47.2 | 560 | 216 | 344 |
-| journal | 4 (4) | B | 0.5 | 448 | 300 | 148 |
-| cmd | 3 (3) | R | 8.8 | 880 | 460 | 420 |
-| telem | 2 (2) | B | 0.1 | 480 | 300 | 180 |
-| oled | 2 (2) | r | 33.6 | 672 | 204 | 468 |
+| imu | 5 (5) | B | 47.0 | 560 | 216 | 344 |
+| journal | 4 (4) | B | 0.5 | 448 | 292 | 156 |
+| cmd | 3 (3) | R | 8.9 | 880 | 460 | 420 |
+| telem | 2 (2) | B | 0.1 | 480 | 312 | 168 |
+| oled | 2 (2) | r | 33.5 | 672 | 204 | 468 |
 | long_op | 1 (1) | B | 0.0 | 624 | 340 | 284 |
-| starve | 6 (6) | D | 9.0 | 256 | 148 | 108 |
+| starve | 6 (6) | D | 9.2 | 256 | 148 | 108 |
 | IDLE | 0 (0) | r | 0.0 | 256 | 164 | 92 |
 
-    HEAP total=7168 free=1136 min_ever_free=48 used_max=7120 malloc_fail=2
+    HEAP total=7168 free=1144 min_ever_free=56 used_max=7112 malloc_fail=2
 
-    OSTICK n=3288 min_ns=18750 avg_ns=28041 max_ns=75500
+    OSTICK n=3230 min_ns=18750 avg_ns=28145 max_ns=75500
 
-    CTXSW n=2380 per_s=793
+    CTXSW n=2388 per_s=796
 
-    MSP stack_used=616 stack_size=768
+    MSP stack_used=624 stack_size=768
 
-    ==== LR4 FreeRTOS | fw=0a4385a4-827d8d5 | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
-    CTXSW_COST n=200 min_cyc=4692 avg_cyc=6647 max_cyc=123664 avg_ns=138479
-    INV kind=mutex h_wait_us=49 l_hold_us=0 m_busy_us=300000 heap_ok=1
-    INV kind=binsem h_wait_us=45 l_hold_us=0 m_busy_us=300000 heap_ok=1
+    ==== LR4 FreeRTOS | fw=6956c414-445c53b | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
+    CTXSW_COST n=200 min_cyc=4704 avg_cyc=6651 max_cyc=123676 avg_ns=138562
+    INV kind=mutex h_wait_us=49516 l_hold_us=50037 m_busy_us=300000 heap_ok=1
+    INV kind=binsem h_wait_us=300604 l_hold_us=300828 m_busy_us=300000 heap_ok=1
     STARVE start ms=300
     STARVE end
     STARVE;
-    QFLOOD n=50 len=8 consumer_ms=10 nb_sent=22 nb_dropped=28 nb_us=170670 blk_sent=50 blk_max_wait_us=21072 consumed=63
-    HEAPX blocks=8 block=128 free_before=1136 free_after=48 hook_calls=2 queue_create=FAIL
+    QFLOOD n=50 len=8 consumer_ms=10 nb_sent=21 nb_dropped=29 nb_us=164707 blk_sent=50 blk_max_wait_us=20095 consumed=62
+    HEAPX blocks=8 block=128 free_before=1144 free_after=56 hook_calls=2 queue_create=FAIL
     OVF start stack_words=64 need_bytes=~400 pad=OK
     FATAL stack overflow task=ovf
 
 ### s3_os.log
+
+| Задача | prio (base) | стан | CPU, % | стек, Б | мін. вільно, Б | використано, Б |
+|---|---|---|---:|---:|---:|---:|
+| btn | 6 (6) | B | 2.3 | 416 | 96 | 320 |
+| imu | 5 (5) | B | 48.3 | 560 | 196 | 364 |
+| journal | 4 (4) | B | 1.0 | 448 | 152 | 296 |
+| cmd | 3 (3) | R | 3.7 | 880 | 364 | 516 |
+| telem | 2 (2) | r | 3.4 | 480 | 172 | 308 |
+| oled | 2 (2) | r | 33.1 | 672 | 204 | 468 |
+| long_op | 1 (1) | r | 7.9 | 624 | 204 | 420 |
+| IDLE | 0 (0) | r | 0.1 | 256 | 164 | 92 |
+
+    HEAP total=5888 free=216 min_ever_free=216 used_max=5672 malloc_fail=0
+
+    OSTICK n=12718 min_ns=18750 avg_ns=27770 max_ns=117687
+
+    CTXSW n=8300 per_s=691
+
+    MSP stack_used=576 stack_size=768
+
+    ==== LR4 FreeRTOS | fw=fd9e8eb3-827d8d5 | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
+
+Хронологія перемикань (trace, від `trace start`):
+
+| t, мкс від першого | Δ, мкс | задача |
+|---:|---:|---|
+| 0 | 0 | imu |
+| 2462 | 2462 | cmd |
+| 2880 | 418 | oled |
+| 4994 | 2114 | imu |
+| 5294 | 300 | oled |
+| 6846 | 1552 | imu |
+| 44394 | 37548 | journal |
+| 44567 | 173 | oled |
+| 44975 | 408 | telem |
+| 45973 | 998 | oled |
+| 46975 | 1002 | telem |
+| 47973 | 998 | oled |
+| 48975 | 1002 | telem |
+| 49973 | 998 | oled |
+| 50975 | 1002 | telem |
+| 51231 | 256 | oled |
+| 63994 | 12763 | journal |
+| 64156 | 162 | oled |
+| 83994 | 19838 | journal |
+| 84157 | 163 | oled |
+| 93994 | 9837 | imu |
+| 94211 | 217 | oled |
+| 97323 | 3112 | long_op |
+| 98993 | 1670 | imu |
+| 101425 | 2432 | long_op |
+| 103483 | 2058 | imu |
+| 106818 | 3335 | imu |
+| 109423 | 2605 | imu |
+| 111811 | 2388 | journal |
+| 112020 | 209 | cmd |
+| 112181 | 161 | telem |
+| 112975 | 794 | oled |
+| 113995 | 1020 | imu |
+| 114300 | 305 | oled |
+| 115140 | 840 | imu |
+| 117495 | 2355 | oled |
+| 117975 | 480 | telem |
+| 118992 | 1017 | imu |
+| 119289 | 297 | oled |
+| 122561 | 3272 | imu |
+| 124869 | 2308 | imu |
+| 127345 | 2476 | oled |
+| 127975 | 630 | telem |
+| 128991 | 1016 | imu |
+| 129293 | 302 | oled |
+| 132464 | 3171 | imu |
+| 134768 | 2304 | imu |
+| 137233 | 2465 | journal |
+
+### s3_os_telem20_timeout.log
 
     ==== LR4 FreeRTOS | fw=fd9e8eb3-827d8d5 | NUCLEO-C031C6 | SYSCLK=48000000 | tick=1000 | reset=0x00 ====
 

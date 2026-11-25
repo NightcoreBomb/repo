@@ -92,12 +92,19 @@ flowchart LR
 | SysTick | 3 (найнижчий, `configKERNEL_INTERRUPT_PRIORITY = 0xC0`) | `xPortSysTickHandler` → tick hook: `HAL_IncTick` (крок `uwTickFreq = 1000/TICK_HZ`), debounce кнопки; облік вартості тіку | `vTaskNotifyGiveFromISR` |
 | PendSV | 3 | перемикання контексту (порт) | — |
 | SVC | — | старт першої задачі (порт) | — |
-| USART2 RX | 2 | байт → кільце; на `\r`/`\n` — будить `cmd` | `vTaskNotifyGiveFromISR` |
+| USART2 RX | **3** (П-29: як SysTick/PendSV — без вкладення ISR) | байт → кільце; на `\r`/`\n` — будить `cmd` (якщо RX перервав критичну секцію ядра — будить наступний тік) | `vTaskNotifyGiveFromISR` |
 | EXTI4_15 (кнопка) | 3 | мітка тактів першого фронту (вимір затримки) | — |
 
-На ARMv6-M немає `BASEPRI`: критична секція FreeRTOS вимикає **всі** переривання (`cpsid i`).
-Тому `*FromISR` можна кликати з будь-якого пріоритету, але кожна критична секція ядра додає
-затримку й до RX-переривання. Наскільки — показує `OSTICK max_ns` і `RX dropped` у порівнянні.
+На ARMv6-M немає `BASEPRI` і `configMAX_SYSCALL_INTERRUPT_PRIORITY`: критична секція FreeRTOS
+вимикає **всі** переривання (`cpsid i`), тож `*FromISR` формально можна кликати з будь-якого
+пріоритету.
+
+**Обхід симулятора (П-29).** Модель Wokwi STM32C031 не маскує SysTick і PendSV через PRIMASK
+(тест: 405 тіків під `cpsid i`, 318 перемикань контексту всередині `taskENTER_CRITICAL`). Тому
+`SysTick_Handler` і `PendSV_Handler` — обгортки (`Core/Src/os_simfix.c`): якщо
+`ulCriticalNesting != 0`, тік/перемикання відкладаються, а `vPortExitCritical` (2 рядки в
+`port.c`) виставляє їх після виходу із секції. Усі переривання, що кличуть API ядра, мають
+однаковий пріоритет 3 — вкладення ISR немає. На залізі ці гілки не виконуються.
 
 ## 3. Конфігурація ядра
 
@@ -113,6 +120,7 @@ FreeRTOS-Kernel **V11.1.0**, порт `GCC/ARM_CM0`, `heap_4`
 | `configMINIMAL_STACK_SIZE` | 64 слова | лише для idle (хуку idle немає) |
 | `configTOTAL_HEAP_SIZE` | **5888 Б** (`OSTEST=1`: 6912) | 7 стеків (3 952 Б) + 8 TCB + 2 черги + 3 м'ютекси + стек idle (256 Б) ≈ 5 470 Б; решта — запас (`HEAP min_ever_free`) |
 | алокатор | `heap_4` | об'єднує вільні блоки; потрібен для `vTaskDelete` у тестах ОС (7.2.1–7.2.5) |
+| `configUSE_MINI_LIST_ITEM` | 0 | П-27/П-29: повні елементи кінця списків (+96 Б RAM), ядро без strict aliasing |
 | `configCHECK_FOR_STACK_OVERFLOW` | **2** (варіант `STACK_CHECK=0`) | перевірка шаблону в кінці стека при кожному перемиканні; хук друкує `FATAL stack overflow task=…` і зупиняє систему |
 | `configUSE_MALLOC_FAILED_HOOK` | 1 | `HOOK malloc_failed free=…`, лічильник `HEAP malloc_fail=` |
 | `configUSE_TICK_HOOK` | 1 | часова база HAL і debounce кнопки (раніше — у `SysTick_Handler`) |
@@ -144,8 +152,23 @@ FreeRTOS-Kernel **V11.1.0**, порт `GCC/ARM_CM0`, `heap_4`
 | `oled` | `app_oled_run → ssd1306_render → font → lk_write` | 528 | 672 |
 | `long_op` | `cmd_dump → sd_read_to → plat_log` | 488 (виміряно 436) | 624 |
 
-**Фінальна перевірка — high water mark** (`tasks`: `stack_free_min`) після найгіршого сценарію
-S3 і сценарію `lr4_s3_os`. Виміряні значення і висновок — `docs/comparison.md` §3.
+**Фінальна перевірка — high water mark** (`tasks`: `stack_free_min`) після S3 (`lr4_s3_os`,
+`docs/metrics/os/s3_os.log`):
+
+| Задача | Стек, Б | Мін. вільно, Б | Використано, Б | Запас |
+|---|---:|---:|---:|---:|
+| btn | 416 | 96 | 320 | 23 % — найменший: реакція кнопки викликає `rec_stop` → SD (П-31) |
+| imu | 560 | 196 | 364 | 35 % |
+| journal | 448 | 152 | 296 | 34 % |
+| cmd | 880 | 364 | 516 | 41 % |
+| telem | 480 | 172 | 308 | 36 % |
+| oled | 672 | 204 | 468 | 30 % |
+| long_op | 624 | 204 | 420 | 33 % |
+| IDLE | 256 | 164 | 92 | 64 % |
+| MSP (переривання) | 768 | 192 | 576 | 25 % (576 — ініціалізація до старту ОС) |
+
+Heap ОС: 5 888 Б, зайнято 5 672 Б, мінімум вільного 216 Б, відмов 0.
+Правило, якого дійшли (П-25): статична оцінка — нижня межа; розмір = HWM після S3 + ≥ 25 %.
 
 ## 5. Сценарії, специфічні для ОС (методичка §7.2)
 
