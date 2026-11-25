@@ -1,0 +1,79 @@
+EVT t_us=2391 name=boot
+
+==== LR3 super-loop | fw=126ed3cd-nogit | NUCLEO-C031C6 | SYSCLK=48000000 | reset=0x00 ====
+CHK imu=OK who=0x68 oled=OK sd=OK type=SDHC adc=OK
+DIR NONE blocks=0 records=0 duration_ms=0
+READY (type 'help')
+OK evt
+271,0,0,1500,1500,LIVE
+OK telem
+EVT t_us=278154 name=rec_start
+MODE RECOK mode
+REC stop records=151 blocks=1 duration_ms=3020 gaps=15 max_int_ms=71
+EVT t_us=3308212 name=rec_stop
+EVT t_us=3311343 name=live
+MODE LIVEOK mode
+EVT t_us=3991204 name=rec_start
+MODE REC
+EVT t_us=3995322 name=btn lat_db_us=24 lat_edge_us=53005
+REC stop records=31 blocks=1 duration_ms=620 gaps=3 max_int_ms=78
+EVT t_us=4626790 name=rec_stopEVT t_us=4644980 name=play_start
+MODE PLAY
+EVT t_us=4649321 name=btn lat_db_us=30 lat_edge_us=51986
+PLAY done records=31 duration_ms=640 rec_ms=620
+EVT t_us=5273826 name=play_done
+EVT t_us=5347148 name=live
+MODE LIVE
+EVT t_us=5350906 name=btn lat_db_us=54 lat_edge_us=51035
+EVT t_us=6376833 name=calib_start
+EVT t_us=7781093 name=calib_done dur_us=1404294
+CALIB n=200 bias_mdps=0,0,0
+OK calib
+EVT t_us=7789967 name=rec_start
+MODE REC
+EVT t_us=7794116 name=btn lat_db_us=1000758 lat_edge_us=1053701
+EVT t_us=8318949 name=calib_start
+EVT t_us=9757095 name=calib_done dur_us=1438180
+CALIB n=199 bias_mdps=0,0,0
+OK calib
+REC stop records=27 blocks=1 duration_ms=540 gaps=3 max_int_ms=79
+EVT t_us=9790562 name=rec_stop
+EVT t_us=9807392 name=play_start
+MODE PLAY
+EVT t_us=9811723 name=btn lat_db_us=999757 lat_edge_us=1052643
+EVT t_us=10293859 name=calib_start
+EVT t_us=11698094 name=calib_done dur_us=1404269
+CALIB n=200 bias_mdps=0,0,0
+OK calib
+EVT t_us=11706983 name=live
+MODE LIVE
+EVT t_us=11710862 name=btn lat_db_us=1299855 lat_edge_us=1352730
+NOTE VCD;STAT BEGIN fw=126ed3cd-nogit t_ms=12437 mode=LIVE oled_mode=0 telem_ms=0 imu_hz=200 load_us=0
+STAT name=loop n=36762 min_us=74 avg_us=332 max_us=1564868
+STAT name=cmd n=8 min_us=907 avg_us=539278 max_us=1446942
+STAT name=btn n=6 min_us=9542 avg_us=24380 max_us=52967
+STAT name=imu n=1060 min_us=1958 avg_us=2129 max_us=2784
+STAT name=pot n=150 min_us=23 avg_us=23 max_us=36
+STAT name=rec n=209 min_us=60 avg_us=69 max_us=112
+STAT name=play n=58 min_us=91 avg_us=226 max_us=7924
+STAT name=oled n=41 min_us=62714 avg_us=62880 max_us=63279
+STAT name=telem n=1 min_us=2496 avg_us=2496 max_us=2496
+STAT name=i2c_burst n=1060 min_us=1614 avg_us=1616 max_us=1779
+STAT name=ctrl n=912 min_us=24 avg_us=71 max_us=170
+STAT name=sd_write n=6 min_us=3990 avg_us=3992 max_us=3993
+STAT name=sd_read n=2 min_us=3776 avg_us=4454 max_us=5132
+STAT name=oled_txn n=820 min_us=1479 avg_us=3094 max_us=3538
+STAT name=uart_line n=1 min_us=2460 avg_us=2460 max_us=2460
+STAT name=long_op n=3 min_us=1404191 avg_us=1415503 max_us=1438102
+LAT name=btn_db n=6 min_us=24 avg_us=550079 max_us=1299855
+LAT name=btn_edge n=6 min_us=51035 avg_us=602516 max_us=1352730
+LAT name=cmd n=9 min_us=27 avg_us=15990 max_us=71163
+LAT name=imu2pwm n=325 min_us=2145 avg_us=2170 max_us=2286
+JIT name=imu period_us=5000 n=1059 min_us=-2359 max_us=1496641 p99_us=100000 missed=49
+LOAD last_pct=91 min_pct=61 max_pct=96 windows=9
+RX bytes=68 dropped=0 ore=0
+I2C recov=1 timeouts=1 imu_err=0 imu_samples=1060
+REC records=27 blocks=1 gaps=3 max_int_ms=79
+OLED frames=41 fps_x10=33
+MEM stack_used=724 stack_size=1024 ram_static=2760 heap=0 first_imu_us=208827
+STAT END
